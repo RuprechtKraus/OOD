@@ -105,10 +105,12 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>C:\Users\Ruprecht Kraus\source\repos\OOD\Lab1\SimUDuck;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\Users\Ruprecht Kraus\source\repos\OOD\Lab1\SimUDuck;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -120,16 +122,35 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>C:\Users\Ruprecht Kraus\source\repos\OOD\Lab1\SimUDuck;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\Users\Ruprecht Kraus\source\repos\OOD\Lab1\SimUDuck;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Ducks\DecoyDuck.cpp" />
+    <ClCompile Include="Ducks\Duck.cpp" />
+    <ClCompile Include="Ducks\MallardDuck.cpp" />
+    <ClCompile Include="Ducks\ModelDuck.cpp" />
+    <ClCompile Include="Ducks\RedheadDuck.cpp" />
+    <ClCompile Include="Ducks\RubberDuck.cpp" />
     <ClCompile Include="SimUDuck.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Behaviors\DanceBehavior.h" />
+    <ClInclude Include="Behaviors\FlyBehavior.h" />
+    <ClInclude Include="Behaviors\QuackBehavior.h" />
+    <ClInclude Include="Ducks\DecoyDuck.h" />
+    <ClInclude Include="Ducks\Duck.h" />
+    <ClInclude Include="Ducks\MallardDuck.h" />
+    <ClInclude Include="Ducks\ModelDuck.h" />
+    <ClInclude Include="Ducks\RedheadDuck.h" />
+    <ClInclude Include="Ducks\RubberDuck.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

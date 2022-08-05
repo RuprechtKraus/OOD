@@ -1,190 +1,12 @@
-﻿#include <functional>
+﻿#include "Ducks/DecoyDuck.h"
+#include "Ducks/MallardDuck.h"
+#include "Ducks/ModelDuck.h"
+#include "Ducks/RedheadDuck.h"
+#include "Ducks/RubberDuck.h"
 #include <iostream>
-#include <format>
 
-using FlyBehavior = std::function<void()>;
-using QuackBehavior = std::function<void()>;
-using DanceBehavior = std::function<void()>;
-
-void FlyWithWings()
-{
-	std::cout << "I'm flying with wings!!!" << std::endl;
-}
-
-void FlyWithRocket()
-{
-	std::cout << "I'm flying on rocket!!!" << std::endl;
-}
-
-void NormalQuack()
-{
-	std::cout << "Quack Quack!!!" << std::endl;
-}
-
-void SqueakQuack()
-{
-	std::cout << "Squeak!!!" << std::endl;
-}
-
-void DanceWaltz()
-{
-	std::cout << "I am dancing waltz" << std::endl;
-}
-
-void DanceMinuet()
-{
-	std::cout << "I am dancing minuet" << std::endl;
-}
-
-class Duck
-{
-public:
-	Duck(FlyBehavior flyBehavior, QuackBehavior quackBehavior, DanceBehavior danceBehavior) noexcept
-		: m_flyBehavior(std::move(flyBehavior))
-		, m_quackBehavior(std::move(quackBehavior))
-		, m_danceBehavior(std::move(danceBehavior))
-		, m_flightCount(0)
-	{
-	}
-
-	void Quack() const noexcept
-	{
-		if (m_quackBehavior)
-		{
-			m_quackBehavior();
-		}
-	}
-
-	void Swim() const noexcept
-	{
-		std::cout << "I'm swimming" << std::endl;
-	}
-
-	void Fly() noexcept
-	{
-		if (m_flyBehavior)
-		{
-			m_flightCount++;
-			DisplayFlightCount();
-			m_flyBehavior();
-		}
-	}
-
-	void Dance() const noexcept
-	{
-		if (m_danceBehavior)
-		{
-			m_danceBehavior();
-		}
-	}
-
-	void SetFlyBehavior(FlyBehavior flyBehavior) noexcept
-	{
-		m_flightCount = 0;
-		m_flyBehavior = std::move(flyBehavior);
-	}
-
-	void SetDanceBevahior(DanceBehavior danceBehavior) noexcept
-	{
-		m_danceBehavior = std::move(danceBehavior);
-	}
-
-	virtual void Display() const = 0;
-	virtual ~Duck() noexcept = default;
-
-private:
-	void DisplayFlightCount() const noexcept
-	{
-		std::cout << std::format("It's my {} flight!", m_flightCount) << std::endl;
-	}
-
-	FlyBehavior m_flyBehavior;
-	QuackBehavior m_quackBehavior;
-	DanceBehavior m_danceBehavior;
-	int m_flightCount;
-};
-
-class MallardDuck : public Duck
-{
-public:
-	MallardDuck()
-		: Duck(FlyWithWings, NormalQuack, DanceWaltz)
-	{
-	}
-
-	void Display() const override
-	{
-		std::cout << "I'm mallard duck" << std::endl;
-	}
-};
-
-class RedheadDuck : public Duck
-{
-public:
-	RedheadDuck()
-		: Duck(FlyWithWings, NormalQuack, DanceMinuet)
-	{
-	}
-
-	void Display() const override
-	{
-		std::cout << "I'm redhead duck" << std::endl;
-	}
-};
-class DecoyDuck : public Duck
-{
-public:
-	DecoyDuck()
-		: Duck(nullptr, nullptr, nullptr)
-	{
-	}
-
-	void Display() const override
-	{
-		std::cout << "I'm decoy duck" << std::endl;
-	}
-};
-class RubberDuck : public Duck
-{
-public:
-	RubberDuck()
-		: Duck(nullptr, SqueakQuack, nullptr)
-	{
-	}
-
-	void Display() const override
-	{
-		std::cout << "I'm rubber duck" << std::endl;
-	}
-};
-
-class ModelDuck : public Duck
-{
-public:
-	ModelDuck()
-		: Duck(nullptr, NormalQuack, nullptr)
-	{
-	}
-
-	void Display() const override
-	{
-		std::cout << "I'm model duck" << std::endl;
-	}
-};
-
-void DrawDuck(Duck const& duck)
-{
-	duck.Display();
-}
-
-void PlayWithDuck(Duck& duck)
-{
-	DrawDuck(duck);
-	duck.Quack();
-	duck.Fly();
-	duck.Dance();
-	std::cout << std::endl;
-}
+void DrawDuck(Duck const& duck) noexcept;
+void PlayWithDuck(Duck& duck) noexcept;
 
 int main()
 {
@@ -204,4 +26,18 @@ int main()
 	PlayWithDuck(modelDuck);
 	modelDuck.SetFlyBehavior(FlyWithWings);
 	PlayWithDuck(modelDuck);
+}
+
+void DrawDuck(const Duck& duck) noexcept
+{
+	duck.Display();
+}
+
+void PlayWithDuck(Duck& duck) noexcept
+{
+	DrawDuck(duck);
+	duck.Quack();
+	duck.Fly();
+	duck.Dance();
+	std::cout << std::endl;
 }
