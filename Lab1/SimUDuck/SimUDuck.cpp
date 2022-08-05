@@ -13,10 +13,6 @@ void FlyWithWings()
 	std::cout << "I'm flying with wings!!!" << std::endl;
 }
 
-void FlyNoWay()
-{
-}
-
 void NormalQuack()
 {
 	std::cout << "Quack Quack!!!" << std::endl;
@@ -25,10 +21,6 @@ void NormalQuack()
 void SqueakQuack()
 {
 	std::cout << "Squeak!!!" << std::endl;
-}
-
-void MuteQuack()
-{
 }
 
 void DanceWaltz()
@@ -41,10 +33,6 @@ void DanceMinuet()
 	std::cout << "I am dancing minuet" << std::endl;
 }
 
-void NoDance()
-{
-}
-
 class Duck
 {
 public:
@@ -55,27 +43,33 @@ public:
 	{
 	}
 
-	void Quack() const
+	void Quack() const noexcept
 	{
-		assert(m_quackBehavior);
-		m_quackBehavior();
+		if (m_quackBehavior)
+		{
+			m_quackBehavior();
+		}
 	}
 
-	void Swim() const
+	void Swim() const noexcept
 	{
 		std::cout << "I'm swimming" << std::endl;
 	}
 
-	void Fly() const
+	void Fly() const noexcept
 	{
-		assert(m_flyBehavior);
-		m_flyBehavior();
+		if (m_flyBehavior)
+		{
+			m_flyBehavior();
+		}
 	}
 
-	void Dance() const
+	void Dance() const noexcept
 	{
-		assert(m_danceBehavior);
-		m_danceBehavior();
+		if (m_danceBehavior)
+		{
+			m_danceBehavior();
+		}
 	}
 
 	void SetFlyBehavior(FlyBehavior flyBehavior) noexcept
@@ -128,7 +122,7 @@ class DecoyDuck : public Duck
 {
 public:
 	DecoyDuck()
-		: Duck(FlyNoWay, MuteQuack, NoDance)
+		: Duck(nullptr, nullptr, nullptr)
 	{
 	}
 
@@ -141,7 +135,7 @@ class RubberDuck : public Duck
 {
 public:
 	RubberDuck()
-		: Duck(FlyNoWay, SqueakQuack, NoDance)
+		: Duck(nullptr, SqueakQuack, nullptr)
 	{
 	}
 
@@ -155,7 +149,7 @@ class ModelDuck : public Duck
 {
 public:
 	ModelDuck()
-		: Duck(FlyNoWay, NormalQuack, NoDance)
+		: Duck(nullptr, NormalQuack, nullptr)
 	{
 	}
 
