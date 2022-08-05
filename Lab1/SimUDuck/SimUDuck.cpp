@@ -1,8 +1,6 @@
-﻿#include <cassert>
-#include <functional>
+﻿#include <functional>
 #include <iostream>
-#include <memory>
-#include <vector>
+#include <format>
 
 using FlyBehavior = std::function<void()>;
 using QuackBehavior = std::function<void()>;
@@ -11,6 +9,11 @@ using DanceBehavior = std::function<void()>;
 void FlyWithWings()
 {
 	std::cout << "I'm flying with wings!!!" << std::endl;
+}
+
+void FlyWithRocket()
+{
+	std::cout << "I'm flying on rocket!!!" << std::endl;
 }
 
 void NormalQuack()
@@ -40,6 +43,7 @@ public:
 		: m_flyBehavior(std::move(flyBehavior))
 		, m_quackBehavior(std::move(quackBehavior))
 		, m_danceBehavior(std::move(danceBehavior))
+		, m_flightCount(0)
 	{
 	}
 
@@ -56,10 +60,12 @@ public:
 		std::cout << "I'm swimming" << std::endl;
 	}
 
-	void Fly() const noexcept
+	void Fly() noexcept
 	{
 		if (m_flyBehavior)
 		{
+			m_flightCount++;
+			DisplayFlightCount();
 			m_flyBehavior();
 		}
 	}
@@ -74,6 +80,7 @@ public:
 
 	void SetFlyBehavior(FlyBehavior flyBehavior) noexcept
 	{
+		m_flightCount = 0;
 		m_flyBehavior = std::move(flyBehavior);
 	}
 
@@ -86,9 +93,15 @@ public:
 	virtual ~Duck() noexcept = default;
 
 private:
+	void DisplayFlightCount() const noexcept
+	{
+		std::cout << std::format("It's my {} flight!", m_flightCount) << std::endl;
+	}
+
 	FlyBehavior m_flyBehavior;
 	QuackBehavior m_quackBehavior;
 	DanceBehavior m_danceBehavior;
+	int m_flightCount;
 };
 
 class MallardDuck : public Duck
