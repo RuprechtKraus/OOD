@@ -1,10 +1,12 @@
-﻿#include <functional>
+﻿#include <cassert>
+#include <functional>
 #include <iostream>
 #include <memory>
 #include <vector>
 
 using FlyBehavior = std::function<void()>;
 using QuackBehavior = std::function<void()>;
+using DanceBehavior = std::function<void()>;
 
 void FlyWithWings()
 {
@@ -29,53 +31,77 @@ void MuteQuack()
 {
 }
 
+void DanceWaltz()
+{
+	std::cout << "I am dancing waltz" << std::endl;
+}
+
+void DanceMinuet()
+{
+	std::cout << "I am dancing minuet" << std::endl;
+}
+
+void NoDance()
+{
+}
+
 class Duck
 {
 public:
-	Duck(FlyBehavior flyBehavior, QuackBehavior quackBehavior)
+	Duck(FlyBehavior flyBehavior, QuackBehavior quackBehavior, DanceBehavior danceBehavior) noexcept
 		: m_flyBehavior(std::move(flyBehavior))
 		, m_quackBehavior(std::move(quackBehavior))
+		, m_danceBehavior(std::move(danceBehavior))
 	{
 	}
 
 	void Quack() const
 	{
+		assert(m_quackBehavior);
 		m_quackBehavior();
 	}
 
-	void Swim()
+	void Swim() const
 	{
 		std::cout << "I'm swimming" << std::endl;
 	}
 
-	void Fly()
+	void Fly() const
 	{
+		assert(m_flyBehavior);
 		m_flyBehavior();
 	}
 
-	virtual void Dance()
+	void Dance() const
 	{
-		std::cout << "I'm Dancing" << std::endl;
+		assert(m_danceBehavior);
+		m_danceBehavior();
 	}
 
-	void SetFlyBehavior(FlyBehavior flyBehavior)
+	void SetFlyBehavior(FlyBehavior flyBehavior) noexcept
 	{
-		m_flyBehavior = move(flyBehavior);
+		m_flyBehavior = std::move(flyBehavior);
+	}
+
+	void SetDanceBevahior(DanceBehavior danceBehavior) noexcept
+	{
+		m_danceBehavior = std::move(danceBehavior);
 	}
 
 	virtual void Display() const = 0;
-	virtual ~Duck() = default;
+	virtual ~Duck() noexcept = default;
 
 private:
 	FlyBehavior m_flyBehavior;
 	QuackBehavior m_quackBehavior;
+	DanceBehavior m_danceBehavior;
 };
 
 class MallardDuck : public Duck
 {
 public:
 	MallardDuck()
-		: Duck(FlyWithWings, NormalQuack)
+		: Duck(FlyWithWings, NormalQuack, DanceWaltz)
 	{
 	}
 
@@ -89,7 +115,7 @@ class RedheadDuck : public Duck
 {
 public:
 	RedheadDuck()
-		: Duck(FlyWithWings, NormalQuack)
+		: Duck(FlyWithWings, NormalQuack, DanceMinuet)
 	{
 	}
 
@@ -102,7 +128,7 @@ class DecoyDuck : public Duck
 {
 public:
 	DecoyDuck()
-		: Duck(FlyNoWay, MuteQuack)
+		: Duck(FlyNoWay, MuteQuack, NoDance)
 	{
 	}
 
@@ -110,14 +136,12 @@ public:
 	{
 		std::cout << "I'm decoy duck" << std::endl;
 	}
-
-	void Dance() override {}
 };
 class RubberDuck : public Duck
 {
 public:
 	RubberDuck()
-		: Duck(FlyNoWay, SqueakQuack)
+		: Duck(FlyNoWay, SqueakQuack, NoDance)
 	{
 	}
 
@@ -125,15 +149,13 @@ public:
 	{
 		std::cout << "I'm rubber duck" << std::endl;
 	}
-
-	void Dance() override {}
 };
 
 class ModelDuck : public Duck
 {
 public:
 	ModelDuck()
-		: Duck(FlyNoWay, NormalQuack)
+		: Duck(FlyNoWay, NormalQuack, NoDance)
 	{
 	}
 
@@ -141,8 +163,6 @@ public:
 	{
 		std::cout << "I'm model duck" << std::endl;
 	}
-
-	void Dance() override {}
 };
 
 void DrawDuck(Duck const& duck)
