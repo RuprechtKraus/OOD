@@ -1,13 +1,15 @@
-﻿#include "WeatherData.h"
+﻿#include "Display.h"
+#include "StatsDisplay.h"
+#include "WeatherData.h"
 
 int main()
 {
-	CWeatherData wd;
+	WeatherData wd;
 
-	CDisplay display;
+	Display display;
 	wd.RegisterObserver(display);
 
-	CStatsDisplay statsDisplay;
+	StatsDisplay statsDisplay;
 	wd.RegisterObserver(statsDisplay);
 
 	wd.SetMeasurements(3, 0.7, 760);
