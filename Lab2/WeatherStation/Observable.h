@@ -9,9 +9,9 @@ class Observable : public IObservable<T>
 public:
 	using ObserverType = IObserver<T>;
 
-	void RegisterObserver(ObserverType& observer);
+	void RegisterObserver(ObserverType& observer) override;
 	void RemoveObserver(ObserverType& observer) override;
-	void NotifyObservers() noexcept override;
+	void NotifyObservers() const noexcept override;
 
 protected:
 	virtual T GetChangedData() const = 0;
@@ -33,11 +33,11 @@ void Observable<T>::RemoveObserver(ObserverType& observer)
 }
 
 template <typename T>
-void Observable<T>::NotifyObservers() noexcept
+void Observable<T>::NotifyObservers() const noexcept
 {
-	T data = GetChangedData();
-	for (auto& observer : m_observers)
+	std::set<ObserverType*> observersCopy = m_observers;
+	for (auto& observer : observersCopy)
 	{
-		observer->Update(data);
+		observer->Update(GetChangedData());
 	}
 }
