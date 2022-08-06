@@ -6,13 +6,20 @@
 #include <map>
 #include <string>
 
-class StatisticsData
+class IStatisticsData
+{
+public:
+	virtual void Update(double value) = 0;
+	virtual void Display() const = 0;
+};
+
+class StatisticsData : IStatisticsData
 {
 public:
 	StatisticsData(const std::string& name);
 
-	void Update(double value) noexcept;
-	void Display() const noexcept;
+	void Update(double value) noexcept override;
+	void Display() const noexcept override;
 
 private:
 	std::string m_valueName;
