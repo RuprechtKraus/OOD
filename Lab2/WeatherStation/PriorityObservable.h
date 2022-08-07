@@ -66,7 +66,9 @@ void PriorityObservable<T>::SetObserverPriority(unsigned priority, const Observe
 template <typename T>
 void PriorityObservable<T>::RemoveObserver(ObserverType& observer)
 {
-	m_observers.erase(FindObserver(observer));
+	auto it = FindObserver(observer);
+	assert(it != m_observers.end());
+	m_observers.erase(it);
 }
 
 template <typename T>
