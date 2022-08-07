@@ -20,7 +20,7 @@ private:
 	std::set<ObserverType*> m_observers;
 };
 
-template<typename T>
+template <typename T>
 void Observable<T>::RegisterObserver(ObserverType& observer)
 {
 	m_observers.insert(&observer);
