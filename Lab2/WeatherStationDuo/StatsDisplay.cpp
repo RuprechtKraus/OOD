@@ -1,8 +1,9 @@
 #include "StatsDisplay.h"
 #include <format>
 
-StatisticsData::StatisticsData(const std::string& name)
+StatisticsData::StatisticsData(const std::string& name, std::ostream& output)
 	: m_valueName(name)
+	, m_output(output)
 {
 }
 
@@ -16,10 +17,15 @@ void StatisticsData::Update(double value) noexcept
 
 void StatisticsData::Display() const noexcept
 {
-	std::cout << std::format("Max {} ", m_valueName) << m_maxValue << std::endl;
-	std::cout << std::format("Min {} ", m_valueName) << m_minValue << std::endl;
-	std::cout << std::format("Average {} ", m_valueName) << (m_accValue / m_countAcc) << std::endl;
-	std::cout << "----------------" << std::endl;
+	m_output << std::format("Max {} ", m_valueName) << m_maxValue << std::endl;
+	m_output << std::format("Min {} ", m_valueName) << m_minValue << std::endl;
+	m_output << std::format("Average {} ", m_valueName) << (m_accValue / m_countAcc) << std::endl;
+	m_output << "----------------" << std::endl;
+}
+
+StatsDisplay::StatsDisplay(std::ostream& output)
+	: m_output(output)
+{
 }
 
 void StatsDisplay::Update(const std::string& source, const WeatherInfo& data)
@@ -35,9 +41,9 @@ void StatsDisplay::Update(const std::string& source, const WeatherInfo& data)
 void StatsDisplay::AddSource(const std::string& source)
 {
 	m_sources[source] = {
-		{ m_temperatureDataName, std::make_shared<StatisticsData>(m_temperatureDataName) },
-		{ m_humidityDataName, std::make_shared<StatisticsData>(m_humidityDataName) },
-		{ m_pressureDataName, std::make_shared<StatisticsData>(m_pressureDataName) }
+		{ m_temperatureDataName, std::make_shared<StatisticsData>(m_temperatureDataName, m_output) },
+		{ m_humidityDataName, std::make_shared<StatisticsData>(m_humidityDataName, m_output) },
+		{ m_pressureDataName, std::make_shared<StatisticsData>(m_pressureDataName, m_output) }
 	};
 }
 
