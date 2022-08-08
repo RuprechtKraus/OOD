@@ -101,7 +101,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <AdditionalLibraryDirectories>C:\Users\Ruprecht Kraus\source\repos\OOD\Lab2\WeatherStationDuo\x64\Debug;$(VCInstallDir)UnitTest\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>WeatherData.obj;Display.obj;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>WeatherData.obj;Display.obj;StatsDisplay.obj;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -156,7 +156,7 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <AdditionalLibraryDirectories>C:\Users\Ruprecht Kraus\source\repos\OOD\Lab2\WeatherStationDuo\x64\Debug;$(VCInstallDir)UnitTest\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>WeatherData.obj;Display.obj;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>WeatherData.obj;Display.obj;StatsDisplay.obj;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

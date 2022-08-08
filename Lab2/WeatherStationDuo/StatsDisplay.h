@@ -3,7 +3,7 @@
 #include "WeatherData.h"
 #include <climits>
 #include <iostream>
-#include <map>
+#include <unordered_map>
 #include <string>
 
 class IStatisticsData
@@ -36,18 +36,18 @@ public:
 	StatsDisplay(std::ostream& output = std::cout);
 
 private:
-	using SourceData = std::map<std::string, std::shared_ptr<StatisticsData>>;
+	using SourceData = std::unordered_map<std::string, std::shared_ptr<StatisticsData>>;
 
-	void Update(const std::string& source, const WeatherInfo& data) override;
-	void Display(const std::string& source) const noexcept;
 	void AddSource(const std::string& source);
+	void Update(const std::string& source, const WeatherInfo& data) override;
+	void DisplaySourceData(const std::string& source) const noexcept;
 	void UpdateSourceData(const std::string& source, const WeatherInfo& newData);
 	bool DoesSourceExist(const std::string& source) const noexcept;
 
-	const std::string m_temperatureDataName{ "Temperature" };
-	const std::string m_humidityDataName{ "Humidity" };
+	const std::string m_temperatureDataName{ "Temp" };
+	const std::string m_humidityDataName{ "Hum" };
 	const std::string m_pressureDataName{ "Pressure" };
 
-	std::map<std::string, SourceData> m_sources;
+	std::unordered_map<std::string, SourceData> m_sources;
 	std::ostream& m_output;
 };

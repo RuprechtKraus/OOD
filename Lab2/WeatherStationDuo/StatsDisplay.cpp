@@ -35,7 +35,7 @@ void StatsDisplay::Update(const std::string& source, const WeatherInfo& data)
 		AddSource(source);
 	}
 	UpdateSourceData(source, data);
-	Display(source);
+	DisplaySourceData(source);
 }
 
 void StatsDisplay::AddSource(const std::string& source)
@@ -59,9 +59,9 @@ bool StatsDisplay::DoesSourceExist(const std::string& source) const noexcept
 	return m_sources.find(source) != m_sources.end() ? true : false;
 }
 
-void StatsDisplay::Display(const std::string& source) const noexcept
+void StatsDisplay::DisplaySourceData(const std::string& source) const noexcept
 {
-	std::cout << "Source " << source << std::endl;
+	m_output << "Source " << source << std::endl;
 	for (const auto& [_, data] : m_sources.at(source))
 	{
 		data.get()->Display();
