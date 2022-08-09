@@ -131,8 +131,10 @@
   <ItemGroup>
     <ClCompile Include="Display.cpp" />
     <ClCompile Include="StatsDisplay.cpp" />
+    <ClCompile Include="ValueStatistics.cpp" />
     <ClCompile Include="WeatherData.cpp" />
     <ClCompile Include="WeatherStationDuo.cpp" />
+    <ClCompile Include="WeatherStatistics.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Display.h" />
@@ -140,8 +142,10 @@
     <ClInclude Include="IObserver.h" />
     <ClInclude Include="Observable.h" />
     <ClInclude Include="StatsDisplay.h" />
+    <ClInclude Include="ValueStatistics.h" />
     <ClInclude Include="WeatherData.h" />
     <ClInclude Include="WeatherInfo.h" />
+    <ClInclude Include="WeatherStatistics.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

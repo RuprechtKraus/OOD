@@ -1,18 +1,15 @@
-﻿#include <iostream>
-#include "WeatherData.h"
-#include "Display.h"
+﻿#include "Display.h"
 #include "StatsDisplay.h"
+#include "WeatherData.h"
+#include <iostream>
 
 int main()
 {
-	WeatherData wd1("Inside");
-	WeatherData wd2("Outside");
+	WeatherData wd("Outside");
 	StatsDisplay dp;
 
-	wd1.RegisterObserver(dp);
-	wd2.RegisterObserver(dp);
+	wd.RegisterObserver(dp);
 
-	wd1.SetMeasurements(1, 2, 3);
-	wd2.SetMeasurements(10, 20, 30);
-	wd2.SetMeasurements(20, 30, 40);
+	wd.SetMeasurements(10, 20, 30, 1, 90);
+	wd.SetMeasurements(30, 40, 50, 4, 270);
 }
