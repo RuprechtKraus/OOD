@@ -38,12 +38,6 @@ public:
 
 private:
 	int GetAverage() const noexcept;
-	static std::string DegreesToCardinalDirection(double degrees);
-	static bool IsWithingDeviationRange(double value, double anchor,
-		unsigned absoluteDeviation) noexcept;
-	static double NormalizeDegrees(double degrees) noexcept;
-	static double DegreesToRadians(double degrees) noexcept;
-	static double RadiansToDegrees(double radians) noexcept;
 
 	std::string m_name;
 	std::ostream& m_output;

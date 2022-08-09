@@ -22,17 +22,25 @@ double WeatherData::GetPressure() const noexcept
 
 double WeatherData::GetWindSpeed() const noexcept
 {
-	return m_windSpeed;
+	return m_wind ? m_wind.value().speed : 0.0;
 }
 
 double WeatherData::GetWindDirection() const noexcept
 {
-	return m_windDirection;
+	return m_wind ? m_wind.value().direction : std::numeric_limits<double>::quiet_NaN();
 }
 
 void WeatherData::MeasurementsChanged() noexcept
 {
 	NotifyObservers();
+}
+
+void WeatherData::SetMeasurements(double temp, double humidity, double pressure) noexcept
+{
+	m_humidity = humidity;
+	m_temperature = temp;
+	m_pressure = pressure;
+	MeasurementsChanged();
 }
 
 void WeatherData::SetMeasurements(double temp, double humidity, double pressure, 
@@ -41,8 +49,7 @@ void WeatherData::SetMeasurements(double temp, double humidity, double pressure,
 	m_humidity = humidity;
 	m_temperature = temp;
 	m_pressure = pressure;
-	m_windSpeed = windSpeed;
-	m_windDirection = windDirection;
+	m_wind.emplace(windSpeed, windDirection);
 	MeasurementsChanged();
 }
 
@@ -52,7 +59,9 @@ WeatherInfo WeatherData::GetChangedData() const noexcept
 	info.temperature = m_temperature;
 	info.humidity = m_humidity;
 	info.pressure = m_pressure;
-	info.windInfo.speed = m_windSpeed;
-	info.windInfo.direction = m_windDirection;
+	if (m_wind)
+	{
+		info.windInfo = m_wind;
+	}
 	return info;
 }

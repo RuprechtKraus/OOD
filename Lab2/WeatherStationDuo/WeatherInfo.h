@@ -4,7 +4,7 @@
 struct WindInfo
 {
 	double speed = 0;
-	double direction = 0;
+	double direction = std::numeric_limits<double>::quiet_NaN();
 };
 
 struct WeatherInfo
@@ -12,5 +12,5 @@ struct WeatherInfo
 	double temperature = 0;
 	double humidity = 0;
 	double pressure = 0;
-	WindInfo windInfo;
+	std::optional<WindInfo> windInfo;
 };

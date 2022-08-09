@@ -62,5 +62,8 @@
     <ClInclude Include="WeatherStatistics.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="CardinalDirectionHelpers.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

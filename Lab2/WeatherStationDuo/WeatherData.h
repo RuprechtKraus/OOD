@@ -14,6 +14,7 @@ public:
 	double GetWindSpeed() const noexcept;
 	double GetWindDirection() const noexcept;
 	void MeasurementsChanged() noexcept;
+	void SetMeasurements(double temp, double humidity, double pressure) noexcept;
 	void SetMeasurements(double temp, double humidity, double pressure, 
 		double windSpeed, double windDirection) noexcept;
 
@@ -24,6 +25,5 @@ private:
 	double m_temperature = 0.0;
 	double m_humidity = 0.0;
 	double m_pressure = 760.0;
-	double m_windSpeed = 0.0;
-	double m_windDirection = 0.0;
+	std::optional<WindInfo> m_wind;
 };

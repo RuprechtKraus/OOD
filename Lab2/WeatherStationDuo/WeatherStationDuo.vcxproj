@@ -137,6 +137,7 @@
     <ClCompile Include="WeatherStatistics.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CardinalDirectionHelpers.h" />
     <ClInclude Include="Display.h" />
     <ClInclude Include="IObservable.h" />
     <ClInclude Include="IObserver.h" />
