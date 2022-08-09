@@ -105,6 +105,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>C:\Users\Ruprecht Kraus\source\repos\OOD\Lab2\WeatherStationDuo;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -120,6 +121,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>C:\Users\Ruprecht Kraus\source\repos\OOD\Lab2\WeatherStationDuo;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -129,24 +131,24 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Display.cpp" />
-    <ClCompile Include="StatsDisplay.cpp" />
-    <ClCompile Include="ValueStatistics.cpp" />
+    <ClCompile Include="Displays\Display.cpp" />
+    <ClCompile Include="Displays\StatsDisplay.cpp" />
+    <ClCompile Include="StatisticsTrackers\ValueStatistics.cpp" />
+    <ClCompile Include="StatisticsTrackers\WeatherStatistics.cpp" />
     <ClCompile Include="WeatherData.cpp" />
     <ClCompile Include="WeatherStationDuo.cpp" />
-    <ClCompile Include="WeatherStatistics.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CardinalDirectionHelpers.h" />
-    <ClInclude Include="Display.h" />
-    <ClInclude Include="IObservable.h" />
-    <ClInclude Include="IObserver.h" />
-    <ClInclude Include="Observable.h" />
-    <ClInclude Include="StatsDisplay.h" />
-    <ClInclude Include="ValueStatistics.h" />
+    <ClInclude Include="Displays\Display.h" />
+    <ClInclude Include="Displays\StatsDisplay.h" />
+    <ClInclude Include="Helpers\CardinalDirectionHelper.h" />
+    <ClInclude Include="Observers\IObservable.h" />
+    <ClInclude Include="Observers\IObserver.h" />
+    <ClInclude Include="Observers\Observable.h" />
+    <ClInclude Include="StatisticTrackers\ValueStatistics.h" />
+    <ClInclude Include="StatisticTrackers\WeatherStatistics.h" />
     <ClInclude Include="WeatherData.h" />
     <ClInclude Include="WeatherInfo.h" />
-    <ClInclude Include="WeatherStatistics.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

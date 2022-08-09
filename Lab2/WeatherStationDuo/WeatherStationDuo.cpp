@@ -1,7 +1,7 @@
-﻿#include "Display.h"
-#include "StatsDisplay.h"
+﻿#include "Displays/Display.h"
+#include "Displays/StatsDisplay.h"
+#include "StatisticsTrackers/WeatherStatistics.h"
 #include "WeatherData.h"
-#include "WeatherStatistics.h"
 #include <iostream>
 
 int main()

@@ -1,7 +1,7 @@
 #pragma once
-#include "IObserver.h"
+#include "Observers/IObserver.h"
 #include "WeatherData.h"
-#include "WeatherStatistics.h"
+#include "StatisticsTrackers/WeatherStatistics.h"
 #include <unordered_map>
 
 class StatsDisplay : public IObserver<WeatherInfo>

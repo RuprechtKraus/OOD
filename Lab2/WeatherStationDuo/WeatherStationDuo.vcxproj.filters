@@ -13,6 +13,24 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Исходные файлы\Displays">
+      <UniqueIdentifier>{10593dc2-1189-4541-baa8-296d6117b95e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Displays">
+      <UniqueIdentifier>{acdb573e-5182-4c2a-bf0d-3d32132bd3ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\StatisticsTrackers">
+      <UniqueIdentifier>{4161a905-32df-422f-b3d4-18e3b63d60f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\StatisticsTrackers">
+      <UniqueIdentifier>{393eb92c-965f-436f-a26d-3c9505444839}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Helpers">
+      <UniqueIdentifier>{775f45cb-f2b6-4242-9a4e-aab3593d410d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Observers">
+      <UniqueIdentifier>{ad5e4e72-bbcd-48d5-94f2-2a4241ca53e2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="WeatherStationDuo.cpp">
@@ -21,49 +39,49 @@
     <ClCompile Include="WeatherData.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="Display.cpp">
-      <Filter>Исходные файлы</Filter>
+    <ClCompile Include="Displays\Display.cpp">
+      <Filter>Исходные файлы\Displays</Filter>
     </ClCompile>
-    <ClCompile Include="StatsDisplay.cpp">
-      <Filter>Исходные файлы</Filter>
+    <ClCompile Include="Displays\StatsDisplay.cpp">
+      <Filter>Исходные файлы\Displays</Filter>
     </ClCompile>
-    <ClCompile Include="ValueStatistics.cpp">
-      <Filter>Исходные файлы</Filter>
+    <ClCompile Include="StatisticTrackers\ValueStatistics.cpp">
+      <Filter>Исходные файлы\StatisticsTrackers</Filter>
     </ClCompile>
-    <ClCompile Include="WeatherStatistics.cpp">
-      <Filter>Исходные файлы</Filter>
+    <ClCompile Include="StatisticTrackers\WeatherStatistics.cpp">
+      <Filter>Исходные файлы\StatisticsTrackers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="WeatherInfo.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="IObservable.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="IObserver.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="Observable.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="WeatherData.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="Display.h">
-      <Filter>Файлы заголовков</Filter>
+    <ClInclude Include="Displays\Display.h">
+      <Filter>Файлы заголовков\Displays</Filter>
     </ClInclude>
-    <ClInclude Include="StatsDisplay.h">
-      <Filter>Файлы заголовков</Filter>
+    <ClInclude Include="Displays\StatsDisplay.h">
+      <Filter>Файлы заголовков\Displays</Filter>
     </ClInclude>
-    <ClInclude Include="ValueStatistics.h">
-      <Filter>Файлы заголовков</Filter>
+    <ClInclude Include="StatisticTrackers\ValueStatistics.h">
+      <Filter>Файлы заголовков\StatisticsTrackers</Filter>
     </ClInclude>
-    <ClInclude Include="WeatherStatistics.h">
-      <Filter>Файлы заголовков</Filter>
+    <ClInclude Include="StatisticTrackers\WeatherStatistics.h">
+      <Filter>Файлы заголовков\StatisticsTrackers</Filter>
     </ClInclude>
-    <ClInclude Include="CardinalDirectionHelpers.h">
-      <Filter>Файлы заголовков</Filter>
+    <ClInclude Include="Helpers\CardinalDirectionHelper.h">
+      <Filter>Файлы заголовков\Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="Observers\IObservable.h">
+      <Filter>Файлы заголовков\Observers</Filter>
+    </ClInclude>
+    <ClInclude Include="Observers\IObserver.h">
+      <Filter>Файлы заголовков\Observers</Filter>
+    </ClInclude>
+    <ClInclude Include="Observers\Observable.h">
+      <Filter>Файлы заголовков\Observers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

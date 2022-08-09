@@ -1,5 +1,5 @@
 #include "Display.h"
-#include "CardinalDirectionHelpers.h"
+#include "Helpers/CardinalDirectionHelper.h"
 #include "WeatherData.h"
 
 Display::Display(std::ostream& output)

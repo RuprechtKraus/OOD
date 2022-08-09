@@ -1,8 +1,8 @@
 #include "pch.h"
 #include "CppUnitTest.h"
 #include "WeatherData.h"
-#include "Display.h"
-#include "StatsDisplay.h"
+#include "Displays/Display.h"
+#include "Displays/StatsDisplay.h"
 
 using namespace Microsoft::VisualStudio::CppUnitTestFramework;
 using namespace std::string_literals;

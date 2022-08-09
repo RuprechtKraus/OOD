@@ -1,6 +1,5 @@
 #pragma once
-#include "IObserver.h"
-#include "Observable.h"
+#include "Observers/Observable.h"
 #include "WeatherInfo.h"
 
 class WeatherData : public Observable<WeatherInfo>
@@ -15,7 +14,7 @@ public:
 	double GetWindDirection() const noexcept;
 	void MeasurementsChanged() noexcept;
 	void SetMeasurements(double temp, double humidity, double pressure) noexcept;
-	void SetMeasurements(double temp, double humidity, double pressure, 
+	void SetMeasurements(double temp, double humidity, double pressure,
 		double windSpeed, double windDirection) noexcept;
 
 protected:

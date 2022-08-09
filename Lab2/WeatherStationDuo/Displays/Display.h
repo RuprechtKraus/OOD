@@ -1,5 +1,5 @@
 #pragma once
-#include "IObserver.h"
+#include "Observers/IObserver.h"
 #include "WeatherInfo.h"
 #include <iostream>
 

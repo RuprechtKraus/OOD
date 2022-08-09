@@ -1,5 +1,5 @@
 #include "ValueStatistics.h"
-#include "CardinalDirectionHelpers.h"
+#include "Helpers/CardinalDirectionHelper.h"
 #include <format>
 
 NumericStatistics::NumericStatistics(const std::string& name, std::ostream& output)
