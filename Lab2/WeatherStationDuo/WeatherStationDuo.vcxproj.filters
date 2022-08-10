@@ -22,14 +22,14 @@
     <Filter Include="Файлы заголовков\StatisticsTrackers">
       <UniqueIdentifier>{4161a905-32df-422f-b3d4-18e3b63d60f5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Исходные файлы\StatisticsTrackers">
-      <UniqueIdentifier>{393eb92c-965f-436f-a26d-3c9505444839}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Файлы заголовков\Helpers">
       <UniqueIdentifier>{775f45cb-f2b6-4242-9a4e-aab3593d410d}</UniqueIdentifier>
     </Filter>
     <Filter Include="Файлы заголовков\Observers">
       <UniqueIdentifier>{ad5e4e72-bbcd-48d5-94f2-2a4241ca53e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\StatisticsTrackers">
+      <UniqueIdentifier>{f457d60d-c1ec-46f7-a20f-94a70f5eba3b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -46,10 +46,10 @@
       <Filter>Исходные файлы\Displays</Filter>
     </ClCompile>
     <ClCompile Include="StatisticsTrackers\ValueStatistics.cpp">
-      <Filter>Исходные файлы</Filter>
+      <Filter>Исходные файлы\StatisticsTrackers</Filter>
     </ClCompile>
     <ClCompile Include="StatisticsTrackers\WeatherStatistics.cpp">
-      <Filter>Исходные файлы</Filter>
+      <Filter>Исходные файлы\StatisticsTrackers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -64,12 +64,6 @@
     </ClInclude>
     <ClInclude Include="Displays\StatsDisplay.h">
       <Filter>Файлы заголовков\Displays</Filter>
-    </ClInclude>
-    <ClInclude Include="StatisticTrackers\ValueStatistics.h">
-      <Filter>Файлы заголовков\StatisticsTrackers</Filter>
-    </ClInclude>
-    <ClInclude Include="StatisticTrackers\WeatherStatistics.h">
-      <Filter>Файлы заголовков\StatisticsTrackers</Filter>
     </ClInclude>
     <ClInclude Include="Helpers\CardinalDirectionHelper.h">
       <Filter>Файлы заголовков\Helpers</Filter>
@@ -88,6 +82,21 @@
     </ClInclude>
     <ClInclude Include="Observers\PriorityObservable.h">
       <Filter>Файлы заголовков\Observers</Filter>
+    </ClInclude>
+    <ClInclude Include="WeatherEvents.h">
+      <Filter>Файлы заголовков\Observers</Filter>
+    </ClInclude>
+    <ClInclude Include="StatisticsTrackers\ValueStatistics.h">
+      <Filter>Файлы заголовков\StatisticsTrackers</Filter>
+    </ClInclude>
+    <ClInclude Include="StatisticsTrackers\WeatherStatistics.h">
+      <Filter>Файлы заголовков\StatisticsTrackers</Filter>
+    </ClInclude>
+    <ClInclude Include="Helpers\ValueTracker.h">
+      <Filter>Файлы заголовков\Helpers</Filter>
+    </ClInclude>
+    <ClInclude Include="WeatherStationLocation.h">
+      <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

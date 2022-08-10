@@ -13,6 +13,8 @@ public:
 
 class NumericStatistics : IValueStatistics<double>
 {
+	static constexpr double Inf = std::numeric_limits<double>::infinity();
+
 public:
 	NumericStatistics(const std::string& name, std::ostream& output = std::cout);
 
@@ -22,8 +24,8 @@ public:
 private:
 	std::string m_name;
 	std::ostream& m_output;
-	double m_minValue = std::numeric_limits<double>::infinity();
-	double m_maxValue = -std::numeric_limits<double>::infinity();
+	double m_minValue = Inf;
+	double m_maxValue = -Inf;
 	double m_accValue = 0;
 	unsigned m_countAcc = 0;
 };

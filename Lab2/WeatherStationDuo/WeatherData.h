@@ -1,11 +1,13 @@
 #pragma once
+#include "Helpers/ValueTracker.h"
 #include "Observers/PriorityObservable.h"
 #include "WeatherInfo.h"
+#include "WeatherStationLocation.h"
 
-class WeatherData : public PriorityObservable<WeatherInfo>
+class WeatherData : public PriorityObservable<WeatherInfo, WeatherEvents>
 {
 public:
-	WeatherData(const std::string& name);
+	WeatherData(const std::string& name, WeatherStationLocation location);
 
 	double GetTemperature() const noexcept;
 	double GetHumidity() const noexcept;
@@ -18,11 +20,15 @@ public:
 		double windSpeed, double windDirection) noexcept;
 
 protected:
-	WeatherInfo GetChangedData() const noexcept override;
+	ChangedData<WeatherInfo, WeatherEvents> GetChangedData(WeatherEvents eventsToDisplay) const noexcept override;
 
 private:
-	double m_temperature = 0.0;
-	double m_humidity = 0.0;
-	double m_pressure = 760.0;
-	std::optional<WindInfo> m_wind;
+	WeatherEvents CollectChangedWeatherParameters() const noexcept;
+
+	WeatherStationLocation m_stationLocation;
+	ValueTracker<double> m_temperature;
+	ValueTracker<double> m_humidity;
+	ValueTracker<double> m_pressure;
+	ValueTracker<double> m_windSpeed;
+	ValueTracker<double> m_windDirection;
 };

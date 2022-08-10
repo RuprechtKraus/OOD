@@ -1,16 +1,23 @@
 #pragma once
-#include <optional>
+#include "WeatherEvents.h"
+#include "WeatherStationLocation.h"
+#include <limits>
 
-struct WindInfo
-{
-	double speed = 0;
-	double direction = std::numeric_limits<double>::quiet_NaN();
-};
+constexpr double NaN = std::numeric_limits<double>::quiet_NaN();
 
 struct WeatherInfo
 {
-	double temperature = 0;
-	double humidity = 0;
-	double pressure = 0;
-	std::optional<WindInfo> windInfo;
+	double temperature = NaN;
+	double humidity = NaN;
+	double pressure = NaN;
+	double windSpeed = NaN;
+	double windDirection = NaN;
+	WeatherStationLocation sourceLocation;
+	WeatherEvents events = static_cast<WeatherEvents>(0);
+};
+
+struct WindInfo
+{
+	double speed = NaN;
+	double direction = NaN;
 };
