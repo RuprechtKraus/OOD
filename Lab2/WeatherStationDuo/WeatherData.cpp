@@ -1,7 +1,7 @@
 #include "WeatherData.h"
 
 WeatherData::WeatherData(const std::string& name)
-	: Observable(name)
+	: PriorityObservable(name)
 {
 }
 

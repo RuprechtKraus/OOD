@@ -45,11 +45,11 @@
     <ClCompile Include="Displays\StatsDisplay.cpp">
       <Filter>Исходные файлы\Displays</Filter>
     </ClCompile>
-    <ClCompile Include="StatisticTrackers\ValueStatistics.cpp">
-      <Filter>Исходные файлы\StatisticsTrackers</Filter>
+    <ClCompile Include="StatisticsTrackers\ValueStatistics.cpp">
+      <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="StatisticTrackers\WeatherStatistics.cpp">
-      <Filter>Исходные файлы\StatisticsTrackers</Filter>
+    <ClCompile Include="StatisticsTrackers\WeatherStatistics.cpp">
+      <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -81,6 +81,12 @@
       <Filter>Файлы заголовков\Observers</Filter>
     </ClInclude>
     <ClInclude Include="Observers\Observable.h">
+      <Filter>Файлы заголовков\Observers</Filter>
+    </ClInclude>
+    <ClInclude Include="Observers\IPriorityObservable.h">
+      <Filter>Файлы заголовков\Observers</Filter>
+    </ClInclude>
+    <ClInclude Include="Observers\PriorityObservable.h">
       <Filter>Файлы заголовков\Observers</Filter>
     </ClInclude>
   </ItemGroup>

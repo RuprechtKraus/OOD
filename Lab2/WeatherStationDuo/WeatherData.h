@@ -1,8 +1,8 @@
 #pragma once
-#include "Observers/Observable.h"
+#include "Observers/PriorityObservable.h"
 #include "WeatherInfo.h"
 
-class WeatherData : public Observable<WeatherInfo>
+class WeatherData : public PriorityObservable<WeatherInfo>
 {
 public:
 	WeatherData(const std::string& name);

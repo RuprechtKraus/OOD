@@ -144,7 +144,9 @@
     <ClInclude Include="Helpers\CardinalDirectionHelper.h" />
     <ClInclude Include="Observers\IObservable.h" />
     <ClInclude Include="Observers\IObserver.h" />
+    <ClInclude Include="Observers\IPriorityObservable.h" />
     <ClInclude Include="Observers\Observable.h" />
+    <ClInclude Include="Observers\PriorityObservable.h" />
     <ClInclude Include="StatisticTrackers\ValueStatistics.h" />
     <ClInclude Include="StatisticTrackers\WeatherStatistics.h" />
     <ClInclude Include="WeatherData.h" />
