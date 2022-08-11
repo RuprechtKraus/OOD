@@ -1,8 +1,7 @@
 #pragma once
 #include "IObserver.h"
 #include "IPriorityObservable.h"
-#include <cassert>
-#include <set>
+#include <map>
 #include <stdexcept>
 
 template <typename T, typename SubscriptionOptions>
@@ -20,29 +19,19 @@ public:
 
 private:
 	struct ObserverInfo;
-	using Observers = std::set<ObserverInfo, std::greater<ObserverInfo>>;
+	//using Observers = std::set<ObserverInfo, std::greater<ObserverInfo>>;
+	using Observers = std::multimap<int, ObserverInfo, std::greater<int>>;
 	using Iterator = typename Observers::iterator;
 
 	struct ObserverInfo
 	{
-		ObserverInfo(ObserverType& observer, unsigned priority, SubscriptionOptions subOptions)
+		ObserverInfo(ObserverType& observer, SubscriptionOptions subOptions)
 			: observer(&observer)
-			, priority(priority)
 			, subOptions(subOptions)
 		{
 		}
 
-		bool operator>(const ObserverInfo& other) const
-		{
-			if (priority == other.priority)
-			{
-				return observer > other.observer;
-			}
-			return priority > other.priority;
-		}
-
 		ObserverType* observer;
-		unsigned priority;
 		SubscriptionOptions subOptions;
 	};
 
@@ -80,7 +69,7 @@ void PriorityObservable<T, SubscriptionOptions>::RegisterObserver(
 	auto it = FindObserver(observer);
 	if (it == m_observers.end())
 	{
-		m_observers.emplace(observer, priority, subOptions);
+		m_observers.emplace(priority, ObserverInfo(observer, subOptions));
 	}
 	else
 	{
@@ -109,19 +98,17 @@ void PriorityObservable<T, SubscriptionOptions>::RemoveObserver(ObserverType& ob
 template <typename T, typename SubscriptionOptions>
 void PriorityObservable<T, SubscriptionOptions>::ChangeObserverPiority(Iterator it, unsigned priority)
 {
-	ObserverInfo o = *it;
-	o.priority = priority;
-	o.subOptions = it->subOptions;
-	m_observers.erase(it);
-	m_observers.insert(m_observers.end(), std::move(o));
+	auto node = m_observers.extract(it);
+	node.key() = priority;
+	m_observers.insert(std::move(node));
 }
 
 template <typename T, typename SubscriptionOptions>
 typename PriorityObservable<T, SubscriptionOptions>::Iterator
 PriorityObservable<T, SubscriptionOptions>::FindObserver(const ObserverType& observer)
 {
-	return std::find_if(m_observers.begin(), m_observers.end(), [&observer](const ObserverInfo& o) {
-		return o.observer == &observer;
+	return std::ranges::find_if(m_observers, [&observer](const auto& v) {
+		return v.second.observer == &observer;
 	});
 }
 
@@ -129,7 +116,7 @@ template <typename T, typename SubscriptionOptions>
 void PriorityObservable<T, SubscriptionOptions>::NotifyObservers() const noexcept
 {
 	Observers observersCopy = m_observers;
-	for (auto& observerInfo : observersCopy)
+	for (const auto& [_, observerInfo] : observersCopy)
 	{
 		auto changedData = GetChangedData(observerInfo.subOptions);
 		if (observerInfo.subOptions & changedData.subOptions)
