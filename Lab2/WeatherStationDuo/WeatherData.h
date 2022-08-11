@@ -4,10 +4,13 @@
 #include "WeatherInfo.h"
 #include "WeatherStationLocation.h"
 
-class WeatherData : public PriorityObservable<WeatherInfo, WeatherEvents>
+class WeatherData : public PriorityObservable<WeatherInfo, WeatherEvent>
 {
+	using Base = PriorityObservable<WeatherInfo, WeatherEvent>;
+	using EventData = Base::EventData;
+
 public:
-	WeatherData(const std::string& name, WeatherStationLocation location);
+	WeatherData(const std::string& name, StationType location);
 
 	double GetTemperature() const noexcept;
 	double GetHumidity() const noexcept;
@@ -20,12 +23,12 @@ public:
 		double windSpeed, double windDirection) noexcept;
 
 protected:
-	ChangedData<WeatherInfo, WeatherEvents> GetChangedData(WeatherEvents eventsToDisplay) const noexcept override;
+	EventData GetChangedData() const noexcept override;
 
 private:
-	WeatherEvents CollectChangedWeatherParameters() const noexcept;
+	EventData CollectChangedWeatherParameters() const noexcept;
 
-	WeatherStationLocation m_stationLocation;
+	StationType m_stationLocation;
 	ValueTracker<double> m_temperature;
 	ValueTracker<double> m_humidity;
 	ValueTracker<double> m_pressure;

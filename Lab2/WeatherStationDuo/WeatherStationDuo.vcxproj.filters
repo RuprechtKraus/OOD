@@ -83,7 +83,7 @@
     <ClInclude Include="Observers\PriorityObservable.h">
       <Filter>Файлы заголовков\Observers</Filter>
     </ClInclude>
-    <ClInclude Include="WeatherEvents.h">
+    <ClInclude Include="WeatherEvent.h">
       <Filter>Файлы заголовков\Observers</Filter>
     </ClInclude>
     <ClInclude Include="StatisticsTrackers\ValueStatistics.h">

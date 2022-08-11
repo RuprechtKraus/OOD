@@ -1,6 +1,7 @@
 #include "WeatherData.h"
+#include <unordered_map>
 
-WeatherData::WeatherData(const std::string& name, WeatherStationLocation location)
+WeatherData::WeatherData(const std::string& name, StationType location)
 	: PriorityObservable(name)
 	, m_stationLocation(location)
 {
@@ -44,7 +45,7 @@ void WeatherData::SetMeasurements(double temp, double humidity, double pressure)
 	MeasurementsChanged();
 }
 
-void WeatherData::SetMeasurements(double temp, double humidity, double pressure, 
+void WeatherData::SetMeasurements(double temp, double humidity, double pressure,
 	double windSpeed, double windDirection) noexcept
 {
 	m_humidity.UpdateValue(humidity);
@@ -55,41 +56,43 @@ void WeatherData::SetMeasurements(double temp, double humidity, double pressure,
 	MeasurementsChanged();
 }
 
-ChangedData<WeatherInfo, WeatherEvents> WeatherData::GetChangedData(WeatherEvents eventsToDisplay) const noexcept
+WeatherData::EventData WeatherData::GetChangedData() const noexcept
 {
-	WeatherInfo info;
-	info.temperature = m_temperature.GetValue();
-	info.humidity = m_humidity.GetValue();
-	info.pressure = m_pressure.GetValue();
-	info.windSpeed = m_windSpeed.GetValue();
-	info.windDirection = m_windDirection.GetValue();
-	info.sourceLocation = m_stationLocation;
-	info.events = eventsToDisplay;
-	return { info, CollectChangedWeatherParameters() };
+	return CollectChangedWeatherParameters();
 }
 
-WeatherEvents WeatherData::CollectChangedWeatherParameters() const noexcept
+WeatherData::EventData WeatherData::CollectChangedWeatherParameters() const noexcept
 {
-	WeatherEvents we = static_cast<WeatherEvents>(0);
+	std::unordered_map<WeatherEvent, WeatherInfo> info;
 	if (m_temperature.IsChanged())
 	{
-		we |= TEMPERATURE_CHANGED;
+		info.emplace(
+			TEMPERATURE_CHANGED,
+			WeatherInfo{ m_temperature, "Temp", m_name, m_stationLocation });
 	}
 	if (m_humidity.IsChanged())
 	{
-		we |= HUMIDITY_CHANGED;
+		info.emplace(
+			HUMIDITY_CHANGED,
+			WeatherInfo{ m_humidity, "Hum", m_name, m_stationLocation });
 	}
 	if (m_pressure.IsChanged())
 	{
-		we |= PRESSURE_CHANGED;
+		info.emplace(
+			PRESSURE_CHANGED,
+			WeatherInfo{ m_pressure, "Pressure", m_name, m_stationLocation });
 	}
 	if (m_windSpeed.IsChanged())
 	{
-		we |= WIND_SPEED_CHANGED;
+		info.emplace(
+			WIND_SPEED_CHANGED,
+			WeatherInfo{ m_windSpeed, "Wind speed", m_name, m_stationLocation });
 	}
 	if (m_windDirection.IsChanged())
 	{
-		we |= WIND_DIRECTION_CHANGED;
+		info.emplace(
+			WIND_DIRECTION_CHANGED,
+			WeatherInfo{ m_windDirection, "Wind direction", m_name, m_stationLocation });
 	}
-	return we;
+	return info;
 }

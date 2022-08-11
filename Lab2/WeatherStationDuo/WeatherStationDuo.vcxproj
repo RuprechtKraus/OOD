@@ -150,7 +150,7 @@
     <ClInclude Include="Observers\PriorityObservable.h" />
     <ClInclude Include="StatisticsTrackers\ValueStatistics.h" />
     <ClInclude Include="StatisticsTrackers\WeatherStatistics.h" />
-    <ClInclude Include="WeatherEvents.h" />
+    <ClInclude Include="WeatherEvent.h" />
     <ClInclude Include="WeatherData.h" />
     <ClInclude Include="WeatherInfo.h" />
     <ClInclude Include="WeatherStationLocation.h" />

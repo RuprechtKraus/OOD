@@ -15,6 +15,8 @@ public:
 	bool IsChanged() const noexcept;
 	T GetValue() const;
 
+	operator T() const;
+
 private:
 	T m_value;
 	bool m_isChanged;
@@ -84,6 +86,12 @@ bool ValueTracker<T>::IsChanged() const noexcept
 
 template <typename T>
 T ValueTracker<T>::GetValue() const
+{
+	return m_value;
+}
+
+template <typename T>
+ValueTracker<T>::operator T() const
 {
 	return m_value;
 }

@@ -3,73 +3,70 @@
 #include "IPriorityObservable.h"
 #include <map>
 #include <stdexcept>
+#include <unordered_map>
 
-template <typename T, typename SubscriptionOptions>
-struct ChangedData
-{
-	T data;
-	SubscriptionOptions subOptions;
-};
-
-template <typename T, typename SubscriptionOptions>
-class PriorityObservable : public IPriorityObservable<T, SubscriptionOptions>
+template <typename T, typename Event>
+class PriorityObservable : public IPriorityObservable<T, Event>
 {
 public:
 	using ObserverType = IObserver<T>;
+	using EventData = std::unordered_map<Event, T>;
 
 private:
 	struct ObserverInfo;
-	//using Observers = std::set<ObserverInfo, std::greater<ObserverInfo>>;
 	using Observers = std::multimap<int, ObserverInfo, std::greater<int>>;
 	using Iterator = typename Observers::iterator;
+	using ConstIterator = typename Observers::const_iterator;
 
 	struct ObserverInfo
 	{
-		ObserverInfo(ObserverType& observer, SubscriptionOptions subOptions)
+		ObserverInfo(ObserverType& observer, Event events)
 			: observer(&observer)
-			, subOptions(subOptions)
+			, events(events)
 		{
 		}
 
 		ObserverType* observer;
-		SubscriptionOptions subOptions;
+		Event events;
 	};
 
 public:
 	PriorityObservable(const std::string& name);
-
-public:
-	void RegisterObserver(ObserverType& observer, SubscriptionOptions subOptions, unsigned priority = 0) override;
+	void RegisterObserver(ObserverType& observer, Event events, unsigned priority = 0) override;
 	void SetObserverPriority(const ObserverType& observer, unsigned priority) override;
-	void RemoveObserver(ObserverType& observer) override;
-	void NotifyObservers() const noexcept override;
+	void RemoveObserver(const ObserverType& observer) override;
+	void SubscribeObserverToEvents(const ObserverType& observer, Event events);
+	void UnsubscribeObserverFromEvents(const ObserverType& observer, Event events);
+	bool DoesObserverExist(const ObserverType& observer) const noexcept;
 
 protected:
-	virtual ChangedData<T, SubscriptionOptions> GetChangedData(SubscriptionOptions subOptions) const = 0;
+	virtual EventData GetChangedData() const = 0;
+	void NotifyObservers() const noexcept override;
 
+	std::string m_name;
 	Observers m_observers;
 
 private:
 	void ChangeObserverPiority(Iterator it, unsigned priority);
-	Iterator FindObserver(const ObserverType& observer);
-
-	const std::string m_name;
+	Iterator FindObserver(const ObserverType& observer) noexcept;
+	ConstIterator FindObserver(const ObserverType& observer) const noexcept;
+	Iterator FindObserverOrThrow(const ObserverType& observer);
 };
 
-template <typename T, typename SubscriptionOptions>
-PriorityObservable<T, SubscriptionOptions>::PriorityObservable(const std::string& name)
+template <typename T, typename Event>
+PriorityObservable<T, Event>::PriorityObservable(const std::string& name)
 	: m_name(name)
 {
 }
 
-template <typename T, typename SubscriptionOptions>
-void PriorityObservable<T, SubscriptionOptions>::RegisterObserver(
-	ObserverType& observer, SubscriptionOptions subOptions, unsigned priority)
+template <typename T, typename Event>
+void PriorityObservable<T, Event>::RegisterObserver(
+	ObserverType& observer, Event events, unsigned priority)
 {
 	auto it = FindObserver(observer);
 	if (it == m_observers.end())
 	{
-		m_observers.emplace(priority, ObserverInfo(observer, subOptions));
+		m_observers.emplace(priority, ObserverInfo(observer, events));
 	}
 	else
 	{
@@ -77,51 +74,100 @@ void PriorityObservable<T, SubscriptionOptions>::RegisterObserver(
 	}
 }
 
-template <typename T, typename SubscriptionOptions>
-void PriorityObservable<T, SubscriptionOptions>::SetObserverPriority(
+template <typename T, typename Event>
+void PriorityObservable<T, Event>::SetObserverPriority(
 	const ObserverType& observer, unsigned priority)
 {
-	auto it = FindObserver(observer);
-	if (it != m_observers.end())
-	{
-		ChangeObserverPiority(it, priority);
-	}
+	auto it = FindObserverOrThrow(observer);
+	ChangeObserverPiority(it, priority);
 }
 
-template <typename T, typename SubscriptionOptions>
-void PriorityObservable<T, SubscriptionOptions>::RemoveObserver(ObserverType& observer)
+template <typename T, typename Event>
+void PriorityObservable<T, Event>::RemoveObserver(const ObserverType& observer)
 {
-	auto it = FindObserver(observer);
+	auto it = FindObserverOrThrow(observer);
 	m_observers.erase(it);
 }
 
-template <typename T, typename SubscriptionOptions>
-void PriorityObservable<T, SubscriptionOptions>::ChangeObserverPiority(Iterator it, unsigned priority)
+template <typename T, typename Event>
+void PriorityObservable<T, Event>::ChangeObserverPiority(Iterator it, unsigned priority)
 {
 	auto node = m_observers.extract(it);
 	node.key() = priority;
 	m_observers.insert(std::move(node));
 }
 
-template <typename T, typename SubscriptionOptions>
-typename PriorityObservable<T, SubscriptionOptions>::Iterator
-PriorityObservable<T, SubscriptionOptions>::FindObserver(const ObserverType& observer)
+template <typename T, typename Event>
+void PriorityObservable<T, Event>::SubscribeObserverToEvents(
+	const ObserverType& observer, Event events)
+{
+	auto it = FindObserverOrThrow(observer);
+	it->second.events &= events;
+}
+
+template <typename T, typename Event>
+void PriorityObservable<T, Event>::UnsubscribeObserverFromEvents(
+	const ObserverType& observer, Event events)
+{
+	auto it = FindObserverOrThrow(observer);
+	it->second.events &= ~events;
+	if (it->second.events == 0)
+	{
+		RemoveObserver(observer);
+	}
+}
+
+template <typename T, typename Event>
+bool PriorityObservable<T, Event>::DoesObserverExist(
+	const ObserverType& observer) const noexcept
+{
+	return FindObserver(observer) != m_observers.end();
+}
+
+
+template <typename T, typename Event>
+typename PriorityObservable<T, Event>::Iterator
+PriorityObservable<T, Event>::FindObserver(const ObserverType& observer) noexcept
 {
 	return std::ranges::find_if(m_observers, [&observer](const auto& v) {
 		return v.second.observer == &observer;
 	});
 }
 
-template <typename T, typename SubscriptionOptions>
-void PriorityObservable<T, SubscriptionOptions>::NotifyObservers() const noexcept
+template <typename T, typename Event>
+typename PriorityObservable<T, Event>::ConstIterator
+PriorityObservable<T, Event>::FindObserver(const ObserverType& observer) const noexcept
+{
+	return std::ranges::find_if(m_observers, [&observer](const auto& v) {
+		return v.second.observer == &observer;
+	});
+}
+
+template <typename T, typename Event>
+typename PriorityObservable<T, Event>::Iterator
+PriorityObservable<T, Event>::FindObserverOrThrow(const ObserverType& observer)
+{
+	auto it = FindObserver(observer);
+	if (it == m_observers.end())
+	{
+		throw std::logic_error("Observer doesn't exist");
+	}
+	return it;
+}
+
+template <typename T, typename Event>
+void PriorityObservable<T, Event>::NotifyObservers() const noexcept
 {
 	Observers observersCopy = m_observers;
+	EventData changedData = GetChangedData();
 	for (const auto& [_, observerInfo] : observersCopy)
 	{
-		auto changedData = GetChangedData(observerInfo.subOptions);
-		if (observerInfo.subOptions & changedData.subOptions)
+		for (const auto& [event, data] : changedData)
 		{
-			observerInfo.observer->Update(m_name, changedData.data);
+			if (observerInfo.events & event)
+			{
+				observerInfo.observer->Update(data);
+			}
 		}
 	}
 }

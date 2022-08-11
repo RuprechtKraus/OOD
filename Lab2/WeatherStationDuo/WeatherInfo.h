@@ -1,19 +1,17 @@
 #pragma once
-#include "WeatherEvents.h"
+#include "WeatherEvent.h"
 #include "WeatherStationLocation.h"
 #include <limits>
+#include <string>
 
 constexpr double NaN = std::numeric_limits<double>::quiet_NaN();
 
 struct WeatherInfo
 {
-	double temperature = NaN;
-	double humidity = NaN;
-	double pressure = NaN;
-	double windSpeed = NaN;
-	double windDirection = NaN;
-	WeatherStationLocation sourceLocation;
-	WeatherEvents events = static_cast<WeatherEvents>(0);
+	double value;
+	std::string valueName;
+	std::string sourceName;
+	StationType sourceLocation;
 };
 
 struct WindInfo
