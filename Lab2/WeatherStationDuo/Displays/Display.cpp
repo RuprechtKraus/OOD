@@ -10,7 +10,7 @@ Display::Display(std::ostream& output)
 void Display::Update(const WeatherInfo& data)
 {
 	m_output << "Source " << data.sourceName << std::endl;
-	m_output << data.valueName << " ";
+	m_output << std::format("Current {} ", data.valueName);
 	try
 	{
 		DisplayValue(data);

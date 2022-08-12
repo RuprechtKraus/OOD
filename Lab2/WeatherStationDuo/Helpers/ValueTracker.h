@@ -20,12 +20,14 @@ public:
 private:
 	T m_value;
 	bool m_isChanged;
+	bool m_isEmpty;
 };
 
 template <typename T>
 ValueTracker<T>::ValueTracker()
 	: m_value(T())
 	, m_isChanged(false)
+	, m_isEmpty(true)
 {
 }
 
@@ -33,6 +35,7 @@ template <typename T>
 ValueTracker<T>::ValueTracker(const T& value)
 	: m_value(value)
 	, m_isChanged(false)
+	, m_isEmpty(true)
 {
 }
 
@@ -40,13 +43,20 @@ template <typename T>
 ValueTracker<T>::ValueTracker(T&& value)
 	: m_value(std::exchange(value, T()))
 	, m_isChanged(false)
+	, m_isEmpty(true)
 {
 }
 
 template <typename T>
 void ValueTracker<T>::UpdateValue(const T& newValue)
 {
-	if (m_value != newValue)
+	if (m_isEmpty)
+	{
+		m_value = newValue;
+		m_isChanged = true;
+		m_isEmpty = false;
+	}
+	else if (m_value != newValue)
 	{
 		m_value = newValue;
 		m_isChanged = true;
@@ -76,6 +86,7 @@ void ValueTracker<T>::Reset() noexcept
 {
 	m_value = T();
 	m_isChanged = false;
+	m_isEmpty	 = true;
 }
 
 template <typename T>
