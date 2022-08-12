@@ -7,6 +7,7 @@ enum WeatherEvent : unsigned short
 	PRESSURE_CHANGED	   = 0b00100,
 	WIND_SPEED_CHANGED	   = 0b01000,
 	WIND_DIRECTION_CHANGED = 0b10000,
+	ALL_WEATHER_EVENTS     = 0b11111
 };
 
 constexpr WeatherEvent operator~(WeatherEvent options)

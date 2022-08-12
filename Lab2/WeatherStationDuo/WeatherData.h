@@ -27,6 +27,11 @@ protected:
 
 private:
 	EventData CollectChangedWeatherParameters() const noexcept;
+	WeatherInfo CreateTemperatureInfo() const noexcept;
+	WeatherInfo CreateHumidityInfo() const noexcept;
+	WeatherInfo CreatePressureInfo() const noexcept;
+	WeatherInfo CreateWindSpeedInfo() const noexcept;
+	WeatherInfo CreateWindDirectionInfo() const noexcept;
 
 	StationType m_stationLocation;
 	ValueTracker<double> m_temperature;

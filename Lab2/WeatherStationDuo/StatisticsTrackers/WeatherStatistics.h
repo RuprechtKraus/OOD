@@ -6,15 +6,11 @@ class WeatherStatistics
 {
 public:
 	WeatherStatistics(std::ostream& output = std::cout);
-	void AddEntry(const WeatherInfo& weatherInfo) noexcept;
-	void UpdateEvents(WeatherEvent newEvents) noexcept;
-	void Display() const noexcept;
+	void AddEntry(const WeatherInfo& weatherInfo);
+	void Display(WeatherEvent event) const noexcept;
 
 private:
-	template <typename S, typename T>
-	static void AddValueEntry(S& statistics, const T& value, WeatherEvent happendEvents, WeatherEvent requiredEvent);
-	template <typename S>
-	static void DisplayValue(S& statistics, WeatherEvent events, WeatherEvent targetEvent);
+	void TryAddEntry(const WeatherInfo& weatherInfo);
 
 	std::ostream& m_output;
 	NumericStatistics m_temperature;

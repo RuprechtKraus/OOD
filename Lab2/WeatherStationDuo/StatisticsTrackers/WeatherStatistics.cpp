@@ -11,48 +11,66 @@ WeatherStatistics::WeatherStatistics(std::ostream& output)
 {
 }
 
-void WeatherStatistics::AddEntry(const WeatherInfo& weatherInfo) noexcept
+void WeatherStatistics::AddEntry(const WeatherInfo& weatherInfo)
 {
-	/*AddValueEntry(m_temperature, weatherInfo.temperature, m_events, TEMPERATURE_CHANGED);
-	AddValueEntry(m_humidity, weatherInfo.humidity, m_events, HUMIDITY_CHANGED);
-	AddValueEntry(m_pressure, weatherInfo.pressure, m_events, PRESSURE_CHANGED);
-	if (weatherInfo.sourceLocation == WeatherStationLocation::OUTSIDE)
+	try
 	{
-		AddValueEntry(m_windSpeed, weatherInfo.windSpeed, m_events, WIND_SPEED_CHANGED);
-		AddValueEntry(m_windDirection, WindInfo{ weatherInfo.windSpeed, weatherInfo.windDirection },
-			m_events, WIND_DIRECTION_CHANGED);
-	}*/
-}
-
-void WeatherStatistics::Display() const noexcept
-{
-	/*DisplayValue(m_temperature, m_events, TEMPERATURE_CHANGED);
-	DisplayValue(m_humidity, m_events, HUMIDITY_CHANGED);
-	DisplayValue(m_pressure, m_events, PRESSURE_CHANGED);
-	DisplayValue(m_windSpeed, m_events, WIND_SPEED_CHANGED);
-	DisplayValue(m_windDirection, m_events, WIND_DIRECTION_CHANGED);*/
-}
-
-void WeatherStatistics::UpdateEvents(WeatherEvent newEvents) noexcept
-{
-	m_events = newEvents;
-}
-
-template <typename S, typename T>
-void WeatherStatistics::AddValueEntry(S& statistics, const T& value,
-	WeatherEvent events, WeatherEvent targetEvent)
-{
-	if (events & targetEvent)
+		TryAddEntry(weatherInfo);
+	}
+	catch (const std::bad_variant_access& e)
 	{
-		statistics.AddEntry(value);
+		throw std::runtime_error("Incorrect event value");
+	}
+	catch (const std::runtime_error& e)
+	{
+		throw;
 	}
 }
 
-template <typename S>
-void WeatherStatistics::DisplayValue(S& statistics, WeatherEvent events, WeatherEvent targetEvent)
+void WeatherStatistics::TryAddEntry(const WeatherInfo& weatherInfo)
 {
-	if (events & targetEvent)
+	switch (weatherInfo.event)
 	{
-		statistics.Display();
+	case TEMPERATURE_CHANGED:
+		m_temperature.AddEntry(std::get<double>(weatherInfo.value));
+		break;
+	case HUMIDITY_CHANGED:
+		m_humidity.AddEntry(std::get<double>(weatherInfo.value));
+		break;
+	case PRESSURE_CHANGED:
+		m_pressure.AddEntry(std::get<double>(weatherInfo.value));
+		break;
+	case WIND_SPEED_CHANGED:
+		m_windSpeed.AddEntry(std::get<double>(weatherInfo.value));
+		break;
+	case WIND_DIRECTION_CHANGED:
+		m_windDirection.AddEntry(std::get<WindInfo>(weatherInfo.value));
+		break;
+	default:
+		throw std::runtime_error("Wrong weather event");
+	}
+}
+
+void WeatherStatistics::Display(WeatherEvent event) const noexcept
+{
+	switch (event)
+	{
+	case TEMPERATURE_CHANGED:
+		m_temperature.Display();
+		break;
+	case HUMIDITY_CHANGED:
+		m_humidity.Display();
+		break;
+	case PRESSURE_CHANGED:
+		m_pressure.Display();
+		break;
+	case WIND_SPEED_CHANGED:
+		m_windSpeed.Display();
+		break;
+	case WIND_DIRECTION_CHANGED:
+		m_windDirection.Display();
+		break;
+	default:
+		break;
 	}
 }
