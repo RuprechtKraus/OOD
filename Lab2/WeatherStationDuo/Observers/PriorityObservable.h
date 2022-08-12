@@ -38,6 +38,7 @@ public:
 	void SubscribeObserverToEvents(ObserverType& observer, Event events);
 	void UnsubscribeObserverFromEvents(ObserverType& observer, Event events);
 	bool DoesObserverExist(const ObserverType& observer) const noexcept;
+	void RemoveAllObservers() noexcept;
 
 protected:
 	virtual EventData GetChangedData() const = 0;
@@ -63,15 +64,11 @@ template <typename T, typename Event>
 void PriorityObservable<T, Event>::RegisterObserver(
 	ObserverType& observer, Event events, unsigned priority)
 {
-	auto it = FindObserver(observer);
-	if (it == m_observers.end())
+	if (DoesObserverExist(observer))
 	{
-		m_observers.emplace(priority, ObserverInfo(observer, events));
+		throw std::runtime_error("Observer already exists");
 	}
-	else
-	{
-		ChangeObserverPiority(it, priority);
-	}
+	m_observers.emplace(priority, ObserverInfo(observer, events));
 }
 
 template <typename T, typename Event>
@@ -90,6 +87,12 @@ void PriorityObservable<T, Event>::RemoveObserver(ObserverType& observer)
 }
 
 template <typename T, typename Event>
+void PriorityObservable<T, Event>::RemoveAllObservers() noexcept
+{
+	m_observers.clear();
+}
+
+template <typename T, typename Event>
 void PriorityObservable<T, Event>::ChangeObserverPiority(Iterator it, unsigned priority)
 {
 	auto node = m_observers.extract(it);
@@ -102,7 +105,7 @@ void PriorityObservable<T, Event>::SubscribeObserverToEvents(
 	ObserverType& observer, Event events)
 {
 	auto it = FindObserverOrThrow(observer);
-	it->second.events &= events;
+	it->second.events |= events;
 }
 
 template <typename T, typename Event>

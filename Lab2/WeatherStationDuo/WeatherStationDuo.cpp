@@ -9,7 +9,7 @@ int main()
 	StatsDisplay dp;
 	Display ds;
 
-	wd.RegisterObserver(dp, TEMPERATURE_CHANGED);
+	wd.RegisterObserver(dp, ALL_WEATHER_EVENTS);
 	wd.RegisterObserver(ds, HUMIDITY_CHANGED | WIND_SPEED_CHANGED, 1);
 
 	wd.SetMeasurements(10, 20, 30);

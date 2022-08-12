@@ -20,8 +20,7 @@ void NumericStatistics::Display() const noexcept
 {
 	m_output << std::format("Max {} ", m_name) << m_maxValue << std::endl;
 	m_output << std::format("Min {} ", m_name) << m_minValue << std::endl;
-	m_output << std::format("Average {} ", m_name) << (m_accValue / m_countAcc) << '\n'
-			 << std::endl;
+	m_output << std::format("Avg {} ", m_name) << (m_accValue / m_countAcc) << std::endl;
 }
 
 CardinalDirectionStatistics::CardinalDirectionStatistics(
@@ -42,8 +41,7 @@ void CardinalDirectionStatistics::AddEntry(const WindInfo& windInfo) noexcept
 
 void CardinalDirectionStatistics::Display() const noexcept
 {
-	m_output << "Average wind direction " << DegreesToCardinalDirection(
-		GetAverage()) << '\n' << std::endl;
+	m_output << "Average wind direction " << DegreesToCardinalDirection(GetAverage()) << std::endl;
 }
 
 int CardinalDirectionStatistics::GetAverage() const noexcept

@@ -48,6 +48,11 @@ void WeatherData::SetMeasurements(double temp, double humidity, double pressure)
 void WeatherData::SetMeasurements(double temp, double humidity, double pressure,
 	double windSpeed, double windDirection) noexcept
 {
+	if (m_stationLocation == StationType::INSIDE)
+	{
+		return SetMeasurements(temp, humidity, pressure);
+	}
+
 	m_humidity.UpdateValue(humidity);
 	m_temperature.UpdateValue(temp);
 	m_pressure.UpdateValue(pressure);
@@ -75,6 +80,10 @@ WeatherData::EventData WeatherData::CollectChangedWeatherParameters() const noex
 	if (m_pressure.IsChanged())
 	{
 		info.emplace(PRESSURE_CHANGED, CreatePressureInfo());
+	}
+	if (m_stationLocation == StationType::INSIDE)
+	{
+		return info;
 	}
 	if (m_windSpeed.IsChanged())
 	{

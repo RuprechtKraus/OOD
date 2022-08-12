@@ -42,8 +42,7 @@ void StatsDisplay::CreateSourceIfNotExists(const std::string& source)
 
 void StatsDisplay::DisplaySourceData(const std::string& source, WeatherEvent event) const noexcept
 {
-	m_output << "Source " << source << '\n'
-			 << std::endl;
+	m_output << "Source " << source << std::endl;
 	m_sources.at(source).Display(event);
 	m_output << "----------------" << std::endl;
 }
