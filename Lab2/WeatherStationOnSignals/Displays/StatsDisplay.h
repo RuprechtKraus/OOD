@@ -11,7 +11,7 @@ class StatsDisplay : public IWeatherDisplay
 	{
 		signals::scoped_connection connection;
 		WeatherStatistics statistics;
-		WeatherEvent events;
+		WeatherEvent events{};
 	};
 
 public:

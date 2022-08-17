@@ -11,7 +11,7 @@ class Display : public IWeatherDisplay
 	struct SourceInfo
 	{
 		signals::scoped_connection connection;
-		WeatherEvent events;
+		WeatherEvent events{};
 	};
 
 public:
