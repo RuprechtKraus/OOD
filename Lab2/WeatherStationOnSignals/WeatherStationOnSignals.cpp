@@ -9,7 +9,7 @@ int main()
 	StatsDisplay dp;
 	Display ds;
 
-	dp.AddDataSource(wd, TEMPERATURE_CHANGED);
+	dp.AddDataSource(wd, TEMPERATURE_CHANGED | HUMIDITY_CHANGED);
 
 	wd.SetMeasurements(10, 20, 30);
 	wd.SetMeasurements(10, 20, 30, 1, 90);

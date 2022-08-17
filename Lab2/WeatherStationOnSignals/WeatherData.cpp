@@ -39,7 +39,7 @@ double WeatherData::GetWindDirection() const noexcept
 
 void WeatherData::MeasurementsChanged() noexcept
 {
-	m_signal(GetChangedData());
+	m_signal(this, GetChangedData());
 }
 
 void WeatherData::SetMeasurements(double temp, double humidity, double pressure) noexcept

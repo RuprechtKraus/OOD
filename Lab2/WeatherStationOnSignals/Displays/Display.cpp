@@ -10,31 +10,38 @@ Display::Display(std::ostream& output)
 {
 }
 
-void Display::AddDataSource(WeatherData& wd, WeatherEvent events, double priority)
+void Display::AddDataSource(IWeatherStation& wd, WeatherEvent events, double priority)
 {
-	auto connection = wd.DoOnWeatherDataChange(bind([this](const std::vector<WeatherInfo>& info) {
-		std::ranges::for_each(info, bind(&Display::Update, this, _1));
-	}, _1), priority);
-	m_connections[wd.GetName()] = { connection, events };
+	auto connection = wd.DoOnWeatherDataChange(bind([this](
+		IWeatherStation* source, 
+		const std::vector<WeatherInfo>& info) {
+		std::ranges::for_each(info, bind(&Display::Update, this, source, _1));
+	}, _1, _2), priority);
+	m_connections[&wd] = { connection, events };
 }
 
-void Display::Update(const WeatherInfo& data)
+void Display::RemoveDataSource(IWeatherStation& wd)
 {
-	if (!m_connections.contains(data.sourceName))
+	m_connections.erase(&wd);
+}
+
+void Display::Update(IWeatherStation* source, const WeatherInfo& info)
+{
+	if (!m_connections.contains(source))
 	{
 		throw std::runtime_error("No such source");
 	}
 
-	if (!(m_connections[data.sourceName].events & data.event))
+	if (!(m_connections[source].events & info.event))
 	{
 		return;
 	}
 
-	m_output << "Source " << data.sourceName << std::endl;
-	m_output << std::format("Current {} ", data.valueName);
+	m_output << "Source " << info.sourceName << std::endl;
+	m_output << std::format("Current {} ", info.valueName);
 	try
 	{
-		DisplayValue(data);
+		DisplayValue(info);
 	}
 	catch (const std::bad_variant_access&)
 	{

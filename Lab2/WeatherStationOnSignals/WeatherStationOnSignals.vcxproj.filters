@@ -74,9 +74,6 @@
     <ClInclude Include="WeatherEvent.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
-    <ClInclude Include="WeatherInfo.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="WeatherStationLocation.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
@@ -85,6 +82,9 @@
     </ClInclude>
     <ClInclude Include="IWeatherDisplay.h">
       <Filter>Файлы заголовков\Displays</Filter>
+    </ClInclude>
+    <ClInclude Include="IWeatherStation.h">
+      <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,35 +1,12 @@
 #pragma once
 #include "Helpers/ValueTracker.h"
-#include "WeatherInfo.h"
+#include "IWeatherStation.h"
 #include "WeatherStationLocation.h"
 #include <boost/signals2.hpp>
 #include <string>
 #include <vector>
 
-namespace signals = boost::signals2;
-
-class IWeatherStation
-{
-public:
-	using Container = std::vector<WeatherInfo>;
-
-private:
-	using Signature = void(const Container&);
-	
-protected:
-	using signal_type = boost::signals2::signal<Signature,
-		signals::optional_last_value<boost::function_traits<Signature>::result_type>,
-		int,
-		std::greater<int>>;
-
-public:
-	using slot_type = signal_type::slot_type;
-
-	virtual signals::connection DoOnWeatherDataChange(const slot_type& slot, double priority) = 0;
-	virtual Container GetChangedData() const = 0;
-};
-
-class WeatherData : IWeatherStation
+class WeatherData : public IWeatherStation
 {
 public:
 	WeatherData(const std::string& name, StationType location);

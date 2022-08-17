@@ -8,38 +8,48 @@ StatsDisplay::StatsDisplay(std::ostream& output)
 {
 }
 
-void StatsDisplay::AddDataSource(WeatherData& wd, WeatherEvent events, double priority)
+void StatsDisplay::AddDataSource(IWeatherStation& wd, WeatherEvent events, double priority)
 {
-	auto connection = wd.DoOnWeatherDataChange(bind([this](const std::vector<WeatherInfo>& info) {
-		std::ranges::for_each(info, bind(&StatsDisplay::Update, this, _1));
-	}, _1),	priority);
-	m_connections.emplace(wd.GetName(), SourceInfo{ connection, WeatherStatistics(m_output), events });
+	auto connection = wd.DoOnWeatherDataChange(bind([this](
+		IWeatherStation* source,
+		const std::vector<WeatherInfo>& info) {
+		std::ranges::for_each(info, bind(&StatsDisplay::Update, this, source, _1));
+	}, _1, _2),	priority);
+	m_connections.emplace(&wd, SourceInfo{ connection, WeatherStatistics(m_output), events });
 }
 
-void StatsDisplay::Update(const WeatherInfo& data)
+void StatsDisplay::RemoveDataSource(IWeatherStation& wd)
 {
-	if (!m_connections.contains(data.sourceName))
+	m_connections.erase(&wd);
+}
+
+void StatsDisplay::Update(IWeatherStation* source, const WeatherInfo& data)
+{
+	if (!m_connections.contains(source))
 	{
 		throw std::runtime_error("No such source");
 	}
 
-	if (!(m_connections[data.sourceName].events & data.event))
+	if (!(m_connections[source].events & data.event))
 	{
 		return;
 	}
 
-	UpdateSourceData(data.sourceName, data);
-	DisplaySourceData(data.sourceName, data.event);
+	UpdateSourceData(source, data);
+	DisplaySourceData(data.sourceName, source, data.event);
 }
 
-void StatsDisplay::UpdateSourceData(const std::string& source, const WeatherInfo& newData)
+void StatsDisplay::UpdateSourceData(IWeatherStation* source, const WeatherInfo& newData)
 {
 	m_connections[source].statistics.AddEntry(newData);
 }
 
-void StatsDisplay::DisplaySourceData(const std::string& source, WeatherEvent event) const noexcept
+void StatsDisplay::DisplaySourceData(
+	const std::string& sourceName, 
+	IWeatherStation* source, 
+	WeatherEvent event) const noexcept
 {
-	m_output << "Source " << source << std::endl;
+	m_output << "Source " << sourceName  << std::endl;
 	m_connections.at(source).statistics.Display(event);
 	m_output << "----------------" << std::endl;
 }

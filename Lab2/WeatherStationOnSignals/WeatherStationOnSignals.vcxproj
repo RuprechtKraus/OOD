@@ -144,12 +144,12 @@
     <ClInclude Include="Helpers\CardinalDirectionHelper.h" />
     <ClInclude Include="Helpers\ValueTracker.h" />
     <ClInclude Include="IWeatherDisplay.h" />
+    <ClInclude Include="IWeatherStation.h" />
     <ClInclude Include="StatisticsTrackers\ValueStatistics.h" />
     <ClInclude Include="StatisticsTrackers\WeatherStatistics.h" />
     <ClInclude Include="WeatherData.h" />
     <ClInclude Include="WeatherDisplay.h" />
     <ClInclude Include="WeatherEvent.h" />
-    <ClInclude Include="WeatherInfo.h" />
     <ClInclude Include="WeatherStationLocation.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

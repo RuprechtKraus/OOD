@@ -1,5 +1,5 @@
 #pragma once
-#include "WeatherInfo.h"
+#include "IWeatherStation.h"
 #include <iostream>
 #include <string>
 
