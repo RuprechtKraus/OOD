@@ -34,6 +34,7 @@ class WeatherData : IWeatherStation
 public:
 	WeatherData(const std::string& name, StationType location);
 
+	std::string GetName() const noexcept;
 	double GetTemperature() const noexcept;
 	double GetHumidity() const noexcept;
 	double GetPressure() const noexcept;

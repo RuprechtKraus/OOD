@@ -7,6 +7,11 @@ WeatherData::WeatherData(const std::string& name, StationType location)
 {
 }
 
+std::string WeatherData::GetName() const noexcept
+{
+	return m_name;
+}
+
 double WeatherData::GetTemperature() const noexcept
 {
 	return m_temperature.GetValue();

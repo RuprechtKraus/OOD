@@ -6,8 +6,10 @@
 int main()
 {
 	WeatherData wd("Outside", StationType::OUTSIDE);
-	StatsDisplay dp(wd, ALL_WEATHER_EVENTS);
-	Display ds(wd, HUMIDITY_CHANGED | WIND_SPEED_CHANGED, 1);
+	StatsDisplay dp;
+	Display ds;
+
+	dp.AddDataSource(wd, TEMPERATURE_CHANGED);
 
 	wd.SetMeasurements(10, 20, 30);
 	wd.SetMeasurements(10, 20, 30, 1, 90);

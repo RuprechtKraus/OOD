@@ -6,18 +6,23 @@
 
 class StatsDisplay : public IWeatherDisplay
 {
-public:
-	StatsDisplay(WeatherData& wd, WeatherEvent events, double priority = 0, std::ostream& output = std::cout);
+	struct SourceInfo
+	{
+		signals::scoped_connection connection;
+		WeatherStatistics statistics;
+		WeatherEvent events;
+	};
 
+public:
+	StatsDisplay(std::ostream& output = std::cout);
+
+	void AddDataSource(WeatherData& wd, WeatherEvent events, double priority = 0);
 	void Update(const WeatherInfo& data) override;
 
 private:
 	void DisplaySourceData(const std::string& source, WeatherEvent event) const noexcept;
 	void UpdateSourceData(const std::string& source, const WeatherInfo& newData);
-	void CreateSourceIfNotExists(const std::string& source);
 
-	std::unordered_map<std::string, WeatherStatistics> m_sources;
-	signals::scoped_connection m_connection;
-	WeatherEvent m_events;
+	std::unordered_map<std::string, SourceInfo> m_connections;
 	std::ostream& m_output;
 };

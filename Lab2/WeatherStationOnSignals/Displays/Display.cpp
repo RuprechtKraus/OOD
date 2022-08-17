@@ -5,18 +5,27 @@
 
 using namespace std::placeholders;
 
-Display::Display(WeatherData& wd, WeatherEvent events, double priority, std::ostream& output)
-	: m_events(events)
-	, m_output(output)
+Display::Display(std::ostream& output)
+	: m_output(output)
 {
-	m_connection = wd.DoOnWeatherDataChange(bind([this](const std::vector<WeatherInfo>& info) {
+}
+
+void Display::AddDataSource(WeatherData& wd, WeatherEvent events, double priority)
+{
+	auto connection = wd.DoOnWeatherDataChange(bind([this](const std::vector<WeatherInfo>& info) {
 		std::ranges::for_each(info, bind(&Display::Update, this, _1));
 	}, _1), priority);
+	m_connections[wd.GetName()] = { connection, events };
 }
 
 void Display::Update(const WeatherInfo& data)
 {
-	if (!(m_events & data.event))
+	if (!m_connections.contains(data.sourceName))
+	{
+		throw std::runtime_error("No such source");
+	}
+
+	if (!(m_connections[data.sourceName].events & data.event))
 	{
 		return;
 	}
