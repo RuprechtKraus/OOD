@@ -13,30 +13,24 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Исходные файлы\Displays">
-      <UniqueIdentifier>{10593dc2-1189-4541-baa8-296d6117b95e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Файлы заголовков\Displays">
-      <UniqueIdentifier>{acdb573e-5182-4c2a-bf0d-3d32132bd3ff}</UniqueIdentifier>
+      <UniqueIdentifier>{f45259f0-5ba4-4890-8ea0-1029e4fcd630}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Файлы заголовков\StatisticsTrackers">
-      <UniqueIdentifier>{4161a905-32df-422f-b3d4-18e3b63d60f5}</UniqueIdentifier>
+    <Filter Include="Исходные файлы\Displays">
+      <UniqueIdentifier>{69a06c89-c273-4e54-8421-61b2f6952cb0}</UniqueIdentifier>
     </Filter>
     <Filter Include="Файлы заголовков\Helpers">
-      <UniqueIdentifier>{775f45cb-f2b6-4242-9a4e-aab3593d410d}</UniqueIdentifier>
+      <UniqueIdentifier>{823e1640-fac0-4b3f-8f4c-2a30e6d2df54}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Файлы заголовков\Observers">
-      <UniqueIdentifier>{ad5e4e72-bbcd-48d5-94f2-2a4241ca53e2}</UniqueIdentifier>
+    <Filter Include="Файлы заголовков\StatisticsTrackers">
+      <UniqueIdentifier>{7dfee5af-bee3-442b-9bff-4547909f4c38}</UniqueIdentifier>
     </Filter>
     <Filter Include="Исходные файлы\StatisticsTrackers">
-      <UniqueIdentifier>{f457d60d-c1ec-46f7-a20f-94a70f5eba3b}</UniqueIdentifier>
+      <UniqueIdentifier>{ba909176-96a2-4928-90bb-98e20dcb15e7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="WeatherStationDuo.cpp">
-      <Filter>Исходные файлы</Filter>
-    </ClCompile>
-    <ClCompile Include="WeatherData.cpp">
+    <ClCompile Include="WeatherStationOnSignals.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
     <ClCompile Include="Displays\Display.cpp">
@@ -51,14 +45,11 @@
     <ClCompile Include="StatisticsTrackers\WeatherStatistics.cpp">
       <Filter>Исходные файлы\StatisticsTrackers</Filter>
     </ClCompile>
+    <ClCompile Include="WeatherData.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="WeatherInfo.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
-    <ClInclude Include="WeatherData.h">
-      <Filter>Файлы заголовков</Filter>
-    </ClInclude>
     <ClInclude Include="Displays\Display.h">
       <Filter>Файлы заголовков\Displays</Filter>
     </ClInclude>
@@ -68,20 +59,8 @@
     <ClInclude Include="Helpers\CardinalDirectionHelper.h">
       <Filter>Файлы заголовков\Helpers</Filter>
     </ClInclude>
-    <ClInclude Include="Observers\IObservable.h">
-      <Filter>Файлы заголовков\Observers</Filter>
-    </ClInclude>
-    <ClInclude Include="Observers\IObserver.h">
-      <Filter>Файлы заголовков\Observers</Filter>
-    </ClInclude>
-    <ClInclude Include="Observers\Observable.h">
-      <Filter>Файлы заголовков\Observers</Filter>
-    </ClInclude>
-    <ClInclude Include="Observers\IPriorityObservable.h">
-      <Filter>Файлы заголовков\Observers</Filter>
-    </ClInclude>
-    <ClInclude Include="Observers\PriorityObservable.h">
-      <Filter>Файлы заголовков\Observers</Filter>
+    <ClInclude Include="Helpers\ValueTracker.h">
+      <Filter>Файлы заголовков\Helpers</Filter>
     </ClInclude>
     <ClInclude Include="StatisticsTrackers\ValueStatistics.h">
       <Filter>Файлы заголовков\StatisticsTrackers</Filter>
@@ -89,14 +68,23 @@
     <ClInclude Include="StatisticsTrackers\WeatherStatistics.h">
       <Filter>Файлы заголовков\StatisticsTrackers</Filter>
     </ClInclude>
-    <ClInclude Include="Helpers\ValueTracker.h">
-      <Filter>Файлы заголовков\Helpers</Filter>
-    </ClInclude>
-    <ClInclude Include="WeatherStationLocation.h">
+    <ClInclude Include="WeatherData.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
     <ClInclude Include="WeatherEvent.h">
       <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="WeatherInfo.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="WeatherStationLocation.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="WeatherDisplay.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="IWeatherDisplay.h">
+      <Filter>Файлы заголовков\Displays</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
