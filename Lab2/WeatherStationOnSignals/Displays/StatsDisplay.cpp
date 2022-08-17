@@ -23,6 +23,21 @@ void StatsDisplay::RemoveDataSource(IWeatherStation& wd)
 	m_connections.erase(&wd);
 }
 
+void StatsDisplay::SetEvents(IWeatherStation& wd, WeatherEvent events)
+{
+	m_connections.at(&wd).events = events;
+}
+
+void StatsDisplay::AddEvents(IWeatherStation& wd, WeatherEvent events)
+{
+	m_connections.at(&wd).events |= events;
+}
+
+void StatsDisplay::RemoveEvents(IWeatherStation& wd, WeatherEvent events)
+{
+	m_connections.at(&wd).events &= ~events;
+}
+
 void StatsDisplay::Update(IWeatherStation* source, const WeatherInfo& data)
 {
 	if (!m_connections.contains(source))

@@ -211,7 +211,7 @@ Current Temp 10
 			Assert::IsFalse(wdOut.DoesObserverExist(d));
 		}
 
-		TEST_METHOD(WindInfoDoesnDisplayedFromInsideStationType)
+		TEST_METHOD(WindInfoDoesntDisplayedFromInsideStationType)
 		{
 			std::ostringstream ss;
 			WeatherData wdIn("In", StationType::INSIDE);

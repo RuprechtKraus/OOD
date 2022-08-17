@@ -19,6 +19,9 @@ public:
 
 	void AddDataSource(IWeatherStation& wd, WeatherEvent events, double priority = 0) override;
 	void RemoveDataSource(IWeatherStation& wd) override;
+	void SetEvents(IWeatherStation& wd, WeatherEvent events) override;
+	void AddEvents(IWeatherStation& wd, WeatherEvent events) override;
+	void RemoveEvents(IWeatherStation& wd, WeatherEvent events) override;
 	void Update(IWeatherStation* source, const WeatherInfo& data) override;
 
 private:
