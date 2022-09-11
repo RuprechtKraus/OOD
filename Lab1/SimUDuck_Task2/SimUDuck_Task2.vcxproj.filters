@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Исходные файлы">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Файлы заголовков">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Файлы ресурсов">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Файлы заголовков\Ducks">
+      <UniqueIdentifier>{27c181fe-99e9-46d0-b768-653dab25de10}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\Ducks">
+      <UniqueIdentifier>{9472e740-6510-49dd-a1ad-e752f8d381b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\Behaviors">
+      <UniqueIdentifier>{65a25640-eb9e-4fa4-ac2d-05c9b1db4fb4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Behaviors">
+      <UniqueIdentifier>{8c25b0b6-59b5-42e7-8c03-20e8c7247ebd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Behaviors\Interfaces">
+      <UniqueIdentifier>{033671c6-0f4d-421e-a4c7-377f4566ce73}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Behaviors\FlyBehaviors">
+      <UniqueIdentifier>{b5291e8b-8f45-49a6-a8a6-52117d068811}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\Behaviors\FlyBehaviors">
+      <UniqueIdentifier>{4b84d1a9-fe31-4f30-9de3-4d91d3e9dcc4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Behaviors\QuackBehaviors">
+      <UniqueIdentifier>{13e4d87f-59e3-4077-a4f8-812dcb4d6cf0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\Behaviors\QuackBehaviors">
+      <UniqueIdentifier>{02a35767-5dcf-49e8-905c-d971897313cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Behaviors\DanceBehaviors">
+      <UniqueIdentifier>{a3a01cf5-5217-44f9-aabe-7b06b4aca6f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\Behaviors\DanceBehaviors">
+      <UniqueIdentifier>{d46c3ecf-20ef-408a-b519-f80ed1dec56d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="SimUDuck_Task2.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+    <ClCompile Include="Behaviors\FlyBehaviors\FlyWithWingsBehavior.cpp">
+      <Filter>Исходные файлы\Behaviors\FlyBehaviors</Filter>
+    </ClCompile>
+    <ClCompile Include="Ducks\Duck.cpp">
+      <Filter>Исходные файлы\Ducks</Filter>
+    </ClCompile>
+    <ClCompile Include="Behaviors\FlyBehaviors\NoFlyBehavior.cpp">
+      <Filter>Исходные файлы\Behaviors\FlyBehaviors</Filter>
+    </ClCompile>
+    <ClCompile Include="Behaviors\QuackBehaviors\QuackBehavior.cpp">
+      <Filter>Исходные файлы\Behaviors\QuackBehaviors</Filter>
+    </ClCompile>
+    <ClCompile Include="Behaviors\QuackBehaviors\SqueakBehavior.cpp">
+      <Filter>Исходные файлы\Behaviors\QuackBehaviors</Filter>
+    </ClCompile>
+    <ClCompile Include="Behaviors\QuackBehaviors\MuteQuackBehavior.cpp">
+      <Filter>Исходные файлы\Behaviors\QuackBehaviors</Filter>
+    </ClCompile>
+    <ClCompile Include="Ducks\MallardDuck.cpp">
+      <Filter>Исходные файлы\Ducks</Filter>
+    </ClCompile>
+    <ClCompile Include="Ducks\RedheadDuck.cpp">
+      <Filter>Исходные файлы\Ducks</Filter>
+    </ClCompile>
+    <ClCompile Include="Ducks\DecoyDuck.cpp">
+      <Filter>Исходные файлы\Ducks</Filter>
+    </ClCompile>
+    <ClCompile Include="Ducks\RubberDuck.cpp">
+      <Filter>Исходные файлы\Ducks</Filter>
+    </ClCompile>
+    <ClCompile Include="Ducks\ModelDuck.cpp">
+      <Filter>Исходные файлы\Ducks</Filter>
+    </ClCompile>
+    <ClCompile Include="Behaviors\DanceBehaviors\WaltzDanceBehavior.cpp">
+      <Filter>Исходные файлы\Behaviors\DanceBehaviors</Filter>
+    </ClCompile>
+    <ClCompile Include="Behaviors\DanceBehaviors\MinuetDanceBehavior.cpp">
+      <Filter>Исходные файлы\Behaviors\DanceBehaviors</Filter>
+    </ClCompile>
+    <ClCompile Include="Behaviors\DanceBehaviors\NoDanceBehavior.cpp">
+      <Filter>Исходные файлы\Behaviors\DanceBehaviors</Filter>
+    </ClCompile>
+    <ClCompile Include="Behaviors\FlyBehaviors\FlyWithRocketBehavior.cpp">
+      <Filter>Исходные файлы\Behaviors\FlyBehaviors</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Behaviors\Interfaces\IFlyBehavior.h">
+      <Filter>Файлы заголовков\Behaviors\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviors\FlyBehaviors\FlyWithWingsBehavior.h">
+      <Filter>Файлы заголовков\Behaviors\FlyBehaviors</Filter>
+    </ClInclude>
+    <ClInclude Include="Ducks\Duck.h">
+      <Filter>Файлы заголовков\Ducks</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviors\Interfaces\IQuackBehavior.h">
+      <Filter>Файлы заголовков\Behaviors\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviors\FlyBehaviors\NoFlyBehavior.h">
+      <Filter>Файлы заголовков\Behaviors\FlyBehaviors</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviors\QuackBehaviors\QuackBehavior.h">
+      <Filter>Файлы заголовков\Behaviors\QuackBehaviors</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviors\QuackBehaviors\SqueakBehavior.h">
+      <Filter>Файлы заголовков\Behaviors\QuackBehaviors</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviors\QuackBehaviors\MuteQuackBehavior.h">
+      <Filter>Файлы заголовков\Behaviors\QuackBehaviors</Filter>
+    </ClInclude>
+    <ClInclude Include="Ducks\MallardDuck.h">
+      <Filter>Файлы заголовков\Ducks</Filter>
+    </ClInclude>
+    <ClInclude Include="Ducks\RedheadDuck.h">
+      <Filter>Файлы заголовков\Ducks</Filter>
+    </ClInclude>
+    <ClInclude Include="Ducks\DecoyDuck.h">
+      <Filter>Файлы заголовков\Ducks</Filter>
+    </ClInclude>
+    <ClInclude Include="Ducks\RubberDuck.h">
+      <Filter>Файлы заголовков\Ducks</Filter>
+    </ClInclude>
+    <ClInclude Include="Ducks\ModelDuck.h">
+      <Filter>Файлы заголовков\Ducks</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviors\Interfaces\IDanceBehavior.h">
+      <Filter>Файлы заголовков\Behaviors\Interfaces</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviors\DanceBehaviors\WaltzDanceBehavior.h">
+      <Filter>Файлы заголовков\Behaviors\DanceBehaviors</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviors\DanceBehaviors\MinuetDanceBehavior.h">
+      <Filter>Файлы заголовков\Behaviors\DanceBehaviors</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviors\DanceBehaviors\NoDanceBehavior.h">
+      <Filter>Файлы заголовков\Behaviors\DanceBehaviors</Filter>
+    </ClInclude>
+    <ClInclude Include="Behaviors\FlyBehaviors\FlyWithRocketBehavior.h">
+      <Filter>Файлы заголовков\Behaviors\FlyBehaviors</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
