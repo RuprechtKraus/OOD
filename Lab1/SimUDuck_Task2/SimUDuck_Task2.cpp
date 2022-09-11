@@ -14,6 +14,7 @@ void PlayWithDuck(Duck& duck);
 int main()
 {
 	MallardDuck mallardDuck;
+
 	mallardDuck.Fly();
 	mallardDuck.Fly();
 	mallardDuck.SetFlyBehavior(std::make_unique<FlyWithRocketBehavior>());
