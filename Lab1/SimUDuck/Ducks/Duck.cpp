@@ -22,6 +22,7 @@ void Duck::Swim() const noexcept
 	std::cout << "I'm swimming" << std::endl;
 }
 
+// TODO: Вынести подсчет количества вылетов в объект функции
 void Duck::Fly() noexcept
 {
 	if (m_flyBehavior)

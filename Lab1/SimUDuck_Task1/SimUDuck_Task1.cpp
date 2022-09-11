@@ -1,14 +1,15 @@
-﻿#include "Ducks/DecoyDuck.h"
-#include "Ducks/MallardDuck.h"
-#include "Ducks/ModelDuck.h"
-#include "Ducks/RedheadDuck.h"
-#include "Ducks/RubberDuck.h"
+﻿#include "Ducks/Duck.h"
+#include <Behaviors/FlyBehaviors/FlyWithWingsBehavior.h>
+#include <Ducks/DecoyDuck.h>
+#include <Ducks/MallardDuck.h>
+#include <Ducks/ModelDuck.h>
+#include <Ducks/RedheadDuck.h>
+#include <Ducks/RubberDuck.h>
 #include <iostream>
 
-void DrawDuck(Duck const& duck) noexcept;
-void PlayWithDuck(Duck& duck) noexcept;
+void DrawDuck(Duck const& duck);
+void PlayWithDuck(Duck& duck);
 
-// TODO: Добавить ООП стиль
 int main()
 {
 	MallardDuck mallardDuck;
@@ -25,16 +26,16 @@ int main()
 
 	ModelDuck modelDuck;
 	PlayWithDuck(modelDuck);
-	modelDuck.SetFlyBehavior(FlyWithWings);
+	modelDuck.SetFlyBehavior(std::make_unique<FlyWithWingsBehavior>());
 	PlayWithDuck(modelDuck);
 }
 
-void DrawDuck(const Duck& duck) noexcept
+void DrawDuck(Duck const& duck)
 {
 	duck.Display();
 }
 
-void PlayWithDuck(Duck& duck) noexcept
+void PlayWithDuck(Duck& duck)
 {
 	DrawDuck(duck);
 	duck.Quack();

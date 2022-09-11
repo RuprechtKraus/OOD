@@ -11,7 +11,7 @@ public:
 	virtual void Display() const = 0;
 };
 
-class NumericStatistics : IValueStatistics<double>
+class NumericStatistics : public IValueStatistics<double>
 {
 	static constexpr double Inf = std::numeric_limits<double>::infinity();
 
