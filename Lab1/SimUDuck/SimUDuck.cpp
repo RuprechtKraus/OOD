@@ -8,7 +8,6 @@
 void DrawDuck(Duck const& duck) noexcept;
 void PlayWithDuck(Duck& duck) noexcept;
 
-// TODO: Добавить ООП стиль
 int main()
 {
 	MallardDuck mallardDuck;
