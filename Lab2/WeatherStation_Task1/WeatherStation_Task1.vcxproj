@@ -133,7 +133,7 @@
   <ItemGroup>
     <ClCompile Include="Displays\Display.cpp" />
     <ClCompile Include="Displays\StatsDisplay.cpp" />
-    <ClCompile Include="ValueStatistsics.cpp" />
+    <ClCompile Include="ValueStatistics.cpp" />
     <ClCompile Include="WeatherData.cpp" />
     <ClCompile Include="WeatherStation_Task1.cpp" />
   </ItemGroup>
@@ -143,7 +143,7 @@
     <ClInclude Include="Observers\IObservable.h" />
     <ClInclude Include="Observers\IObserver.h" />
     <ClInclude Include="Observers\Observable.h" />
-    <ClInclude Include="ValueStatistsics.h" />
+    <ClInclude Include="ValueStatistics.h" />
     <ClInclude Include="WeatherData.h" />
     <ClInclude Include="WeatherInfo.h" />
   </ItemGroup>

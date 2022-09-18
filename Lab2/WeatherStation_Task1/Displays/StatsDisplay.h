@@ -1,6 +1,6 @@
 #pragma once
 #include "Observers/IObserver.h"
-#include "ValueStatistsics.h"
+#include "ValueStatistics.h"
 #include "WeatherInfo.h"
 
 class StatsDisplay : public IObserver<WeatherInfo>
