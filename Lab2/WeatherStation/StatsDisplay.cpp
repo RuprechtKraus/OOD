@@ -1,12 +1,12 @@
 #include "StatsDisplay.h"
 #include <format>
 
-StatisticsData::StatisticsData(const std::string& name)
+ValueStatistics::ValueStatistics(const std::string& name)
 	: m_valueName(name)
 {
 }
 
-void StatisticsData::Update(double value) noexcept
+void ValueStatistics::Update(double value) noexcept
 {
 	m_minValue = std::min(m_minValue, value);
 	m_maxValue = std::max(m_maxValue, value);
@@ -14,7 +14,7 @@ void StatisticsData::Update(double value) noexcept
 	++m_countAcc;
 }
 
-void StatisticsData::Display() const noexcept
+void ValueStatistics::Display() const noexcept
 {
 	std::cout << std::format("Max {} ", m_valueName) << m_maxValue << std::endl;
 	std::cout << std::format("Min {} ", m_valueName) << m_minValue << std::endl;

@@ -13,10 +13,10 @@ public:
 	virtual void Display() const = 0;
 };
 
-class StatisticsData : IStatisticsData
+class ValueStatistics : IStatisticsData
 {
 public:
-	StatisticsData(const std::string& name);
+	ValueStatistics(const std::string& name);
 
 	void Update(double value) noexcept override;
 	void Display() const noexcept override;
@@ -39,9 +39,9 @@ private:
 	const std::string m_humidityDataName{ "Humidity" };
 	const std::string m_pressureDataName{ "Pressure" };
 
-	std::map<std::string, std::shared_ptr<StatisticsData>> m_staticData{
-		{ m_temperatureDataName, std::make_shared<StatisticsData>(m_temperatureDataName) },
-		{ m_humidityDataName, std::make_shared<StatisticsData>(m_humidityDataName) },
-		{ m_pressureDataName, std::make_shared<StatisticsData>(m_pressureDataName) }
+	std::map<std::string, std::shared_ptr<ValueStatistics>> m_staticData{
+		{ m_temperatureDataName, std::make_shared<ValueStatistics>(m_temperatureDataName) },
+		{ m_humidityDataName, std::make_shared<ValueStatistics>(m_humidityDataName) },
+		{ m_pressureDataName, std::make_shared<ValueStatistics>(m_pressureDataName) }
 	};
 };
