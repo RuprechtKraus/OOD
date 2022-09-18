@@ -16,7 +16,7 @@ private:
 	void Update(WeatherInfo const& data) override;
 	void Display() const noexcept;
 
-	ValueStatistsics m_temperatureStats;
-	ValueStatistsics m_humidityStats;
-	ValueStatistsics m_pressureStats;
+	ValueStatistics m_temperatureStats;
+	ValueStatistics m_humidityStats;
+	ValueStatistics m_pressureStats;
 };

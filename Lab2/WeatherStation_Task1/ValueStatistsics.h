@@ -2,10 +2,10 @@
 #include <limits>
 #include <string>
 
-class ValueStatistsics
+class ValueStatistics
 {
 public:
-	ValueStatistsics(const std::string& name);
+	ValueStatistics(const std::string& name);
 
 	void Update(double value) noexcept;
 	void Display() const noexcept;

@@ -2,12 +2,12 @@
 #include <format>
 #include <iostream>
 
-ValueStatistsics::ValueStatistsics(const std::string& name)
+ValueStatistics::ValueStatistics(const std::string& name)
 	: m_valueName(name)
 {
 }
 
-void ValueStatistsics::Update(double value) noexcept
+void ValueStatistics::Update(double value) noexcept
 {
 	m_minValue = std::min(m_minValue, value);
 	m_maxValue = std::max(m_maxValue, value);
@@ -15,7 +15,7 @@ void ValueStatistsics::Update(double value) noexcept
 	++m_countAcc;
 }
 
-void ValueStatistsics::Display() const noexcept
+void ValueStatistics::Display() const noexcept
 {
 	std::cout << std::format("Max {} ", m_valueName) << m_maxValue << std::endl;
 	std::cout << std::format("Min {} ", m_valueName) << m_minValue << std::endl;
