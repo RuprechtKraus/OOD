@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SimUDuck", "SimUDuck\SimUDuck.vcxproj", "{FE425DAE-26EC-445B-AB22-BAE94EA83ACA}"
-EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SimUDuck_Task1", "SimUDuck_Task1\SimUDuck_Task1.vcxproj", "{842C1282-4328-41C7-A99B-EFF1183B47DA}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SimUDuck_Task2", "SimUDuck_Task2\SimUDuck_Task2.vcxproj", "{B746FE9C-F315-457C-8017-4705437AF8A1}"
@@ -19,14 +17,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{FE425DAE-26EC-445B-AB22-BAE94EA83ACA}.Debug|x64.ActiveCfg = Debug|x64
-		{FE425DAE-26EC-445B-AB22-BAE94EA83ACA}.Debug|x64.Build.0 = Debug|x64
-		{FE425DAE-26EC-445B-AB22-BAE94EA83ACA}.Debug|x86.ActiveCfg = Debug|Win32
-		{FE425DAE-26EC-445B-AB22-BAE94EA83ACA}.Debug|x86.Build.0 = Debug|Win32
-		{FE425DAE-26EC-445B-AB22-BAE94EA83ACA}.Release|x64.ActiveCfg = Release|x64
-		{FE425DAE-26EC-445B-AB22-BAE94EA83ACA}.Release|x64.Build.0 = Release|x64
-		{FE425DAE-26EC-445B-AB22-BAE94EA83ACA}.Release|x86.ActiveCfg = Release|Win32
-		{FE425DAE-26EC-445B-AB22-BAE94EA83ACA}.Release|x86.Build.0 = Release|Win32
 		{842C1282-4328-41C7-A99B-EFF1183B47DA}.Debug|x64.ActiveCfg = Debug|x64
 		{842C1282-4328-41C7-A99B-EFF1183B47DA}.Debug|x64.Build.0 = Debug|x64
 		{842C1282-4328-41C7-A99B-EFF1183B47DA}.Debug|x86.ActiveCfg = Debug|Win32
