@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{FB075475-A2A1-4DD1-BF5F-3EBD54199C4E}</ProjectGuid>
-    <RootNamespace>WeatherStationTask4</RootNamespace>
+    <ProjectGuid>{5AF7580A-1CA8-49A0-8D30-1AD28F6677FF}</ProjectGuid>
+    <RootNamespace>WeatherStationTask5</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -105,7 +105,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>C:\Users\Ruprecht Kraus\source\repos\OOD\Lab2\WeatherStation_Task4;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Ruprecht Kraus\source\repos\OOD\Lab2\WeatherStation_Task5;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -121,7 +121,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>C:\Users\Ruprecht Kraus\source\repos\OOD\Lab2\WeatherStation_Task4;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Ruprecht Kraus\source\repos\OOD\Lab2\WeatherStation_Task5;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -133,10 +133,10 @@
   <ItemGroup>
     <ClCompile Include="Displays\Display.cpp" />
     <ClCompile Include="Displays\StatsDisplay.cpp" />
+    <ClCompile Include="StatisticsTrackers\CardinalDirectionStatistics.cpp" />
     <ClCompile Include="StatisticsTrackers\ValueStatistics.cpp" />
-    <ClCompile Include="StatisticsTrackers\WeatherStatistics.cpp" />
     <ClCompile Include="WeatherData.cpp" />
-    <ClCompile Include="WeatherStation_Task4.cpp" />
+    <ClCompile Include="WeatherStation_Task5.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Displays\Display.h" />
@@ -144,11 +144,12 @@
     <ClInclude Include="Observers\IObservable.h" />
     <ClInclude Include="Observers\IObserver.h" />
     <ClInclude Include="Observers\Observable.h" />
+    <ClInclude Include="StatisticsTrackers\CardinalDirectionStatistics.h" />
     <ClInclude Include="StatisticsTrackers\ValueStatistics.h" />
-    <ClInclude Include="StatisticsTrackers\WeatherStatistics.h" />
+    <ClInclude Include="Utilities\CardinalDirectionUtils.h" />
+    <ClInclude Include="Utilities\MiscUtils.h" />
     <ClInclude Include="WeatherData.h" />
     <ClInclude Include="WeatherInfo.h" />
-    <ClInclude Include="WeatherStationType.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
