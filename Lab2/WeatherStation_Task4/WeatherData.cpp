@@ -1,10 +1,5 @@
 #include "WeatherData.h"
 
-WeatherData::WeatherData(WeatherStationType stationType)
-	: m_stationType(stationType)
-{
-}
-
 void WeatherData::SetMeasurements(double temp, double humidity, double pressure)
 {
 	m_humidity = humidity;
@@ -36,7 +31,6 @@ double WeatherData::GetPressure() const
 WeatherInfo WeatherData::GetChangedData() const
 {
 	WeatherInfo info;
-	info.stationType = m_stationType;
 	info.temperature = GetTemperature();
 	info.humidity = GetHumidity();
 	info.pressure = GetPressure();

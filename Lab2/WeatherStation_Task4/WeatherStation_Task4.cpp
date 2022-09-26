@@ -4,11 +4,11 @@
 
 int main()
 {
-	WeatherData wdIn(WeatherStationType::INSIDE);
-	WeatherData wdOut(WeatherStationType::OUTSIDE);
+	WeatherData wdIn;
+	WeatherData wdOut;
 
-	Display display;
-	StatsDisplay statsDisplay;
+	Display display(wdIn, wdOut);
+	StatsDisplay statsDisplay(wdIn, wdOut);
 
 	wdIn.RegisterObserver(display);
 	wdOut.RegisterObserver(display);

@@ -1,13 +1,25 @@
 #pragma once
-#include "Observers/IObserver.h"
+#include "Observers/IObservable.h"
 #include "WeatherInfo.h"
 
 class Display : public IObserver<WeatherInfo>
 {
+public:
+	Display(
+		const IObservable<WeatherInfo>& insideSource, 
+		const IObservable<WeatherInfo>& outsideSource)
+		: m_insideSource(insideSource)
+		, m_outsideSource(outsideSource)
+	{
+	}
+
 private:
 	/* Метод Update сделан приватным, чтобы ограничить возможность его вызова напрямую
 		Классу CObservable он будет доступен все равно, т.к. в интерфейсе IObserver он
 		остается публичным
 	*/
-	void Update(WeatherInfo const& data) override;
+	void Update(const IObservable<WeatherInfo>& sender, const WeatherInfo& data) override;
+
+	const IObservable<WeatherInfo>& m_insideSource;
+	const IObservable<WeatherInfo>& m_outsideSource;
 };

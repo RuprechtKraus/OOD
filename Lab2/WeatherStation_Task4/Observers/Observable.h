@@ -33,7 +33,7 @@ public:
 
 		for (auto& [_, observer] : observersCopy)
 		{
-			observer->Update(data);
+			observer->Update(*this, data);
 		}
 	}
 
