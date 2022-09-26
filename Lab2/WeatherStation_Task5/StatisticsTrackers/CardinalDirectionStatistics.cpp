@@ -23,7 +23,5 @@ void CardinalDirectionStatistics::Display() const
 
 int CardinalDirectionStatistics::GetAverage() const noexcept
 {
-	double avgSinSum = m_sinSum / m_countAcc;
-	double avgCosSum = m_cosSum / m_countAcc;
-	return (static_cast<int>(RadiansToDegrees(atan2(avgSinSum, avgCosSum))) + 360) % 360;
+	return (static_cast<int>(RadiansToDegrees(atan2(m_sinSum, m_cosSum))) + 360) % 360;
 }

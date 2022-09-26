@@ -6,8 +6,8 @@ int main()
 {
 	WeatherData wd;
 
-	Display display;
-	wd.RegisterObserver(display);
+	/*Display display;
+	wd.RegisterObserver(display);*/
 
 	StatsDisplay statsDisplay;
 	wd.RegisterObserver(statsDisplay);
