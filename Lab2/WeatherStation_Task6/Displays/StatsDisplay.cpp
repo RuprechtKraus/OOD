@@ -1,15 +1,56 @@
 #include "StatsDisplay.h"
 #include <iostream>
 
-void StatsDisplay::Update(WeatherInfo const& data)
+StatsDisplay::StatsDisplay(
+	const IObservable<WeatherInfo>& insideSource,
+	const IObservable<WeatherInfo>& outsideSource)
+	: m_insideDataSource(insideSource, false)
+	, m_outsideDataSource(outsideSource, true)
 {
-	m_sources.try_emplace(data.stationType, data.stationType);
-	m_sources.at(data.stationType).Update(data);
-	Display(data.stationType);
 }
 
-void StatsDisplay::Display(WeatherStationType source) const noexcept
+void StatsDisplay::Update(const IObservable<WeatherInfo>& sender, const WeatherInfo& data)
 {
-	std::cout << "Station Type: " << WeatherStationTypeToString(source) << std::endl;
-	m_sources.at(source).Display();
+	if (IsInsideStation(sender))
+	{
+		m_insideDataSource.stats.Update(data);
+		std::cout << "Station Type: " << GetStationType(sender) << std::endl;
+		m_insideDataSource.stats.Display();
+	}
+	else if (IsOutsideStation(sender))
+	{
+		m_outsideDataSource.stats.Update(data);
+		std::cout << "Station Type: " << GetStationType(sender) << std::endl;
+		m_outsideDataSource.stats.Display();
+	}
+}
+
+std::string StatsDisplay::GetStationType(const IObservable<WeatherInfo>& observable) const
+{
+	if (IsInsideStation(observable))
+	{
+		return "Inside";
+	}
+	else if (IsOutsideStation(observable))
+	{
+		return "Outside";
+	}
+}
+
+bool StatsDisplay::IsInsideStation(const IObservable<WeatherInfo>& observable) const noexcept
+{
+	return &observable == &m_insideDataSource.source;
+}
+
+bool StatsDisplay::IsOutsideStation(const IObservable<WeatherInfo>& observable) const noexcept
+{
+	return &observable == &m_outsideDataSource.source;
+}
+
+StatsDisplay::DataSourceStats::DataSourceStats(
+	const IObservable<WeatherInfo>& wd, 
+	bool includeWindStats)
+	: source(wd)
+	, stats(includeWindStats)
+{
 }

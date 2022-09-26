@@ -56,12 +56,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Observers\IObserver.h">
-      <Filter>Файлы заголовков\Observers</Filter>
-    </ClInclude>
-    <ClInclude Include="Observers\IObservable.h">
-      <Filter>Файлы заголовков\Observers</Filter>
-    </ClInclude>
     <ClInclude Include="Observers\Observable.h">
       <Filter>Файлы заголовков\Observers</Filter>
     </ClInclude>
@@ -92,8 +86,8 @@
     <ClInclude Include="StatisticsTrackers\WeatherStatistics.h">
       <Filter>Файлы заголовков\StatisticsTrackers</Filter>
     </ClInclude>
-    <ClInclude Include="WeatherStationType.h">
-      <Filter>Файлы заголовков</Filter>
+    <ClInclude Include="Observers\IObservable.h">
+      <Filter>Файлы заголовков\Observers</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

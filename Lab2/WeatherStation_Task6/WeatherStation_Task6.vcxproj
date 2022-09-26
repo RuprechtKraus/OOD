@@ -143,7 +143,6 @@
     <ClInclude Include="Displays\Display.h" />
     <ClInclude Include="Displays\StatsDisplay.h" />
     <ClInclude Include="Observers\IObservable.h" />
-    <ClInclude Include="Observers\IObserver.h" />
     <ClInclude Include="Observers\Observable.h" />
     <ClInclude Include="StatisticsTrackers\CardinalDirectionStatistics.h" />
     <ClInclude Include="StatisticsTrackers\ValueStatistics.h" />
@@ -152,7 +151,6 @@
     <ClInclude Include="Utilities\MiscUtils.h" />
     <ClInclude Include="WeatherData.h" />
     <ClInclude Include="WeatherInfo.h" />
-    <ClInclude Include="WeatherStationType.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
