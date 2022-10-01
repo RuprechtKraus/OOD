@@ -19,10 +19,11 @@ auto operator<<(Component&& component, const Decorator& decorate)
 int main()
 try
 {
-	auto beverage = std::make_unique<Coffee>() 
-		<< MakeCondiment<Liquor>(LiquorType::Nut) 
+	auto beverage = std::make_unique<Coffee>()
+		<< MakeCondiment<Liquor>(LiquorType::Nut)
 		<< MakeCondiment<Liquor>(LiquorType::Chocolate)
-		<< MakeCondiment<IceCubes>(2, IceCubeType::Dry);
+		<< MakeCondiment<IceCubes>(2, IceCubeType::Dry)
+		<< MakeCondiment<Lemon>(10);
 	std::cout << beverage->GetDescription() << " costs " << beverage->GetCost() << std::endl;
 }
 catch (const std::exception& e)
