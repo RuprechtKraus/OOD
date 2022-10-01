@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Исходные файлы">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Файлы заголовков">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Файлы ресурсов">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Файлы заголовков\Beverages">
+      <UniqueIdentifier>{19a58563-ff83-4dd6-9adc-dedad0f73e6a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\Condiments">
+      <UniqueIdentifier>{f486b59c-b7fc-4b7f-a6b2-6f023dfca654}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Beverages_Task1.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Beverages\BeverageBase.h">
+      <Filter>Файлы заголовков\Beverages</Filter>
+    </ClInclude>
+    <ClInclude Include="Beverages\IBeverage.h">
+      <Filter>Файлы заголовков\Beverages</Filter>
+    </ClInclude>
+    <ClInclude Include="Beverages\Latte.h">
+      <Filter>Файлы заголовков\Beverages</Filter>
+    </ClInclude>
+    <ClInclude Include="Beverages\Coffee.h">
+      <Filter>Файлы заголовков\Beverages</Filter>
+    </ClInclude>
+    <ClInclude Include="Beverages\Cappuccino.h">
+      <Filter>Файлы заголовков\Beverages</Filter>
+    </ClInclude>
+    <ClInclude Include="Beverages\Tea.h">
+      <Filter>Файлы заголовков\Beverages</Filter>
+    </ClInclude>
+    <ClInclude Include="Beverages\Milkshake.h">
+      <Filter>Файлы заголовков\Beverages</Filter>
+    </ClInclude>
+    <ClInclude Include="Condiments\CondimentDecorator.h">
+      <Filter>Файлы заголовков\Condiments</Filter>
+    </ClInclude>
+    <ClInclude Include="Condiments\Cinnamon.h">
+      <Filter>Файлы заголовков\Condiments</Filter>
+    </ClInclude>
+    <ClInclude Include="Condiments\Lemon.h">
+      <Filter>Файлы заголовков\Condiments</Filter>
+    </ClInclude>
+    <ClInclude Include="Condiments\IceCubes.h">
+      <Filter>Файлы заголовков\Condiments</Filter>
+    </ClInclude>
+    <ClInclude Include="Condiments\Syrup.h">
+      <Filter>Файлы заголовков\Condiments</Filter>
+    </ClInclude>
+    <ClInclude Include="Condiments\ChocolateCrumbs.h">
+      <Filter>Файлы заголовков\Condiments</Filter>
+    </ClInclude>
+    <ClInclude Include="Condiments\CoconutFlakes.h">
+      <Filter>Файлы заголовков\Condiments</Filter>
+    </ClInclude>
+    <ClInclude Include="Beverages.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Condiments.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
