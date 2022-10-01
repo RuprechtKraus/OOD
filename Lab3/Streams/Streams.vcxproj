@@ -132,15 +132,18 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="InputStream\FileInputStream.cpp" />
+    <ClCompile Include="OutputStream\FileOutputStream.cpp" />
     <ClCompile Include="Streams.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="InputStream\FileInputStream.h" />
     <ClInclude Include="InputStream\IInputStream.h" />
+    <ClInclude Include="OutputStream\FileOutputStream.h" />
     <ClInclude Include="OutputStream\IOutputStream.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="input.txt" />
+    <Text Include="output.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

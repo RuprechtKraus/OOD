@@ -22,6 +22,9 @@
     <Filter Include="Исходные файлы\InputStream">
       <UniqueIdentifier>{4a0ebeeb-a3c4-4f99-a245-d0e40a8cb90c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Исходные файлы\OutputStream">
+      <UniqueIdentifier>{271d244f-3294-45da-af1a-f79b562458cf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Streams.cpp">
@@ -29,6 +32,9 @@
     </ClCompile>
     <ClCompile Include="InputStream\FileInputStream.cpp">
       <Filter>Исходные файлы\InputStream</Filter>
+    </ClCompile>
+    <ClCompile Include="OutputStream\FileOutputStream.cpp">
+      <Filter>Исходные файлы\OutputStream</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -41,9 +47,15 @@
     <ClInclude Include="InputStream\FileInputStream.h">
       <Filter>Файлы заголовков\InputStream</Filter>
     </ClInclude>
+    <ClInclude Include="OutputStream\FileOutputStream.h">
+      <Filter>Файлы заголовков\OutputStream</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="input.txt">
+      <Filter>Файлы ресурсов</Filter>
+    </Text>
+    <Text Include="output.txt">
       <Filter>Файлы ресурсов</Filter>
     </Text>
   </ItemGroup>
