@@ -142,11 +142,14 @@
     <ClInclude Include="Beverages\Tea.h" />
     <ClInclude Include="Condiments.h" />
     <ClInclude Include="Condiments\ChocolateCrumbs.h" />
+    <ClInclude Include="Condiments\ChocolateSlices.h" />
     <ClInclude Include="Condiments\Cinnamon.h" />
     <ClInclude Include="Condiments\CoconutFlakes.h" />
     <ClInclude Include="Condiments\CondimentDecorator.h" />
+    <ClInclude Include="Condiments\Cream.h" />
     <ClInclude Include="Condiments\IceCubes.h" />
     <ClInclude Include="Condiments\Lemon.h" />
+    <ClInclude Include="Condiments\Liquor.h" />
     <ClInclude Include="Condiments\Syrup.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

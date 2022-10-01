@@ -14,14 +14,14 @@ public:
 		return m_beverage->GetCost() + GetCondimentCost();
 	}
 
+	virtual std::string GetCondimentDescription() const = 0;
+	virtual double GetCondimentCost() const = 0;
+
 protected:
 	CondimentDecorator(IBeveragePtr&& beverage)
 		: m_beverage(std::move(beverage))
 	{
 	}
-
-	virtual std::string GetCondimentDescription() const = 0;
-	virtual double GetCondimentCost() const = 0;
 
 private:
 	IBeveragePtr m_beverage;

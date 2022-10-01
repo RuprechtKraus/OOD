@@ -17,7 +17,6 @@ public:
 	{
 	}
 
-protected:
 	double GetCondimentCost() const noexcept override
 	{
 		return (m_type == IceCubeType::Dry ? 10 : 5) * m_quantity;

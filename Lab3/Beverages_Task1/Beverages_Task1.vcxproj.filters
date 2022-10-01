@@ -74,5 +74,14 @@
     <ClInclude Include="Condiments.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="Condiments\Cream.h">
+      <Filter>Файлы заголовков\Condiments</Filter>
+    </ClInclude>
+    <ClInclude Include="Condiments\ChocolateSlices.h">
+      <Filter>Файлы заголовков\Condiments</Filter>
+    </ClInclude>
+    <ClInclude Include="Condiments\Liquor.h">
+      <Filter>Файлы заголовков\Condiments</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

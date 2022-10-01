@@ -10,7 +10,6 @@ public:
 	{
 	}
 
-protected:
 	double GetCondimentCost() const noexcept override
 	{
 		return 1.0 * m_mass;

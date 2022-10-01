@@ -16,7 +16,6 @@ public:
 	{
 	}
 
-protected:
 	double GetCondimentCost() const noexcept override
 	{
 		return 15;

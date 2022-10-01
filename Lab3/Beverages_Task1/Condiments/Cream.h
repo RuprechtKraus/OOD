@@ -1,21 +1,21 @@
 #pragma once
 #include "CondimentDecorator.h"
 
-class Cinnamon : public CondimentDecorator
+class Cream : public CondimentDecorator
 {
 public:
-	Cinnamon(IBeveragePtr&& beverage)
-		: CondimentDecorator(move(beverage))
+	Cream(IBeveragePtr&& beverage)
+		: CondimentDecorator(std::move(beverage))
 	{
 	}
 
 	double GetCondimentCost() const noexcept override
 	{
-		return 20;
+		return 25;
 	}
 
 	std::string GetCondimentDescription() const noexcept override
 	{
-		return "Cinnamon";
+		return "Cream";
 	}
 };

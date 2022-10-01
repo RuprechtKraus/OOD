@@ -1,7 +1,10 @@
 #pragma once
 #include "Condiments/ChocolateCrumbs.h"
+#include "Condiments/ChocolateSlices.h"
 #include "Condiments/Cinnamon.h"
 #include "Condiments/CoconutFlakes.h"
+#include "Condiments/Cream.h"
 #include "Condiments/IceCubes.h"
 #include "Condiments/Lemon.h"
+#include "Condiments/Liquor.h"
 #include "Condiments/Syrup.h"
