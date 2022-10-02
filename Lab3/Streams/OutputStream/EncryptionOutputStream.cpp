@@ -1,15 +1,15 @@
 #include "EncryptionOutputStream.h"
 
 EncryptionOutputStream::EncryptionOutputStream(
-	OutputStreamPtr&& stream, const ICryptographer& cryptographer)
+	OutputStreamPtr&& stream, std::unique_ptr<ICryptographer>&& cryptographer)
 	: m_stream(std::move(stream))
-	, m_cryptographer(cryptographer)
+	, m_cryptographer(std::move(cryptographer))
 {
 }
 
 void EncryptionOutputStream::WriteByte(uint8_t data)
 {
-	m_stream->WriteByte(m_cryptographer.Encrypt(data));
+	m_stream->WriteByte(m_cryptographer->Encrypt(data));
 }
 
 void EncryptionOutputStream::WriteBlock(const void* srcData, std::streamsize size)
@@ -24,6 +24,6 @@ void EncryptionOutputStream::EncryptBlock(char* dst, const char* src, std::strea
 {
 	for (std::streamsize i = 0; i < size; i++)
 	{
-		dst[i] = m_cryptographer.Encrypt(src[i]);
+		dst[i] = m_cryptographer->Encrypt(src[i]);
 	}
 }

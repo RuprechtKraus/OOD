@@ -37,6 +37,12 @@
     <Filter Include="Исходные файлы\Compression">
       <UniqueIdentifier>{ca2991a0-08ff-48ee-93c0-69e91102008d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Файлы заголовков\Application">
+      <UniqueIdentifier>{fa31716f-6a3c-4aab-aa2b-f7330135e5f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\Application">
+      <UniqueIdentifier>{23c6483f-3476-42c3-b843-33019bf953ba}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Streams.cpp">
@@ -71,6 +77,9 @@
     </ClCompile>
     <ClCompile Include="OutputStream\CompressionOutputStream.cpp">
       <Filter>Исходные файлы\OutputStream</Filter>
+    </ClCompile>
+    <ClCompile Include="Application\Application.cpp">
+      <Filter>Исходные файлы\Application</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -115,6 +124,9 @@
     </ClInclude>
     <ClInclude Include="OutputStream\CompressionOutputStream.h">
       <Filter>Файлы заголовков\OutputStream</Filter>
+    </ClInclude>
+    <ClInclude Include="Application\Application.h">
+      <Filter>Файлы заголовков\Application</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

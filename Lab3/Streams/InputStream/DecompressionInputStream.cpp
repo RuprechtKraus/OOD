@@ -1,9 +1,9 @@
 #include "DecompressionInputStream.h"
 
 DecompressionInputStream::DecompressionInputStream(
-	InputStreamPtr&& stream, const ICompressor& compressor)
+	InputStreamPtr&& stream, std::unique_ptr<ICompressor>&& compressor)
 	: m_stream(std::move(stream))
-	, m_compressor(compressor)
+	, m_compressor(std::move(compressor))
 {
 }
 
@@ -20,10 +20,10 @@ std::uint8_t DecompressionInputStream::ReadByte()
 std::streamsize DecompressionInputStream::ReadBlock(void* dstBuffer, std::streamsize size)
 {
 	char* buffer = new char[size];
-	char* decompressed = new char[1024];
+	char* decompressed = new char[8192];
 	std::streamsize gcount{ m_stream->ReadBlock(buffer, size) };
 
-	size_t decompressedSize{ m_compressor.Decompress(decompressed, buffer, gcount) };
+	size_t decompressedSize{ m_compressor->Decompress(decompressed, buffer, gcount) };
 	memcpy(dstBuffer, decompressed, decompressedSize);
 
 	delete[] buffer;

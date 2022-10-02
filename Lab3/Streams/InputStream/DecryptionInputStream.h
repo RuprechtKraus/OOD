@@ -5,7 +5,8 @@
 class DecryptionInputStream : public IInputStream
 {
 public:
-	DecryptionInputStream(InputStreamPtr&& stream, const ICryptographer& cryptographer);
+	DecryptionInputStream(
+		InputStreamPtr&& stream, std::unique_ptr<ICryptographer>&& cryptographer);
 
 	bool IsEOF() const override;
 	std::uint8_t ReadByte() override;
@@ -15,5 +16,5 @@ private:
 	void DecryptBlock(char* dst, char* src, std::streamsize size);
 
 	InputStreamPtr m_stream;
-	const ICryptographer& m_cryptographer;
+	std::unique_ptr<ICryptographer> m_cryptographer;
 };

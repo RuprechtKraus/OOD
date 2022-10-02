@@ -5,7 +5,7 @@
 class DecompressionInputStream : public IInputStream
 {
 public:
-	DecompressionInputStream(InputStreamPtr&& stream, const ICompressor& compressor);
+	DecompressionInputStream(InputStreamPtr&& stream, std::unique_ptr<ICompressor>&& compressor);
 
 	bool IsEOF() const override;
 	std::uint8_t ReadByte() override;
@@ -13,5 +13,5 @@ public:
 
 private:
 	InputStreamPtr m_stream;
-	const ICompressor& m_compressor;
+	std::unique_ptr<ICompressor> m_compressor;
 };

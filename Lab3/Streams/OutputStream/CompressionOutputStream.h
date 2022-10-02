@@ -5,12 +5,12 @@
 class CompressionOutputStream : public IOutputStream
 {
 public:
-	CompressionOutputStream(OutputStreamPtr&& stream, const ICompressor& compressor);
+	CompressionOutputStream(OutputStreamPtr&& stream, std::unique_ptr<ICompressor>&& compressor);
 
 	void WriteByte(uint8_t data) override;
 	void WriteBlock(const void* srcData, std::streamsize size) override;
 
 private:
 	OutputStreamPtr m_stream;
-	const ICompressor& m_compressor;
+	std::unique_ptr<ICompressor> m_compressor;
 };
