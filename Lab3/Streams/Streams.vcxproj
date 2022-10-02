@@ -131,6 +131,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Compression\RLECompressor.cpp" />
     <ClCompile Include="Cryptography\Cryptographer.cpp" />
     <ClCompile Include="InputStream\DecryptionInputStreamDecorator.cpp" />
     <ClCompile Include="InputStream\FileInputStream.cpp" />
@@ -141,6 +142,8 @@
     <ClCompile Include="Streams.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Compression\ICompressor.h" />
+    <ClInclude Include="Compression\RLECompressor.h" />
     <ClInclude Include="Cryptography\Cryptographer.h" />
     <ClInclude Include="Cryptography\ICryptographer.h" />
     <ClInclude Include="InputStream\DecryptionInputStreamDecorator.h" />
