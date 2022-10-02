@@ -57,14 +57,20 @@
     <ClCompile Include="Cryptography\Cryptographer.cpp">
       <Filter>Исходные файлы\Cryptography</Filter>
     </ClCompile>
-    <ClCompile Include="OutputStream\EncryptionOutputStreamDecorator.cpp">
+    <ClCompile Include="OutputStream\EncryptionOutputStream.cpp">
       <Filter>Исходные файлы\OutputStream</Filter>
     </ClCompile>
-    <ClCompile Include="InputStream\DecryptionInputStreamDecorator.cpp">
+    <ClCompile Include="InputStream\DecryptionInputStream.cpp">
       <Filter>Исходные файлы\InputStream</Filter>
     </ClCompile>
     <ClCompile Include="Compression\RLECompressor.cpp">
       <Filter>Исходные файлы\Compression</Filter>
+    </ClCompile>
+    <ClCompile Include="InputStream\DecompressionInputStream.cpp">
+      <Filter>Исходные файлы\InputStream</Filter>
+    </ClCompile>
+    <ClCompile Include="OutputStream\CompressionOutputStream.cpp">
+      <Filter>Исходные файлы\OutputStream</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -92,10 +98,10 @@
     <ClInclude Include="Cryptography\Cryptographer.h">
       <Filter>Файлы заголовков\Cryptography</Filter>
     </ClInclude>
-    <ClInclude Include="OutputStream\EncryptionOutputStreamDecorator.h">
+    <ClInclude Include="OutputStream\EncryptionOutputStream.h">
       <Filter>Файлы заголовков\OutputStream</Filter>
     </ClInclude>
-    <ClInclude Include="InputStream\DecryptionInputStreamDecorator.h">
+    <ClInclude Include="InputStream\DecryptionInputStream.h">
       <Filter>Файлы заголовков\InputStream</Filter>
     </ClInclude>
     <ClInclude Include="Compression\ICompressor.h">
@@ -103,6 +109,12 @@
     </ClInclude>
     <ClInclude Include="Compression\RLECompressor.h">
       <Filter>Файлы заголовков\Compression</Filter>
+    </ClInclude>
+    <ClInclude Include="InputStream\DecompressionInputStream.h">
+      <Filter>Файлы заголовков\InputStream</Filter>
+    </ClInclude>
+    <ClInclude Include="OutputStream\CompressionOutputStream.h">
+      <Filter>Файлы заголовков\OutputStream</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -113,6 +125,9 @@
       <Filter>Файлы ресурсов</Filter>
     </Text>
     <Text Include="encrypted.txt">
+      <Filter>Файлы ресурсов</Filter>
+    </Text>
+    <Text Include="result.txt">
       <Filter>Файлы ресурсов</Filter>
     </Text>
   </ItemGroup>

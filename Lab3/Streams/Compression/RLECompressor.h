@@ -4,12 +4,12 @@
 class RLECompressor : public ICompressor
 {
 public:
-	void Compress(char* dst, const char* src, std::streamsize srcSize) override;
-	void Decompress(char* dst, const char* src, std::streamsize srcSize) override;
+	size_t Compress(char* dst, const char* src, std::streamsize srcSize) const override;
+	size_t Decompress(char* dst, const char* src, std::streamsize srcSize) const override;
 
 private:
-	void WriteSymbolOccurrenceInfo(char* dst, size_t& index, char symbol, size_t count);
-	char GetNextSymbol(const char* src, size_t& index);
-	size_t GetSymbolOccurenceCount(const char* src, size_t& index);
-	void UnpackSymbol(char* dst, size_t& index, char symbol, size_t count);
+	std::string GetSymbolOccurrenceInfo(char symbol, size_t count) const;
+	char GetNextSymbol(const char* src, size_t& index) const;
+	size_t GetSymbolOccurenceCount(const char* src, size_t& index) const;
+	std::string UnpackSymbol(size_t& index, char symbol, size_t count) const;
 };

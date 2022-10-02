@@ -1,12 +1,14 @@
 #include "RLECompressor.h"
 #include <string>
+#include <format>
 
-void RLECompressor::Compress(char* dst, const char* src, std::streamsize srcSize)
+size_t RLECompressor::Compress(char* dst, const char* src, std::streamsize srcSize) const
 {
 	char symbol{ src[0] };
 	size_t count{ 1 };
+	std::string result;
 
-	for (size_t j = 0, i = 1; i < srcSize; i++)
+	for (size_t i = 1; i <= srcSize; i++)
 	{
 		if (symbol == src[i])
 		{
@@ -14,42 +16,46 @@ void RLECompressor::Compress(char* dst, const char* src, std::streamsize srcSize
 		}
 		else
 		{
-			WriteSymbolOccurrenceInfo(dst, j, symbol, count);
+			result += GetSymbolOccurrenceInfo(symbol, count);
 			symbol = src[i];
 			count = 1;
 		}
 	}
+
+	memcpy(dst, result.c_str(), result.size());
+
+	return result.size();
 }
 
-void RLECompressor::WriteSymbolOccurrenceInfo(char* dst, size_t& index, char symbol, size_t count)
+std::string RLECompressor::GetSymbolOccurrenceInfo(char symbol, size_t count) const
 {
-	dst[index++] = '{';
-	dst[index++] = symbol;
-	dst[index++] = ',';
-
+	std::string result = "";
 	std::string s{ std::to_string(count) };
+	result += ("{" + std::format("{},{}", symbol, s) + "}");
 
-	memcpy(dst + index, s.c_str(), s.size());
-	index += s.size();
-
-	dst[index++] = '}';
+	return result;
 }
 
-void RLECompressor::Decompress(char* dst, const char* src, std::streamsize srcSize)
+size_t RLECompressor::Decompress(char* dst, const char* src, std::streamsize srcSize) const
 {
 	size_t count{};
 	char symbol{};
+	std::string result;
 
 	for (size_t j{}, i = 0; i < srcSize - 1; i++)
 	{
 		symbol = GetNextSymbol(src, i);
 		count = GetSymbolOccurenceCount(src, i);
-		UnpackSymbol(dst, j, symbol, count);
+		result += UnpackSymbol(j, symbol, count);
 		count = 0;
 	}
+
+	memcpy(dst, result.c_str(), result.size());
+
+	return result.size();
 }
 
-char RLECompressor::GetNextSymbol(const char* src, size_t& index)
+char RLECompressor::GetNextSymbol(const char* src, size_t& index) const
 {
 	char symbol{};
 
@@ -62,7 +68,7 @@ char RLECompressor::GetNextSymbol(const char* src, size_t& index)
 	return symbol;
 }
 
-size_t RLECompressor::GetSymbolOccurenceCount(const char* src, size_t& index)
+size_t RLECompressor::GetSymbolOccurenceCount(const char* src, size_t& index) const
 {
 	std::string count;
 
@@ -74,10 +80,16 @@ size_t RLECompressor::GetSymbolOccurenceCount(const char* src, size_t& index)
 	return std::stoi(count);
 }
 
-void RLECompressor::UnpackSymbol(char* dst, size_t& index, char symbol, size_t count)
+std::string RLECompressor::UnpackSymbol(size_t& index, char symbol, size_t count) const
 {
+	std::string result;
+	result.reserve(count);
+
 	for (int i = 0; i < count; i++)
 	{
-		dst[index++] = symbol;
+		index++;
+		result.push_back(symbol);
 	}
+
+	return result;
 }

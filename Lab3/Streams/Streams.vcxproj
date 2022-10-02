@@ -133,10 +133,12 @@
   <ItemGroup>
     <ClCompile Include="Compression\RLECompressor.cpp" />
     <ClCompile Include="Cryptography\Cryptographer.cpp" />
-    <ClCompile Include="InputStream\DecryptionInputStreamDecorator.cpp" />
+    <ClCompile Include="InputStream\DecompressionInputStream.cpp" />
+    <ClCompile Include="InputStream\DecryptionInputStream.cpp" />
     <ClCompile Include="InputStream\FileInputStream.cpp" />
     <ClCompile Include="InputStream\MemoryInputStream.cpp" />
-    <ClCompile Include="OutputStream\EncryptionOutputStreamDecorator.cpp" />
+    <ClCompile Include="OutputStream\CompressionOutputStream.cpp" />
+    <ClCompile Include="OutputStream\EncryptionOutputStream.cpp" />
     <ClCompile Include="OutputStream\FileOutputStream.cpp" />
     <ClCompile Include="OutputStream\MemoryOutputStream.cpp" />
     <ClCompile Include="Streams.cpp" />
@@ -146,11 +148,13 @@
     <ClInclude Include="Compression\RLECompressor.h" />
     <ClInclude Include="Cryptography\Cryptographer.h" />
     <ClInclude Include="Cryptography\ICryptographer.h" />
-    <ClInclude Include="InputStream\DecryptionInputStreamDecorator.h" />
+    <ClInclude Include="InputStream\DecompressionInputStream.h" />
+    <ClInclude Include="InputStream\DecryptionInputStream.h" />
     <ClInclude Include="InputStream\FileInputStream.h" />
     <ClInclude Include="InputStream\IInputStream.h" />
     <ClInclude Include="InputStream\MemoryInputStream.h" />
-    <ClInclude Include="OutputStream\EncryptionOutputStreamDecorator.h" />
+    <ClInclude Include="OutputStream\CompressionOutputStream.h" />
+    <ClInclude Include="OutputStream\EncryptionOutputStream.h" />
     <ClInclude Include="OutputStream\FileOutputStream.h" />
     <ClInclude Include="OutputStream\IOutputStream.h" />
     <ClInclude Include="OutputStream\MemoryOutputStream.h" />
@@ -159,6 +163,7 @@
     <Text Include="encrypted.txt" />
     <Text Include="input.txt" />
     <Text Include="output.txt" />
+    <Text Include="result.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
