@@ -2,10 +2,10 @@
 #include "Cryptography/ICryptographer.h"
 #include "IOutputStream.h"
 
-class EncryptionOutputStreamDecorator : public IOutputStream
+class EncryptionOutputStream : public IOutputStream
 {
 public:
-	EncryptionOutputStreamDecorator(OutputStreamPtr&& stream, const ICryptographer& cryptographer);
+	EncryptionOutputStream(OutputStreamPtr&& stream, const ICryptographer& cryptographer);
 	void WriteByte(uint8_t data) override;
 	void WriteBlock(const void* srcData, std::streamsize size) override;
 

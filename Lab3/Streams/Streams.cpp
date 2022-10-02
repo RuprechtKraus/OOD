@@ -1,11 +1,11 @@
-﻿#include "Cryptography/Cryptographer.h"
+﻿#include "Compression/RLECompressor.h"
+#include "Cryptography/Cryptographer.h"
+#include "InputStream/DecryptionInputStream.h"
 #include "InputStream/FileInputStream.h"
 #include "InputStream/MemoryInputStream.h"
-#include "OutputStream/EncryptionOutputStreamDecorator.h"
+#include "OutputStream/EncryptionOutputStream.h"
 #include "OutputStream/FileOutputStream.h"
 #include "OutputStream/MemoryOutputStream.h"
-#include "InputStream/DecryptionInputStreamDecorator.h"
-#include "Compression/RLECompressor.h"
 #include <iostream>
 
 int main(int argc, char* argv[])

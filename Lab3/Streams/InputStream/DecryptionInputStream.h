@@ -2,10 +2,10 @@
 #include "Cryptography/ICryptographer.h"
 #include "IInputStream.h"
 
-class DecryptionInputStreamDecorator : public IInputStream
+class DecryptionInputStream : public IInputStream
 {
 public:
-	DecryptionInputStreamDecorator(InputStreamPtr&& stream, const ICryptographer& cryptographer);
+	DecryptionInputStream(InputStreamPtr&& stream, const ICryptographer& cryptographer);
 
 	bool IsEOF() const override;
 	std::uint8_t ReadByte() override;

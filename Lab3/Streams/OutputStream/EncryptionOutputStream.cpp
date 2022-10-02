@@ -1,18 +1,18 @@
-#include "EncryptionOutputStreamDecorator.h"
+#include "EncryptionOutputStream.h"
 
-EncryptionOutputStreamDecorator::EncryptionOutputStreamDecorator(
+EncryptionOutputStream::EncryptionOutputStream(
 	OutputStreamPtr&& stream, const ICryptographer& cryptographer)
 	: m_stream(std::move(stream))
 	, m_cryptographer(cryptographer)
 {
 }
 
-void EncryptionOutputStreamDecorator::WriteByte(uint8_t data)
+void EncryptionOutputStream::WriteByte(uint8_t data)
 {
 	m_stream->WriteByte(m_cryptographer.Encrypt(data));
 }
 
-void EncryptionOutputStreamDecorator::WriteBlock(const void* srcData, std::streamsize size)
+void EncryptionOutputStream::WriteBlock(const void* srcData, std::streamsize size)
 {
 	char* buffer = new char[size];
 	EncryptBlock(buffer, static_cast<const char*>(srcData), size);
@@ -20,7 +20,7 @@ void EncryptionOutputStreamDecorator::WriteBlock(const void* srcData, std::strea
 	delete[] buffer;
 }
 
-void EncryptionOutputStreamDecorator::EncryptBlock(char* dst, const char* src, std::streamsize size)
+void EncryptionOutputStream::EncryptBlock(char* dst, const char* src, std::streamsize size)
 {
 	for (std::streamsize i = 0; i < size; i++)
 	{
