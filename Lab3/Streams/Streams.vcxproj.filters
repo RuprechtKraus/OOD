@@ -25,6 +25,12 @@
     <Filter Include="Исходные файлы\OutputStream">
       <UniqueIdentifier>{271d244f-3294-45da-af1a-f79b562458cf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Файлы заголовков\Cryptography">
+      <UniqueIdentifier>{5a412138-4639-4345-8bda-adb1b126ffb7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\Cryptography">
+      <UniqueIdentifier>{fb94c283-03fe-4065-9376-069f1212783a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Streams.cpp">
@@ -41,6 +47,9 @@
     </ClCompile>
     <ClCompile Include="OutputStream\MemoryOutputStream.cpp">
       <Filter>Исходные файлы\OutputStream</Filter>
+    </ClCompile>
+    <ClCompile Include="Cryptography\Cryptographer.cpp">
+      <Filter>Исходные файлы\Cryptography</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -61,6 +70,12 @@
     </ClInclude>
     <ClInclude Include="InputStream\MemoryInputStream.h">
       <Filter>Файлы заголовков\InputStream</Filter>
+    </ClInclude>
+    <ClInclude Include="Cryptography\ICryptographer.h">
+      <Filter>Файлы заголовков\Cryptography</Filter>
+    </ClInclude>
+    <ClInclude Include="Cryptography\Cryptographer.h">
+      <Filter>Файлы заголовков\Cryptography</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
