@@ -132,8 +132,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Cryptography\Cryptographer.cpp" />
+    <ClCompile Include="InputStream\DecryptionInputStreamDecorator.cpp" />
     <ClCompile Include="InputStream\FileInputStream.cpp" />
     <ClCompile Include="InputStream\MemoryInputStream.cpp" />
+    <ClCompile Include="OutputStream\EncryptionOutputStreamDecorator.cpp" />
     <ClCompile Include="OutputStream\FileOutputStream.cpp" />
     <ClCompile Include="OutputStream\MemoryOutputStream.cpp" />
     <ClCompile Include="Streams.cpp" />
@@ -141,14 +143,17 @@
   <ItemGroup>
     <ClInclude Include="Cryptography\Cryptographer.h" />
     <ClInclude Include="Cryptography\ICryptographer.h" />
+    <ClInclude Include="InputStream\DecryptionInputStreamDecorator.h" />
     <ClInclude Include="InputStream\FileInputStream.h" />
     <ClInclude Include="InputStream\IInputStream.h" />
     <ClInclude Include="InputStream\MemoryInputStream.h" />
+    <ClInclude Include="OutputStream\EncryptionOutputStreamDecorator.h" />
     <ClInclude Include="OutputStream\FileOutputStream.h" />
     <ClInclude Include="OutputStream\IOutputStream.h" />
     <ClInclude Include="OutputStream\MemoryOutputStream.h" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="encrypted.txt" />
     <Text Include="input.txt" />
     <Text Include="output.txt" />
   </ItemGroup>

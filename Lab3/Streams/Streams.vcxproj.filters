@@ -51,6 +51,12 @@
     <ClCompile Include="Cryptography\Cryptographer.cpp">
       <Filter>Исходные файлы\Cryptography</Filter>
     </ClCompile>
+    <ClCompile Include="OutputStream\EncryptionOutputStreamDecorator.cpp">
+      <Filter>Исходные файлы\OutputStream</Filter>
+    </ClCompile>
+    <ClCompile Include="InputStream\DecryptionInputStreamDecorator.cpp">
+      <Filter>Исходные файлы\InputStream</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="InputStream\IInputStream.h">
@@ -77,12 +83,21 @@
     <ClInclude Include="Cryptography\Cryptographer.h">
       <Filter>Файлы заголовков\Cryptography</Filter>
     </ClInclude>
+    <ClInclude Include="OutputStream\EncryptionOutputStreamDecorator.h">
+      <Filter>Файлы заголовков\OutputStream</Filter>
+    </ClInclude>
+    <ClInclude Include="InputStream\DecryptionInputStreamDecorator.h">
+      <Filter>Файлы заголовков\InputStream</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="input.txt">
       <Filter>Файлы ресурсов</Filter>
     </Text>
     <Text Include="output.txt">
+      <Filter>Файлы ресурсов</Filter>
+    </Text>
+    <Text Include="encrypted.txt">
       <Filter>Файлы ресурсов</Filter>
     </Text>
   </ItemGroup>

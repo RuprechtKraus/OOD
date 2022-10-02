@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include <memory>
 
 class IOutputStream
 {
@@ -15,3 +16,5 @@ public:
 
 	virtual ~IOutputStream() = default;
 };
+
+using OutputStreamPtr = std::unique_ptr<IOutputStream>;

@@ -36,7 +36,7 @@ std::streamsize FileInputStream::ReadBlock(void* dstBuffer, std::streamsize size
 {
 	char* buffer = new char[size];
 	m_file.read(buffer, size);
-	std::streamsize gcount = m_file.gcount();
+	std::streamsize gcount{ m_file.gcount() };
 
 	if (m_file.fail() && !m_file.eof() && gcount == 0)
 	{

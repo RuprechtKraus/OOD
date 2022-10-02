@@ -1,5 +1,6 @@
 #pragma once
 #include <iostream>
+#include <memory>
 
 class IInputStream
 {
@@ -19,3 +20,5 @@ public:
 
 	virtual ~IInputStream() = default;
 };
+
+using InputStreamPtr = std::unique_ptr<IInputStream>;
