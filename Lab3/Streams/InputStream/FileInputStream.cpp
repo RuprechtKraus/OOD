@@ -36,13 +36,15 @@ std::streamsize FileInputStream::ReadBlock(void* dstBuffer, std::streamsize size
 {
 	char* buffer = new char[size];
 	m_file.read(buffer, size);
+	std::streamsize gcount = m_file.gcount();
 
-	if (m_file.fail() && !m_file.eof() && m_file.gcount() == 0)
+	if (m_file.fail() && !m_file.eof() && gcount == 0)
 	{
 		throw std::ios_base::failure("Read failure");
 	}
 
-	std::memcpy(dstBuffer, buffer, size);
+	std::memcpy(dstBuffer, buffer, gcount);
+	delete[] buffer;
 
 	return m_file.gcount();
 }

@@ -36,6 +36,12 @@
     <ClCompile Include="OutputStream\FileOutputStream.cpp">
       <Filter>Исходные файлы\OutputStream</Filter>
     </ClCompile>
+    <ClCompile Include="InputStream\MemoryInputStream.cpp">
+      <Filter>Исходные файлы\InputStream</Filter>
+    </ClCompile>
+    <ClCompile Include="OutputStream\MemoryOutputStream.cpp">
+      <Filter>Исходные файлы\OutputStream</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="InputStream\IInputStream.h">
@@ -49,6 +55,12 @@
     </ClInclude>
     <ClInclude Include="OutputStream\FileOutputStream.h">
       <Filter>Файлы заголовков\OutputStream</Filter>
+    </ClInclude>
+    <ClInclude Include="OutputStream\MemoryOutputStream.h">
+      <Filter>Файлы заголовков\OutputStream</Filter>
+    </ClInclude>
+    <ClInclude Include="InputStream\MemoryInputStream.h">
+      <Filter>Файлы заголовков\InputStream</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
