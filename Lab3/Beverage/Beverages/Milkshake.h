@@ -29,6 +29,7 @@ class Milkshake : public BeverageBase
 public:
 	Milkshake(MilkshakeSize size)
 		: BeverageBase(MilkshakeSizeToString(size) + " Milkshake")
+		, m_size(size)
 	{
 	}
 
