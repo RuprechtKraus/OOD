@@ -1,57 +1,42 @@
 #pragma once
 #include "BeverageBase.h"
+#include <stdexcept>
+
+enum class TeaType
+{
+	Black,
+	Green,
+	Hibiscus,
+	Puer
+};
+
+static std::string TeaTypeToString(TeaType type)
+{
+	switch (type)
+	{
+	case TeaType::Black:
+		return "Black";
+	case TeaType::Green:
+		return "Green";
+	case TeaType::Hibiscus:
+		return "Hibiscus";
+	case TeaType::Puer:
+		return "Puer";
+	default:
+		throw std::invalid_argument("Unknown tea type");
+	}
+}
 
 class Tea : public BeverageBase
 {
 public:
-	Tea()
-		: BeverageBase("Tea")
-	{
-	}
-
-	Tea(const std::string& description)
-		: BeverageBase(description)
+	Tea(TeaType type)
+		: BeverageBase(TeaTypeToString(type) + " tea")
 	{
 	}
 
 	double GetCost() const noexcept override
 	{
 		return 30;
-	}
-};
-
-class BlackTea : public Tea
-{
-public:
-	BlackTea()
-		: Tea("Black Tea")
-	{
-	}
-};
-
-class GreenTea : public Tea
-{
-public:
-	GreenTea()
-		: Tea("Green Tea")
-	{
-	}
-};
-
-class HibiscusTea : public Tea
-{
-public:
-	HibiscusTea()
-		: Tea("Hibiscus Tea")
-	{
-	}
-};
-
-class PuerTea : public Tea
-{
-public:
-	PuerTea()
-		: Tea("Pu'er tea")
-	{
 	}
 };
