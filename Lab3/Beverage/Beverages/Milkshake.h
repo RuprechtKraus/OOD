@@ -34,6 +34,19 @@ public:
 
 	double GetCost() const noexcept override
 	{
-		return 80;
+		switch (m_size)
+		{
+		case MilkshakeSize::Small:
+			return 50;
+		case MilkshakeSize::Medium:
+			return 60;
+		case MilkshakeSize::Large:
+			return 80;
+		default:
+			return 80;
+		}
 	}
+
+private:
+	MilkshakeSize m_size;
 };
