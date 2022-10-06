@@ -119,8 +119,7 @@ void Application::SetupStreams(const po::parsed_options& options)
 
 		if (outputWrappers[i].first == "compress")
 		{
-			m_outputStream = std::make_unique<CompressionOutputStream>(std::move(m_outputStream),
-				std::make_unique<RLECompressor>());
+			m_outputStream = std::make_unique<CompressionOutputStream>(std::move(m_outputStream));
 		}
 	}
 
@@ -134,8 +133,7 @@ void Application::SetupStreams(const po::parsed_options& options)
 
 		if (inputWrappers[i].first == "decompress")
 		{
-			m_inputStream = std::make_unique<DecompressionInputStream>(std::move(m_inputStream),
-				std::make_unique<RLECompressor>());
+			m_inputStream = std::make_unique<DecompressionInputStream>(std::move(m_inputStream));
 		}
 	}
 }

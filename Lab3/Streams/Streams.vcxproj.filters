@@ -43,6 +43,9 @@
     <Filter Include="Исходные файлы\Application">
       <UniqueIdentifier>{23c6483f-3476-42c3-b843-33019bf953ba}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Файлы заголовков\Exceptions">
+      <UniqueIdentifier>{26caee60-b8ad-4223-a401-5293e4397056}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Streams.cpp">
@@ -134,12 +137,6 @@
       <Filter>Файлы ресурсов</Filter>
     </Text>
     <Text Include="output.txt">
-      <Filter>Файлы ресурсов</Filter>
-    </Text>
-    <Text Include="encrypted.txt">
-      <Filter>Файлы ресурсов</Filter>
-    </Text>
-    <Text Include="result.txt">
       <Filter>Файлы ресурсов</Filter>
     </Text>
   </ItemGroup>

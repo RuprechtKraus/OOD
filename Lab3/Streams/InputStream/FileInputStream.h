@@ -10,7 +10,7 @@ public:
 	~FileInputStream() override;
 
 	bool IsEOF() const override;
-	std::uint8_t ReadByte() override;
+	uint8_t ReadByte() override;
 	std::streamsize ReadBlock(void* dstBuffer, std::streamsize size) override;
 	void Close();
 
