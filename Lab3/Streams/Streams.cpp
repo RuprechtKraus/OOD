@@ -8,8 +8,8 @@
 int main(int argc, char* argv[])
 try
 {
-	/*Application app(argc, argv);
-	app.Run();*/
+	Application app(argc, argv);
+	app.Run();
 }
 catch (const std::exception& e)
 {

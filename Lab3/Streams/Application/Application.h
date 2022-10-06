@@ -12,9 +12,9 @@ public:
 	void Run();
 
 private:
-	void SetupAppication(int argc, char* argv[]);
+	void SetUpAppication(int argc, char* argv[]);
 	po::parsed_options ParseOptions(int argc, char* argv[]);
-	void SetupStreams(const po::parsed_options& options);
+	void SetUpStreams(const po::parsed_options& options);
 
 	InputStreamPtr m_inputStream;
 	OutputStreamPtr m_outputStream;

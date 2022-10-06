@@ -30,7 +30,7 @@ decltype(auto) operator<<(Stream&& stream, const Wrapper& wrap)
 
 Application::Application(int argc, char* argv[])
 {
-	SetupAppication(argc, argv);
+	SetUpAppication(argc, argv);
 }
 
 void Application::Run()
@@ -46,24 +46,26 @@ void Application::Run()
 	delete[] buffer;
 }
 
-void Application::SetupAppication(int argc, char* argv[])
+void Application::SetUpAppication(int argc, char* argv[])
 {
 	po::parsed_options options{ ParseOptions(argc, argv) };
-	SetupStreams(options);
+	SetUpStreams(options);
 }
 
 po::parsed_options Application::ParseOptions(int argc, char* argv[])
 {
 	po::options_description desc;
+
 	desc.add_options()("encrypt", po::value<int>())("decrypt", po::value<int>());
 	desc.add_options()("compress", "Add compression step")("decompress", "Add decompression step");
 	desc.add_options()("input",
 		po::value<std::string>()->required(), "Set input file")("output",
 		po::value<std::string>()->required(), "Set output file");
+
 	return po::parse_command_line(argc, argv, desc);
 }
 
-void Application::SetupStreams(const po::parsed_options& options)
+void Application::SetUpStreams(const po::parsed_options& options)
 {
 	std::string inFileName;
 	std::string outFileName;
