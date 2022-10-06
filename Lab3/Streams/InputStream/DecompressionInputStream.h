@@ -1,5 +1,4 @@
 #pragma once
-#include "Compression/ICompressor.h"
 #include "IInputStream.h"
 #include <queue>
 

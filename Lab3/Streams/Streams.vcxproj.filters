@@ -31,12 +31,6 @@
     <Filter Include="Исходные файлы\Cryptography">
       <UniqueIdentifier>{fb94c283-03fe-4065-9376-069f1212783a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Файлы заголовков\Compression">
-      <UniqueIdentifier>{92437b96-7cf9-401f-ba87-1c1f84ac31a5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Исходные файлы\Compression">
-      <UniqueIdentifier>{ca2991a0-08ff-48ee-93c0-69e91102008d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Файлы заголовков\Application">
       <UniqueIdentifier>{fa31716f-6a3c-4aab-aa2b-f7330135e5f9}</UniqueIdentifier>
     </Filter>
@@ -71,9 +65,6 @@
     </ClCompile>
     <ClCompile Include="InputStream\DecryptionInputStream.cpp">
       <Filter>Исходные файлы\InputStream</Filter>
-    </ClCompile>
-    <ClCompile Include="Compression\RLECompressor.cpp">
-      <Filter>Исходные файлы\Compression</Filter>
     </ClCompile>
     <ClCompile Include="InputStream\DecompressionInputStream.cpp">
       <Filter>Исходные файлы\InputStream</Filter>
@@ -115,12 +106,6 @@
     </ClInclude>
     <ClInclude Include="InputStream\DecryptionInputStream.h">
       <Filter>Файлы заголовков\InputStream</Filter>
-    </ClInclude>
-    <ClInclude Include="Compression\ICompressor.h">
-      <Filter>Файлы заголовков\Compression</Filter>
-    </ClInclude>
-    <ClInclude Include="Compression\RLECompressor.h">
-      <Filter>Файлы заголовков\Compression</Filter>
     </ClInclude>
     <ClInclude Include="InputStream\DecompressionInputStream.h">
       <Filter>Файлы заголовков\InputStream</Filter>

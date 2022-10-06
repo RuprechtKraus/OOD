@@ -1,5 +1,4 @@
 #include "Application.h"
-#include "Compression/RLECompressor.h"
 #include "Cryptography/Cryptographer.h"
 #include "InputStream/DecompressionInputStream.h"
 #include "InputStream/DecryptionInputStream.h"
@@ -35,13 +34,15 @@ Application::Application(int argc, char* argv[])
 
 void Application::Run()
 {
-	char* buffer = new char[8192];
-	std::streamsize gcount{};
-	
-	gcount = m_inputStream->ReadBlock(buffer, 8192);
-	buffer[gcount] = '\0';
+	char* buffer = new char[1024];
+	std::streamsize gcount;
 
-	m_outputStream->WriteBlock(buffer, gcount);
+	while (!m_inputStream->IsEOF())
+	{
+		gcount = m_inputStream->ReadBlock(buffer, 1024);
+		buffer[gcount] = '\0';
+		m_outputStream->WriteBlock(buffer, gcount);
+	}
 
 	delete[] buffer;
 }
