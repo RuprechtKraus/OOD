@@ -18,7 +18,7 @@ std::uint8_t DecompressionInputStream::ReadByte()
 
 	if (!m_buffer.empty())
 	{
-		GetNextBufferedByte();
+		return GetNextBufferedByte();
 	}
 
 	try
@@ -97,15 +97,24 @@ int DecompressionInputStream::ReadBytesCount()
 
 std::streamsize DecompressionInputStream::ReadBlock(void* dstBuffer, std::streamsize size)
 {
+	uint8_t byte{};
+	std::streamsize gcount{};
 	char* buffer = new char[size];
-	char* decompressed = new char[8192];
-	std::streamsize gcount{ m_stream->ReadBlock(buffer, size) };
 
-	/*size_t decompressedSize{ m_compressor->Decompress(decompressed, buffer, gcount) };
-	memcpy(dstBuffer, decompressed, decompressedSize);*/
+	for (; gcount < size; gcount++)
+	{
+		byte = ReadByte();
 
+		if (IsEOF())
+		{
+			break;
+		}
+
+		buffer[gcount] = byte;
+	}
+
+	std::memcpy(dstBuffer, buffer, gcount);
 	delete[] buffer;
-	delete[] decompressed;
 
-	return 0;
+	return gcount;
 }
