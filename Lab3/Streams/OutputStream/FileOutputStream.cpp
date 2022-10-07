@@ -17,12 +17,14 @@ FileOutputStream::~FileOutputStream()
 
 void FileOutputStream::WriteByte(uint8_t data)
 {
-	m_file.put(data);
+	m_file.write((char*)&data, sizeof(data));
 
 	if (m_file.fail())
 	{
 		throw std::ios_base::failure("Write failure");
 	}
+
+	m_file.flush();
 }
 
 void FileOutputStream::WriteBlock(const void* srcData, std::streamsize size)
@@ -33,6 +35,8 @@ void FileOutputStream::WriteBlock(const void* srcData, std::streamsize size)
 	{
 		throw std::ios_base::failure("Write failure");
 	}
+
+	m_file.flush();
 }
 
 void FileOutputStream::Close()

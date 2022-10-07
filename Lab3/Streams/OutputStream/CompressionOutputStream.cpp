@@ -7,26 +7,40 @@ CompressionOutputStream::CompressionOutputStream(OutputStreamPtr&& stream)
 {
 }
 
+CompressionOutputStream::~CompressionOutputStream()
+{
+	Flush();
+}
+
 void CompressionOutputStream::WriteByte(uint8_t data)
 {
+	if (m_block.count == 0)
+	{
+		m_block = { data, 1 };
+		return;
+	}
+
+	if (m_block.byte == data)
+	{
+		m_block.count++;
+		return;
+	}
+
+	Flush();
+	m_block = { data, 1 };
 }
 
 void CompressionOutputStream::WriteBlock(const void* srcData, std::streamsize size)
 {
-	std::string compressedData{ Compress(srcData, size) };
-	m_stream->WriteBlock(compressedData.c_str(), compressedData.size());
-}
-
-std::string CompressionOutputStream::Compress(const void* srcData, std::streamsize size)
-{
+	const uint8_t* srcPtr{ static_cast<const uint8_t*>(srcData) };
 	uint8_t byte{ static_cast<const uint8_t*>(srcData)[0] };
 	uint8_t nextByte{};
 	std::streamsize count{ 1 };
-	std::string result;
+	Block block{};
 
 	for (size_t i = 1; i <= size; i++)
 	{
-		nextByte = static_cast<const uint8_t*>(srcData)[i];
+		nextByte = srcPtr[i];
 
 		if (nextByte == byte)
 		{
@@ -34,22 +48,21 @@ std::string CompressionOutputStream::Compress(const void* srcData, std::streamsi
 		}
 		else
 		{
-			result += MakeByteInfo(byte, count);
+			block.byte = byte;
+			block.count = count;
+
+			m_stream->WriteBlock(static_cast<const void*>(&block), sizeof(block));
+
 			byte = nextByte;
 			count = 1;
 		}
 	}
-
-	return result;
 }
 
-std::string CompressionOutputStream::MakeByteInfo(uint8_t byte, size_t count)
+void CompressionOutputStream::Flush()
 {
-	std::string result = "{";
-	result += byte;
-	result += ",";
-	result += std::to_string(count);
-	result += "}";
+	m_stream->WriteBlock((const void*)(&m_block.byte), sizeof(uint8_t));
+	m_stream->WriteBlock((const void*)(&m_block.count), sizeof(int));
 
-	return result;
+	m_block = {};
 }

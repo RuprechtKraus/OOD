@@ -34,17 +34,17 @@ Application::Application(int argc, char* argv[])
 
 void Application::Run()
 {
-	char* buffer = new char[1024];
-	std::streamsize gcount;
-
-	while (!m_inputStream->IsEOF())
+	while (true)
 	{
-		gcount = m_inputStream->ReadBlock(buffer, 1024);
-		buffer[gcount] = '\0';
-		m_outputStream->WriteBlock(buffer, gcount);
-	}
+		uint8_t byte = m_inputStream->ReadByte();
 
-	delete[] buffer;
+		if (m_inputStream->IsEOF())
+		{
+			break;
+		}
+
+		m_outputStream->WriteByte(byte);
+	}
 }
 
 void Application::SetUpAppication(int argc, char* argv[])

@@ -22,7 +22,9 @@ bool FileInputStream::IsEOF() const
 
 uint8_t FileInputStream::ReadByte()
 {
-	uint8_t byte{ static_cast<uint8_t>(m_file.get()) };
+	uint8_t byte{};
+
+	m_file.read((char*)&byte, sizeof(uint8_t));
 
 	if (m_file.fail() && !m_file.eof())
 	{
@@ -34,17 +36,12 @@ uint8_t FileInputStream::ReadByte()
 
 std::streamsize FileInputStream::ReadBlock(void* dstBuffer, std::streamsize size)
 {
-	char* buffer = new char[size];
-	m_file.read(buffer, size);
-	std::streamsize gcount{ m_file.gcount() };
+	m_file.read(static_cast<char*>(dstBuffer), size);
 
 	if (m_file.fail() && !m_file.eof())
 	{
 		throw std::ios_base::failure("Read failure");
 	}
-
-	std::memcpy(dstBuffer, buffer, gcount);
-	delete[] buffer;
 
 	return m_file.gcount();
 }
