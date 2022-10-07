@@ -32,30 +32,11 @@ void CompressionOutputStream::WriteByte(uint8_t data)
 
 void CompressionOutputStream::WriteBlock(const void* srcData, std::streamsize size)
 {
-	const uint8_t* srcPtr{ static_cast<const uint8_t*>(srcData) };
-	uint8_t byte{ static_cast<const uint8_t*>(srcData)[0] };
-	uint8_t nextByte{};
-	std::streamsize count{ 1 };
-	Block block{};
+	const uint8_t* srcPtr = static_cast<const uint8_t*>(srcData);
 
-	for (size_t i = 1; i <= size; i++)
+	for (std::streamsize i = 0; i < size; i++)
 	{
-		nextByte = srcPtr[i];
-
-		if (nextByte == byte)
-		{
-			count++;
-		}
-		else
-		{
-			block.byte = byte;
-			block.count = count;
-
-			m_stream->WriteBlock(static_cast<const void*>(&block), sizeof(block));
-
-			byte = nextByte;
-			count = 1;
-		}
+		WriteByte(srcPtr[i]);
 	}
 }
 
