@@ -1,12 +1,16 @@
 #include "pch.h"
 #include "InputStream/FileInputStream.h"
 #include "OutputStream/FileOutputStream.h"
+#include "InputStream/DecryptionInputStream.h"
+#include "OutputStream/EncryptionOutputStream.h"
+#include "Cryptography/Cryptographer.h"
 #include <string>
 
 const std::string TEST_FILES_DIRECTORY{ "Test files/" };
 const std::string EMPTY_TEST_FILENAME{ TEST_FILES_DIRECTORY + "EmptyFileTest.txt" };
 const std::string INPUT_STREAM_FILENAME{ TEST_FILES_DIRECTORY + "InputFileStreamTest.txt" };
 const std::string OUTPUT_STREAM_FILENAME{ TEST_FILES_DIRECTORY + "OutputFileStreamTest.txt" };
+const std::string DECRYPTION_OUTPUT_FILE{ TEST_FILES_DIRECTORY + "DecryptedFile.dat" };
 
 TEST(FileInputStreamTest, ReadingByteFromEmptyFile)
 {
@@ -87,6 +91,40 @@ TEST(FileOutputStreamTest, WriteBlock)
 	inFile.ReadBlock(buffer, 3);
 
 	EXPECT_EQ(std::memcmp(buffer, str, 3), 0);
+
+	delete[] buffer;
+}
+
+TEST(EncryptionTest, EncryptAndDecryptWithTheSameKey)
+{
+	std::unique_ptr<IOutputStream> outStream = std::make_unique<EncryptionOutputStream>(
+		std::make_unique<FileOutputStream>(DECRYPTION_OUTPUT_FILE), std::make_unique<Cryptographer>(3));
+	std::unique_ptr<IInputStream> inStream = std::make_unique<DecryptionInputStream>(
+		std::make_unique<FileInputStream>(DECRYPTION_OUTPUT_FILE), std::make_unique<Cryptographer>(3));
+	const char* message = "This is my secret message...";
+	uint8_t* buffer = new uint8_t[50];
+
+	outStream->WriteBlock(message, 28);
+	inStream->ReadBlock(buffer, 28);
+
+	EXPECT_EQ(std::memcmp(buffer, message, 28), 0);
+
+	delete[] buffer;
+}
+
+TEST(EncryptionTest, EncryptAndDecryptWithTheDifferentKeys)
+{
+	std::unique_ptr<IOutputStream> outStream = std::make_unique<EncryptionOutputStream>(
+		std::make_unique<FileOutputStream>(DECRYPTION_OUTPUT_FILE), std::make_unique<Cryptographer>(3));
+	std::unique_ptr<IInputStream> inStream = std::make_unique<DecryptionInputStream>(
+		std::make_unique<FileInputStream>(DECRYPTION_OUTPUT_FILE), std::make_unique<Cryptographer>(6));
+	const char* message = "This is my secret message...";
+	uint8_t* buffer = new uint8_t[50];
+
+	outStream->WriteBlock(message, 28);
+	inStream->ReadBlock(buffer, 28);
+
+	EXPECT_NE(std::memcmp(buffer, message, 28), 0);
 
 	delete[] buffer;
 }
