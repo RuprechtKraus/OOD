@@ -8,118 +8,85 @@ const std::string EMPTY_TEST_FILENAME{ TEST_FILES_DIRECTORY + "EmptyFileTest.txt
 const std::string INPUT_STREAM_FILENAME{ TEST_FILES_DIRECTORY + "InputFileStreamTest.txt" };
 const std::string OUTPUT_STREAM_FILENAME{ TEST_FILES_DIRECTORY + "OutputFileStreamTest.txt" };
 
-TEST(FileInputStreamTest, OpeningNotExistingFile)
-{
-	EXPECT_THROW(FileInputStream stream("MissingFile.txt"), std::runtime_error);
-}
-
-TEST(FileInputStreamTest, ReadingByOneByte)
-{
-	FileInputStream stream(INPUT_STREAM_FILENAME);
-	uint8_t byte1{ stream.ReadByte() };
-	uint8_t byte2{ stream.ReadByte() };
-	uint8_t byte3{ stream.ReadByte() };
-
-	EXPECT_EQ(byte1, 'A');
-	EXPECT_EQ(byte2, 'B');
-	EXPECT_EQ(byte3, 'C');
-	EXPECT_FALSE(stream.IsEOF());
-}
-
-TEST(FileInputStreamTest, ReadingByteAfterLastSymbol)
-{
-	FileInputStream stream(INPUT_STREAM_FILENAME);
-
-	stream.ReadByte();
-	stream.ReadByte();
-	stream.ReadByte();
-	stream.ReadByte();
-
-	EXPECT_TRUE(stream.IsEOF());
-}
-
 TEST(FileInputStreamTest, ReadingByteFromEmptyFile)
 {
-	FileInputStream stream(EMPTY_TEST_FILENAME);
-	stream.ReadByte();
+	FileInputStream file(EMPTY_TEST_FILENAME);
+	uint8_t byte{ file.ReadByte() };
 
-	EXPECT_TRUE(stream.IsEOF());
-}
-
-TEST(FileInputStreamTest, ReadingBlock)
-{
-	FileInputStream stream(INPUT_STREAM_FILENAME);
-	char* buffer = new char[3];
-	std::streamsize bytesCount = stream.ReadBlock(buffer, 3);
-
-	EXPECT_EQ(bytesCount, 3);
-	EXPECT_EQ(buffer[0], 'A');
-	EXPECT_EQ(buffer[1], 'B');
-	EXPECT_EQ(buffer[2], 'C');
-	EXPECT_FALSE(stream.IsEOF());
-
-	delete[] buffer;
-}
-
-TEST(FileInputStreamTest, ReadingBlockBiggerThanFile)
-{
-	FileInputStream stream(INPUT_STREAM_FILENAME);
-	char* buffer = new char[5];
-	std::streamsize bytesCount = stream.ReadBlock(buffer, 5);
-
-	EXPECT_EQ(bytesCount, 3);
-	EXPECT_EQ(buffer[0], 'A');
-	EXPECT_EQ(buffer[1], 'B');
-	EXPECT_EQ(buffer[2], 'C');
-	EXPECT_TRUE(stream.IsEOF());
-
-	delete[] buffer;
+	EXPECT_EQ(byte, '\0');
+	EXPECT_TRUE(file.IsEOF());
 }
 
 TEST(FileInputStreamTest, ReadingBlockFromEmptyFile)
 {
-	FileInputStream stream(EMPTY_TEST_FILENAME);
-	char* buffer = new char[3];
+	FileInputStream file(EMPTY_TEST_FILENAME);
+	uint8_t* buffer = new uint8_t[10];
+	std::streamsize bytesRead{ file.ReadBlock(buffer, 10) };
 
-	stream.ReadBlock(buffer, 3);
-
-	EXPECT_TRUE(stream.IsEOF());
+	EXPECT_EQ(bytesRead, 0);
+	EXPECT_TRUE(file.IsEOF());
 
 	delete[] buffer;
 }
 
-TEST(FileOutputStreamTest, WritingByByte)
+TEST(FileInputStreamTest, ReadingByteFromFile)
 {
-	FileOutputStream outStream(OUTPUT_STREAM_FILENAME);
+	FileInputStream file(INPUT_STREAM_FILENAME);
+	uint8_t byte{ file.ReadByte() };
 
-	outStream.WriteByte('A');
-	outStream.WriteByte('B');
-	outStream.WriteByte('C');
-	outStream.Close();
-
-	std::ifstream inStream(OUTPUT_STREAM_FILENAME);
-
-	EXPECT_EQ(inStream.get(), 'A');
-	EXPECT_EQ(inStream.get(), 'B');
-	EXPECT_EQ(inStream.get(), 'C');
+	EXPECT_EQ(byte, 'A');
+	EXPECT_FALSE(file.IsEOF());
 }
 
-TEST(FileOutputStreamTest, WritingBlock)
+TEST(FileInputStreamTest, ReadingWholeFileByBlock)
 {
-	FileOutputStream outStream(OUTPUT_STREAM_FILENAME);
-	const char* content = "ABC";
+	FileInputStream file(INPUT_STREAM_FILENAME);
+	uint8_t* buffer = new uint8_t[3];
+	std::streamsize bytesRead{ file.ReadBlock(buffer, 10) };
 
-	outStream.WriteBlock(content, 3);
-	outStream.Close();
+	EXPECT_EQ(bytesRead, 3);
+	EXPECT_EQ(std::memcmp(buffer, "ABC", 3), 0);
+	EXPECT_TRUE(file.IsEOF());
 
-	std::ifstream inStream(OUTPUT_STREAM_FILENAME);
-	char* buffer = new char[3];
+	delete[] buffer;
+}
 
-	inStream.read(buffer, 3);
+TEST(FileInputStreamTest, ReadingPartOfFileByBlock)
+{
+	FileInputStream file(INPUT_STREAM_FILENAME);
+	uint8_t* buffer = new uint8_t[2];
+	std::streamsize bytesRead{ file.ReadBlock(buffer, 2) };
 
-	EXPECT_EQ(buffer[0], 'A');
-	EXPECT_EQ(buffer[1], 'B');
-	EXPECT_EQ(buffer[2], 'C');
+	EXPECT_EQ(bytesRead, 2);
+	EXPECT_EQ(std::memcmp(buffer, "AB", 2), 0);
+	EXPECT_FALSE(file.IsEOF());
+
+	delete[] buffer;
+}
+
+TEST(FileOutputStreamTest, WriteByte)
+{
+	FileOutputStream outFile(OUTPUT_STREAM_FILENAME);
+	FileInputStream inFile(OUTPUT_STREAM_FILENAME);
+	uint8_t byte;
+
+	outFile.WriteByte('A');
+	byte = inFile.ReadByte();
+
+	EXPECT_EQ(byte, 'A');
+}
+
+TEST(FileOutputStreamTest, WriteBlock)
+{
+	FileOutputStream outFile(OUTPUT_STREAM_FILENAME);
+	FileInputStream inFile(OUTPUT_STREAM_FILENAME);
+	uint8_t* buffer = new uint8_t[10];
+	const char* str = "ABC";
+
+	outFile.WriteBlock(str, 3);
+	inFile.ReadBlock(buffer, 3);
+
+	EXPECT_EQ(std::memcmp(buffer, str, 3), 0);
 
 	delete[] buffer;
 }
