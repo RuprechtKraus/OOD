@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "InputStream/FileInputStream.h"
 #include "OutputStream/FileOutputStream.h"
+#include "InputStream/MemoryInputStream.h"
+#include "OutputStream/MemoryOutputStream.h"
 #include "InputStream/DecryptionInputStream.h"
 #include "OutputStream/EncryptionOutputStream.h"
 #include "Cryptography/Cryptographer.h"
@@ -98,7 +100,7 @@ TEST(FileOutputStreamTest, WriteBlock)
 	delete[] buffer;
 }
 
-TEST(EncryptionTest, EncryptAndDecryptWithTheSameKey)
+TEST(FileEncryptionTest, EncryptAndDecryptWithTheSameKey)
 {
 	std::unique_ptr<IOutputStream> outStream = std::make_unique<EncryptionOutputStream>(
 		std::make_unique<FileOutputStream>(DECRYPTION_OUTPUT_FILE), std::make_unique<Cryptographer>(3));
@@ -115,7 +117,7 @@ TEST(EncryptionTest, EncryptAndDecryptWithTheSameKey)
 	delete[] buffer;
 }
 
-TEST(EncryptionTest, EncryptAndDecryptWithTheDifferentKeys)
+TEST(FileEncryptionTest, EncryptAndDecryptWithTheDifferentKeys)
 {
 	std::unique_ptr<IOutputStream> outStream = std::make_unique<EncryptionOutputStream>(
 		std::make_unique<FileOutputStream>(DECRYPTION_OUTPUT_FILE), std::make_unique<Cryptographer>(3));
@@ -132,7 +134,7 @@ TEST(EncryptionTest, EncryptAndDecryptWithTheDifferentKeys)
 	delete[] buffer;
 }
 
-TEST(CompressionTest, CompressAndDecompressData)
+TEST(FileCompressionTest, CompressAndDecompressData)
 {
 	std::unique_ptr<IOutputStream> outStream = std::make_unique<CompressionOutputStream>(
 		std::make_unique<FileOutputStream>(COMPRESSION_OUTPUT_FILE));
@@ -147,4 +149,86 @@ TEST(CompressionTest, CompressAndDecompressData)
 	EXPECT_NE(std::memcmp(buffer, message, 28), 0);
 
 	delete[] buffer;
+}
+
+TEST(MemoryInputStreamTest, ReadingByteFromEmptyVector)
+{
+	std::vector<uint8_t> data;
+	MemoryInputStream input(data);
+	uint8_t byte{ input.ReadByte() };
+
+	EXPECT_EQ(byte, '\0');
+	EXPECT_TRUE(input.IsEOF());
+}
+
+TEST(MemoryInputStreamTest, ReadingBlockFromEmptyVector)
+{
+	std::vector<uint8_t> data;
+	MemoryInputStream stream(data);
+	uint8_t* buffer = new uint8_t[10];
+	std::streamsize bytesRead{ stream.ReadBlock(buffer, 10) };
+
+	EXPECT_EQ(bytesRead, 0);
+	EXPECT_TRUE(stream.IsEOF());
+
+	delete[] buffer;
+}
+
+TEST(MemoryInputStreamTest, ReadingByteFromVector)
+{
+	std::vector<uint8_t> data{ 'A', 'B', 'C' };
+	MemoryInputStream stream(data);
+	uint8_t byte{ stream.ReadByte() };
+
+	EXPECT_EQ(byte, 'A');
+	EXPECT_FALSE(stream.IsEOF());
+}
+
+TEST(MemoryInputStreamTest, ReadingWholeVectorByBlock)
+{
+	std::vector<uint8_t> data{ 'A', 'B', 'C' };
+	MemoryInputStream stream(data);
+	uint8_t* buffer = new uint8_t[3];
+	std::streamsize bytesRead{ stream.ReadBlock(buffer, 10) };
+
+	EXPECT_EQ(bytesRead, 3);
+	EXPECT_EQ(std::memcmp(buffer, "ABC", 3), 0);
+	EXPECT_TRUE(stream.IsEOF());
+
+	delete[] buffer;
+}
+
+TEST(MemoryInputStreamTest, ReadingPartOfVectorByBlock)
+{
+	std::vector<uint8_t> data{ 'A', 'B', 'C' };
+	MemoryInputStream stream(data);
+	uint8_t* buffer = new uint8_t[2];
+	std::streamsize bytesRead{ stream.ReadBlock(buffer, 2) };
+
+	EXPECT_EQ(bytesRead, 2);
+	EXPECT_EQ(std::memcmp(buffer, "AB", 2), 0);
+	EXPECT_FALSE(stream.IsEOF());
+
+	delete[] buffer;
+}
+
+TEST(MemoryOutputStreamTest, WriteByte)
+{
+	std::vector<uint8_t> dstData;
+	MemoryOutputStream stream(dstData);
+
+	stream.WriteByte('A');
+
+	EXPECT_EQ(dstData.back(), 'A');
+}
+
+TEST(MemoryOutputStreamTest, WriteBlock)
+{
+	std::vector<uint8_t> dstData;
+	std::vector<uint8_t> expectedData{ 'A', 'B', 'C' };
+	MemoryOutputStream stream(dstData);
+
+	stream.WriteBlock("ABC", 3);
+
+	EXPECT_EQ(dstData, expectedData);
 }

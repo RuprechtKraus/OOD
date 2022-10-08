@@ -19,7 +19,7 @@ std::uint8_t MemoryInputStream::ReadByte()
 {
 	if (IsEOF())
 	{
-		throw std::ios_base::failure("Read failure");
+		return '\0';
 	}
 
 	return m_buffer[m_position++];
@@ -29,7 +29,7 @@ std::streamsize MemoryInputStream::ReadBlock(void* dstBuffer, std::streamsize si
 {
 	if (IsEOF())
 	{
-		throw std::ios_base::failure("Read failure");
+		return '\0';
 	}
 
 	size_t bufferSize{ m_buffer.size() };

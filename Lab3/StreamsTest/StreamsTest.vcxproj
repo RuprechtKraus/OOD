@@ -83,7 +83,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
       <AdditionalLibraryDirectories>C:\Users\Ruprecht Kraus\source\repos\OOD\Lab3\Streams\x64\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>FileInputStream.obj;FileOutputStream.obj;DecompressionInputStream.obj;CompressionOutputStream.obj;DecryptionInputStream.obj;Cryptographer.obj;EncryptionOutputStream.obj;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>FileInputStream.obj;FileOutputStream.obj;DecompressionInputStream.obj;CompressionOutputStream.obj;DecryptionInputStream.obj;Cryptographer.obj;EncryptionOutputStream.obj;MemoryInputStream.obj;MemoryOutputStream.obj;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
