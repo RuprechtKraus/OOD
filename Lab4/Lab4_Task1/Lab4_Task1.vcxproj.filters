@@ -25,30 +25,69 @@
     <Filter Include="Source Files\Designer">
       <UniqueIdentifier>{84ec1206-972e-464a-867b-d99c6aa38eec}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Canvas">
+      <UniqueIdentifier>{b15c3250-c1c3-4744-a2a8-ca1696c3fd3b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Canvas">
+      <UniqueIdentifier>{e272cd24-c297-42a4-804e-4f99c73d7501}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Lab4_Task1.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Shapes\PictureDraft.cpp">
+    <ClCompile Include="ShapesLib\Shapes\PictureDraft.cpp">
       <Filter>Source Files\Shapes</Filter>
     </ClCompile>
-    <ClCompile Include="Designer\Designer.cpp">
+    <ClCompile Include="ShapesLib\Designer\Designer.cpp">
       <Filter>Source Files\Designer</Filter>
+    </ClCompile>
+    <ClCompile Include="ShapesLib\Shapes\Rectangle.cpp">
+      <Filter>Source Files\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="ShapesLib\Canvas\StreamCanvas.cpp">
+      <Filter>Source Files\Canvas</Filter>
+    </ClCompile>
+    <ClCompile Include="ShapesLib\Shapes\Triangle.cpp">
+      <Filter>Source Files\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="ShapesLib\Shapes\Ellipse.cpp">
+      <Filter>Source Files\Shapes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Shapes\Shape.h">
+    <ClInclude Include="ShapesLib\Shapes\IShapeFactory.h">
       <Filter>Header Files\Shapes</Filter>
     </ClInclude>
-    <ClInclude Include="Shapes\PictureDraft.h">
+    <ClInclude Include="ShapesLib\Shapes\PictureDraft.h">
       <Filter>Header Files\Shapes</Filter>
     </ClInclude>
-    <ClInclude Include="Shapes\IShapeFactory.h">
+    <ClInclude Include="ShapesLib\Shapes\Shape.h">
       <Filter>Header Files\Shapes</Filter>
     </ClInclude>
-    <ClInclude Include="Designer\Designer.h">
+    <ClInclude Include="ShapesLib\Designer\Designer.h">
       <Filter>Header Files\Designer</Filter>
+    </ClInclude>
+    <ClInclude Include="ShapesLib\Canvas\ICanvas.h">
+      <Filter>Header Files\Canvas</Filter>
+    </ClInclude>
+    <ClInclude Include="ShapesLib\Point.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ShapesLib\Shapes\Rectangle.h">
+      <Filter>Header Files\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="ShapesLib\Canvas\StreamCanvas.h">
+      <Filter>Header Files\Canvas</Filter>
+    </ClInclude>
+    <ClInclude Include="ShapesLib\Color.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ShapesLib\Shapes\Triangle.h">
+      <Filter>Header Files\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="ShapesLib\Shapes\Ellipse.h">
+      <Filter>Header Files\Shapes</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

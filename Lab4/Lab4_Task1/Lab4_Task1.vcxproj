@@ -105,7 +105,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>C:\Users\Ruprecht Kraus\source\repos\Libraries\boost_1_80_0;C:\Users\Ruprecht Kraus\source\repos\OOD\Lab4\Lab4_Task1;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Ruprecht Kraus\source\repos\OOD\Lab4\Lab4_Task1\ShapesLib;C:\Users\Ruprecht Kraus\source\repos\Libraries\boost_1_80_0</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -120,6 +120,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>C:\Users\Ruprecht Kraus\source\repos\OOD\Lab4\Lab4_Task1\ShapesLib;C:\Users\Ruprecht Kraus\source\repos\Libraries\boost_1_80_0</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -129,15 +131,26 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Designer\Designer.cpp" />
     <ClCompile Include="Lab4_Task1.cpp" />
-    <ClCompile Include="Shapes\PictureDraft.cpp" />
+    <ClCompile Include="ShapesLib\Canvas\StreamCanvas.cpp" />
+    <ClCompile Include="ShapesLib\Designer\Designer.cpp" />
+    <ClCompile Include="ShapesLib\Shapes\Ellipse.cpp" />
+    <ClCompile Include="ShapesLib\Shapes\PictureDraft.cpp" />
+    <ClCompile Include="ShapesLib\Shapes\Rectangle.cpp" />
+    <ClCompile Include="ShapesLib\Shapes\Triangle.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Designer\Designer.h" />
-    <ClInclude Include="Shapes\IShapeFactory.h" />
-    <ClInclude Include="Shapes\PictureDraft.h" />
-    <ClInclude Include="Shapes\Shape.h" />
+    <ClInclude Include="ShapesLib\Canvas\ICanvas.h" />
+    <ClInclude Include="ShapesLib\Canvas\StreamCanvas.h" />
+    <ClInclude Include="ShapesLib\Color.h" />
+    <ClInclude Include="ShapesLib\Designer\Designer.h" />
+    <ClInclude Include="ShapesLib\Point.h" />
+    <ClInclude Include="ShapesLib\Shapes\Ellipse.h" />
+    <ClInclude Include="ShapesLib\Shapes\IShapeFactory.h" />
+    <ClInclude Include="ShapesLib\Shapes\PictureDraft.h" />
+    <ClInclude Include="ShapesLib\Shapes\Rectangle.h" />
+    <ClInclude Include="ShapesLib\Shapes\Shape.h" />
+    <ClInclude Include="ShapesLib\Shapes\Triangle.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
