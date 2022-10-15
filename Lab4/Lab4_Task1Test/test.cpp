@@ -2,9 +2,11 @@
 #include "MockObjects/MockShape.h"
 #include "Shapes/Ellipse.h"
 #include "Shapes/Rectangle.h"
+#include "Shapes/RegularPolygon.h"
 #include "Shapes/Triangle.h"
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"
+#include <numbers>
 
 using ::testing::Exactly;
 
@@ -16,9 +18,9 @@ TEST(ShapeTest, ShapeHasCorrectColor)
 
 TEST(RectangleTest, ThrowsOnIncorrectVertices)
 {
-	EXPECT_THROW(Rectangle rectangle(Point{ 5, 0 }, Point{ 0, 5 }, Color::Black),
+	EXPECT_THROW(Rectangle(Point{ 5, 0 }, Point{ 0, 5 }, Color::Black),
 		std::invalid_argument);
-	EXPECT_THROW(Rectangle rectangle(Point{ 0, 5 }, Point{ 5, 0 }, Color::Black),
+	EXPECT_THROW(Rectangle(Point{ 0, 5 }, Point{ 5, 0 }, Color::Black),
 		std::invalid_argument);
 }
 
@@ -71,6 +73,12 @@ TEST(TriangleTest, HandlesDrawing)
 	triangle.Draw(canvas);
 }
 
+TEST(EllipseTest, ThrowsOnNegativeRadius)
+{
+	EXPECT_THROW(Ellipse(Point{ 0, 0 }, -5, 5, Color::Black), std::invalid_argument);
+	EXPECT_THROW(Ellipse(Point{ 0, 0 }, 5, -5, Color::Black), std::invalid_argument);
+}
+
 TEST(EllipseTest, HasCorrectRadiuses)
 {
 	Ellipse ellipse(Point{ 0, 0 }, 10, 5, Color::Black);
@@ -82,9 +90,9 @@ TEST(EllipseTest, HasCorrectRadiuses)
 TEST(EllipseTest, HasCorrectCenter)
 {
 	Ellipse ellipse(Point{ 15, 15 }, 10, 5, Color::Black);
-	Point expectedRadius{ 15, 15 };
+	Point expectedCenter{ 15, 15 };
 
-	EXPECT_EQ(ellipse.GetCenter(), expectedRadius);
+	EXPECT_EQ(ellipse.GetCenter(), expectedCenter);
 }
 
 TEST(EllipseTest, HandlesDrawing)
@@ -96,4 +104,46 @@ TEST(EllipseTest, HandlesDrawing)
 	EXPECT_CALL(canvas, DrawEllipse(Point{ 0, 0 }, 10, 5)).Times(Exactly(1));
 
 	ellipse.Draw(canvas);
+}
+
+TEST(RegularPolygonTest, ThrowsOnNegativeRadius)
+{
+	EXPECT_THROW(RegularPolygon(Point{ 0, 0 }, -5, 5, Color::Black), std::invalid_argument);
+}
+
+TEST(RegularPolygonTest, ThrowsOnVertexCountLessThanThree)
+{
+	EXPECT_THROW(RegularPolygon(Point{ 0, 0 }, 5, 2, Color::Black), std::invalid_argument);
+}
+
+TEST(RegularPolygonTest, HasCorrectRadius)
+{
+	RegularPolygon polygon(Point{ 0, 0 }, 5, 5, Color::Black);
+
+	EXPECT_EQ(polygon.GetRadius(), 5);
+}
+
+TEST(RegularPolygonTest, HasCorrectCenter)
+{
+	RegularPolygon polygon(Point{ 3, 3 }, 5, 5, Color::Black);
+	Point expectedCenter{ 3, 3 };
+
+	EXPECT_EQ(polygon.GetCenter(), expectedCenter);
+}
+
+TEST(RegularPolygonTest, HasCorrectVertexCount)
+{
+	RegularPolygon polygon(Point{ 3, 3 }, 5, 5, Color::Black);
+
+	EXPECT_EQ(polygon.GetVertexCount(), 5);
+}
+
+TEST(RegularPolygonTest, HandlesDrawing)
+{
+	MockCanvas canvas;
+	RegularPolygon polygon(Point{ 3, 3 }, 5, 5, Color::Black);
+
+	EXPECT_CALL(canvas, DrawLine).Times(Exactly(5));
+
+	polygon.Draw(canvas);
 }

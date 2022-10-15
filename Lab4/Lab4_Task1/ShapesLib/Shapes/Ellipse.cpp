@@ -3,17 +3,27 @@
 Ellipse::Ellipse(const Point& center, int width, int height, Color color)
 	: Shape(color)
 	, m_center(center)
-	, m_horizontalRadius(width)
-	, m_verticalRadius(height)
 {
+	if (width < 0 || height < 0)
+	{
+		throw std::invalid_argument("Radius can not be negative");
+	}
+
+	m_horizontalRadius = width;
+	m_verticalRadius = height;
 }
 
 Ellipse::Ellipse(Point&& center, int width, int height, Color color)
 	: Shape(color)
 	, m_center(std::move(center))
-	, m_horizontalRadius(width)
-	, m_verticalRadius(height)
 {
+	if (width < 0 || height < 0)
+	{
+		throw std::invalid_argument("Radius can not be negative");
+	}
+
+	m_horizontalRadius = width;
+	m_verticalRadius = height;
 }
 
 void Ellipse::Draw(ICanvas& canvas) const

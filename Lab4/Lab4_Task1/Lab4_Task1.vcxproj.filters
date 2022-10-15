@@ -54,6 +54,9 @@
     <ClCompile Include="ShapesLib\Shapes\Ellipse.cpp">
       <Filter>Source Files\Shapes</Filter>
     </ClCompile>
+    <ClCompile Include="ShapesLib\Shapes\RegularPolygon.cpp">
+      <Filter>Source Files\Shapes</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ShapesLib\Shapes\IShapeFactory.h">
@@ -87,6 +90,9 @@
       <Filter>Header Files\Shapes</Filter>
     </ClInclude>
     <ClInclude Include="ShapesLib\Shapes\Ellipse.h">
+      <Filter>Header Files\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="ShapesLib\Shapes\RegularPolygon.h">
       <Filter>Header Files\Shapes</Filter>
     </ClInclude>
   </ItemGroup>

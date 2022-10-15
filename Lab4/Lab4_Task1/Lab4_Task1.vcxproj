@@ -137,6 +137,7 @@
     <ClCompile Include="ShapesLib\Shapes\Ellipse.cpp" />
     <ClCompile Include="ShapesLib\Shapes\PictureDraft.cpp" />
     <ClCompile Include="ShapesLib\Shapes\Rectangle.cpp" />
+    <ClCompile Include="ShapesLib\Shapes\RegularPolygon.cpp" />
     <ClCompile Include="ShapesLib\Shapes\Triangle.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -149,6 +150,7 @@
     <ClInclude Include="ShapesLib\Shapes\IShapeFactory.h" />
     <ClInclude Include="ShapesLib\Shapes\PictureDraft.h" />
     <ClInclude Include="ShapesLib\Shapes\Rectangle.h" />
+    <ClInclude Include="ShapesLib\Shapes\RegularPolygon.h" />
     <ClInclude Include="ShapesLib\Shapes\Shape.h" />
     <ClInclude Include="ShapesLib\Shapes\Triangle.h" />
   </ItemGroup>
