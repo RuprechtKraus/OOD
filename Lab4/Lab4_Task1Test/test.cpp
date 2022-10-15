@@ -1,15 +1,15 @@
+#include "Client/Client.h"
+#include "Designer/Designer.h"
 #include "MockObjects/MockCanvas.h"
-#include "MockObjects/MockShape.h"
 #include "MockObjects/MockFactory.h"
+#include "MockObjects/MockShape.h"
+#include "Painter/Painter.h"
 #include "Shapes/Ellipse.h"
 #include "Shapes/PictureDraft.h"
 #include "Shapes/Rectangle.h"
 #include "Shapes/RegularPolygon.h"
-#include "Shapes/Triangle.h"
 #include "Shapes/ShapeFactory.h"
-#include "Designer/Designer.h"
-#include "Shapes/PictureDraft.h"
-#include "Painter/Painter.h"
+#include "Shapes/Triangle.h"
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"
 #include <numbers>
@@ -248,7 +248,7 @@ TEST(PainterTest, HandlesPictureDraftDrawing)
 	std::istringstream args("rectangle\ntriangle\nellipse\nregular_polygon");
 	MockFactory factory;
 	Designer designer(factory);
-	PictureDraft draft = designer.CreateDraft(args);
+	PictureDraft draft(designer.CreateDraft(args));
 	MockCanvas canvas;
 	Painter painter;
 
