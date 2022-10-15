@@ -9,7 +9,7 @@ public:
 
 	void SetColor(Color color) noexcept override;
 	void DrawLine(const Point& from, const Point& to) override;
-	void DrawEllipse(const Point& topLeft, int width, int height) override;
+	void DrawEllipse(const Point& center, int width, int height) override;
 
 private:
 	std::ostream& m_stream;

@@ -1,16 +1,16 @@
 #include "Ellipse.h"
 
-Ellipse::Ellipse(const Point& topLeft, int width, int height, Color color)
+Ellipse::Ellipse(const Point& center, int width, int height, Color color)
 	: Shape(color)
-	, m_topLeft(topLeft)
+	, m_center(center)
 	, m_horizontalRadius(width)
 	, m_verticalRadius(height)
 {
 }
 
-Ellipse::Ellipse(Point&& topLeft, int width, int height, Color color)
+Ellipse::Ellipse(Point&& center, int width, int height, Color color)
 	: Shape(color)
-	, m_topLeft(std::move(topLeft))
+	, m_center(std::move(center))
 	, m_horizontalRadius(width)
 	, m_verticalRadius(height)
 {
@@ -19,15 +19,12 @@ Ellipse::Ellipse(Point&& topLeft, int width, int height, Color color)
 void Ellipse::Draw(ICanvas& canvas) const
 {
 	canvas.SetColor(m_color);
-	canvas.DrawEllipse(m_topLeft, m_horizontalRadius, m_verticalRadius);
+	canvas.DrawEllipse(m_center, m_horizontalRadius, m_verticalRadius);
 }
 
 Point Ellipse::GetCenter() const
 {
-	float x = m_topLeft.x + m_horizontalRadius / static_cast<float>(2);
-	float y = m_topLeft.y + m_verticalRadius / static_cast<float>(2);
-
-	return { x, y };
+	return m_center;
 }
 
 int Ellipse::GetHorizontalRadius() const noexcept

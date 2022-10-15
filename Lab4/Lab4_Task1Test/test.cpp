@@ -81,8 +81,8 @@ TEST(EllipseTest, HasCorrectRadiuses)
 
 TEST(EllipseTest, HasCorrectCenter)
 {
-	Ellipse ellipse(Point{ 0, 0 }, 10, 5, Color::Black);
-	Point expectedRadius{ 5, 2.5 };
+	Ellipse ellipse(Point{ 15, 15 }, 10, 5, Color::Black);
+	Point expectedRadius{ 15, 15 };
 
 	EXPECT_EQ(ellipse.GetCenter(), expectedRadius);
 }

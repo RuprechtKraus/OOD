@@ -20,10 +20,10 @@ void StreamCanvas::DrawLine(const Point& from, const Point& to)
 		<< std::endl;
 }
 
-void StreamCanvas::DrawEllipse(const Point& topLeft, int width, int height)
+void StreamCanvas::DrawEllipse(const Point& center, int width, int height)
 {
 	m_stream
 		<< std::format("Drawing {} ellipse at {} {} with width {} and height {}",
-			   ColorToString(m_color), topLeft.x, topLeft.y, width, height)
+			   ColorToString(m_color), center.x, center.y, width, height)
 		<< std::endl;
 }
