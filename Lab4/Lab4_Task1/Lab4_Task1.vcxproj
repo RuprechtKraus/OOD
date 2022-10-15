@@ -138,6 +138,7 @@
     <ClCompile Include="ShapesLib\Shapes\PictureDraft.cpp" />
     <ClCompile Include="ShapesLib\Shapes\Rectangle.cpp" />
     <ClCompile Include="ShapesLib\Shapes\RegularPolygon.cpp" />
+    <ClCompile Include="ShapesLib\Shapes\ShapeFactory.cpp" />
     <ClCompile Include="ShapesLib\Shapes\Triangle.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -152,7 +153,9 @@
     <ClInclude Include="ShapesLib\Shapes\Rectangle.h" />
     <ClInclude Include="ShapesLib\Shapes\RegularPolygon.h" />
     <ClInclude Include="ShapesLib\Shapes\Shape.h" />
+    <ClInclude Include="ShapesLib\Shapes\ShapeFactory.h" />
     <ClInclude Include="ShapesLib\Shapes\Triangle.h" />
+    <ClInclude Include="ShapesLib\Utils\StringUtils.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

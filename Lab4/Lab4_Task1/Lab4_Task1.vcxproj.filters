@@ -31,6 +31,9 @@
     <Filter Include="Source Files\Canvas">
       <UniqueIdentifier>{e272cd24-c297-42a4-804e-4f99c73d7501}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Utils">
+      <UniqueIdentifier>{9723dc98-bb6a-4f90-a12c-50e04956dc4f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Lab4_Task1.cpp">
@@ -55,6 +58,9 @@
       <Filter>Source Files\Shapes</Filter>
     </ClCompile>
     <ClCompile Include="ShapesLib\Shapes\RegularPolygon.cpp">
+      <Filter>Source Files\Shapes</Filter>
+    </ClCompile>
+    <ClCompile Include="ShapesLib\Shapes\ShapeFactory.cpp">
       <Filter>Source Files\Shapes</Filter>
     </ClCompile>
   </ItemGroup>
@@ -94,6 +100,12 @@
     </ClInclude>
     <ClInclude Include="ShapesLib\Shapes\RegularPolygon.h">
       <Filter>Header Files\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="ShapesLib\Shapes\ShapeFactory.h">
+      <Filter>Header Files\Shapes</Filter>
+    </ClInclude>
+    <ClInclude Include="ShapesLib\Utils\StringUtils.h">
+      <Filter>Header Files\Utils</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

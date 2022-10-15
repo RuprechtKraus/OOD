@@ -80,13 +80,13 @@
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
       <LanguageStandard>stdcpp20</LanguageStandard>
-      <AdditionalIncludeDirectories>C:\Users\Ruprecht Kraus\source\repos\OOD\Lab4\Lab4_Task1Test;C:\Users\Ruprecht Kraus\source\repos\OOD\Lab4\Lab4_Task1\ShapesLib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\Ruprecht Kraus\source\repos\Libraries\boost_1_80_0;C:\Users\Ruprecht Kraus\source\repos\OOD\Lab4\Lab4_Task1Test;C:\Users\Ruprecht Kraus\source\repos\OOD\Lab4\Lab4_Task1\ShapesLib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
       <AdditionalLibraryDirectories>C:\Users\Ruprecht Kraus\source\repos\OOD\Lab4\Lab4_Task1\x64\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Rectangle.obj;Triangle.obj;Ellipse.obj;RegularPolygon.obj;Designer.obj;PictureDraft.obj;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>Rectangle.obj;Triangle.obj;Ellipse.obj;RegularPolygon.obj;Designer.obj;PictureDraft.obj;ShapeFactory.obj;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
