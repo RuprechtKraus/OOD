@@ -14,6 +14,9 @@
     <ClInclude Include="MockObjects\MockCanvas.h">
       <Filter>MockObjects</Filter>
     </ClInclude>
+    <ClInclude Include="MockObjects\MockFactory.h">
+      <Filter>MockObjects</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="MockObjects">

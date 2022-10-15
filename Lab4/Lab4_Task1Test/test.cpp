@@ -1,11 +1,14 @@
 #include "MockObjects/MockCanvas.h"
 #include "MockObjects/MockShape.h"
+#include "MockObjects/MockFactory.h"
 #include "Shapes/Ellipse.h"
 #include "Shapes/PictureDraft.h"
 #include "Shapes/Rectangle.h"
 #include "Shapes/RegularPolygon.h"
 #include "Shapes/Triangle.h"
 #include "Shapes/ShapeFactory.h"
+#include "Designer/Designer.h"
+#include "Shapes/PictureDraft.h"
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"
 #include <numbers>
@@ -226,4 +229,15 @@ TEST(ShapeFactoryTest, HandlesRegularPolygonCreating)
 	EXPECT_EQ(polygon->GetRadius(), 5);
 	EXPECT_EQ(polygon->GetVertexCount(), 7);
 	EXPECT_EQ(polygon->GetColor(), Color::Black);
+}
+
+TEST(DesignerTest, HandlesPictureDraftCreating)
+{
+	std::istringstream args("rectangle\ntriangle\nellipse\nregular_polygon");
+	MockFactory factory;
+	Designer designer(factory);
+	PictureDraft draft = designer.CreateDraft(args);
+
+	EXPECT_FALSE(draft.IsEmpty());
+	EXPECT_EQ(draft.GetShapeCount(), 4);
 }

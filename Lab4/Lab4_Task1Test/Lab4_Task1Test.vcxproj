@@ -34,6 +34,7 @@
   <PropertyGroup Label="UserMacros" />
   <ItemGroup>
     <ClInclude Include="MockObjects\MockCanvas.h" />
+    <ClInclude Include="MockObjects\MockFactory.h" />
     <ClInclude Include="MockObjects\MockShape.h" />
     <ClInclude Include="pch.h" />
   </ItemGroup>
