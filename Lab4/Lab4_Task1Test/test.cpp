@@ -9,6 +9,7 @@
 #include "Shapes/ShapeFactory.h"
 #include "Designer/Designer.h"
 #include "Shapes/PictureDraft.h"
+#include "Painter/Painter.h"
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"
 #include <numbers>
@@ -240,4 +241,20 @@ TEST(DesignerTest, HandlesPictureDraftCreating)
 
 	EXPECT_FALSE(draft.IsEmpty());
 	EXPECT_EQ(draft.GetShapeCount(), 4);
+}
+
+TEST(PainterTest, HandlesPictureDraftDrawing)
+{
+	std::istringstream args("rectangle\ntriangle\nellipse\nregular_polygon");
+	MockFactory factory;
+	Designer designer(factory);
+	PictureDraft draft = designer.CreateDraft(args);
+	MockCanvas canvas;
+	Painter painter;
+
+	EXPECT_CALL(canvas, SetColor).Times(::testing::AnyNumber());
+	EXPECT_CALL(canvas, DrawLine).Times(::testing::AtLeast(7));
+	EXPECT_CALL(canvas, DrawEllipse).Times(Exactly(1));
+
+	painter.DrawPicture(draft, canvas);
 }

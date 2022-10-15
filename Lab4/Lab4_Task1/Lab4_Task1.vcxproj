@@ -134,6 +134,7 @@
     <ClCompile Include="Lab4_Task1.cpp" />
     <ClCompile Include="ShapesLib\Canvas\StreamCanvas.cpp" />
     <ClCompile Include="ShapesLib\Designer\Designer.cpp" />
+    <ClCompile Include="ShapesLib\Painter\Painter.cpp" />
     <ClCompile Include="ShapesLib\Shapes\Ellipse.cpp" />
     <ClCompile Include="ShapesLib\Shapes\PictureDraft.cpp" />
     <ClCompile Include="ShapesLib\Shapes\Rectangle.cpp" />
@@ -146,6 +147,7 @@
     <ClInclude Include="ShapesLib\Canvas\StreamCanvas.h" />
     <ClInclude Include="ShapesLib\Color.h" />
     <ClInclude Include="ShapesLib\Designer\Designer.h" />
+    <ClInclude Include="ShapesLib\Painter\Painter.h" />
     <ClInclude Include="ShapesLib\Point.h" />
     <ClInclude Include="ShapesLib\Shapes\Ellipse.h" />
     <ClInclude Include="ShapesLib\Shapes\IShapeFactory.h" />
