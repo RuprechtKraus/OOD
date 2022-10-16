@@ -48,6 +48,7 @@ void RegularPolygon::Draw(ICanvas& canvas) const
 {
 	std::vector<Point> vertices{ FindVertexCoordinates() };
 	size_t nextIndex{};
+	canvas.SetColor(m_color);
 
 	for (size_t index = 0; index < vertices.size(); index++)
 	{
@@ -65,7 +66,7 @@ std::vector<Point> RegularPolygon::FindVertexCoordinates() const
 	for (size_t i = 0; i < m_vertexCount; i++)
 	{
 		float x = m_center.x + m_radius * static_cast<float>(std::cos(i * angle));
-		float y = m_center.x + m_radius * static_cast<float>(std::sin(i * angle));
+		float y = m_center.y + m_radius * static_cast<float>(std::sin(i * angle));
 		vertices.emplace_back(x, y);
 	}
 

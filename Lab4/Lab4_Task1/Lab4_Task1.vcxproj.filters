@@ -81,6 +81,9 @@
     <ClCompile Include="ShapesLib\Client\Client.cpp">
       <Filter>Source Files\Client</Filter>
     </ClCompile>
+    <ClCompile Include="ShapesLib\Canvas\SfmlCanvas.cpp">
+      <Filter>Source Files\Canvas</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ShapesLib\Shapes\IShapeFactory.h">
@@ -133,6 +136,9 @@
     </ClInclude>
     <ClInclude Include="ShapesLib\Designer\IDesigner.h">
       <Filter>Header Files\Designer</Filter>
+    </ClInclude>
+    <ClInclude Include="ShapesLib\Canvas\SfmlCanvas.h">
+      <Filter>Header Files\Canvas</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

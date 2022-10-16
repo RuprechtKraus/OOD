@@ -1,2 +1,4 @@
-triangle 0 0 3 0 1.5 3 yellow
-ellipse 5 5 3 2 pink
+ellipse 140 55 100 50 pink
+triangle 150 150 230 156 234 215 green
+regular_polygon 400 300 70 5 red
+rectangle 600 220 800 500 blue
