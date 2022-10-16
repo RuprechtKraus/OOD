@@ -133,10 +133,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Application.cpp" />
     <ClCompile Include="Lab4_Task1.cpp" />
     <ClCompile Include="ShapesLib\Canvas\SfmlCanvas.cpp" />
     <ClCompile Include="ShapesLib\Canvas\StreamCanvas.cpp" />
     <ClCompile Include="ShapesLib\Client\Client.cpp" />
+    <ClCompile Include="ShapesLib\Client\SfmlClient.cpp" />
+    <ClCompile Include="ShapesLib\Client\StreamClient.cpp" />
     <ClCompile Include="ShapesLib\Designer\Designer.cpp" />
     <ClCompile Include="ShapesLib\Painter\Painter.cpp" />
     <ClCompile Include="ShapesLib\Shapes\Ellipse.cpp" />
@@ -147,10 +150,13 @@
     <ClCompile Include="ShapesLib\Shapes\Triangle.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Application.h" />
     <ClInclude Include="ShapesLib\Canvas\ICanvas.h" />
     <ClInclude Include="ShapesLib\Canvas\SfmlCanvas.h" />
     <ClInclude Include="ShapesLib\Canvas\StreamCanvas.h" />
     <ClInclude Include="ShapesLib\Client\Client.h" />
+    <ClInclude Include="ShapesLib\Client\SfmlClient.h" />
+    <ClInclude Include="ShapesLib\Client\StreamClient.h" />
     <ClInclude Include="ShapesLib\Color.h" />
     <ClInclude Include="ShapesLib\Designer\Designer.h" />
     <ClInclude Include="ShapesLib\Designer\IDesigner.h" />

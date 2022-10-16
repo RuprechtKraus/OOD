@@ -7,10 +7,11 @@
 class Client
 {
 public:
-	Client(std::unique_ptr<ICanvas>&& canvas);
-
+	void SetCanvas(std::unique_ptr<ICanvas>&& canvas);
 	void OrderPainting(std::istream& inputData, IDesigner& designer, Painter& painter);
 
-private:
+protected:
+	virtual void VisualizeDraft(const PictureDraft& draft, Painter& painter) = 0;
+
 	std::unique_ptr<ICanvas> m_canvas;
 };

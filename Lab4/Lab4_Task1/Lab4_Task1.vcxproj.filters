@@ -46,6 +46,12 @@
     <Filter Include="Source Files\Client">
       <UniqueIdentifier>{27ab2680-b9ce-4dc9-847b-b67825f65eef}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Application">
+      <UniqueIdentifier>{90541898-bc4f-4fa1-8ed5-3b0a014c4b6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Application">
+      <UniqueIdentifier>{70ab1d09-71d2-4174-abf9-161b47227f10}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Lab4_Task1.cpp">
@@ -83,6 +89,15 @@
     </ClCompile>
     <ClCompile Include="ShapesLib\Canvas\SfmlCanvas.cpp">
       <Filter>Source Files\Canvas</Filter>
+    </ClCompile>
+    <ClCompile Include="Application.cpp">
+      <Filter>Source Files\Application</Filter>
+    </ClCompile>
+    <ClCompile Include="ShapesLib\Client\StreamClient.cpp">
+      <Filter>Source Files\Client</Filter>
+    </ClCompile>
+    <ClCompile Include="ShapesLib\Client\SfmlClient.cpp">
+      <Filter>Source Files\Client</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -139,6 +154,15 @@
     </ClInclude>
     <ClInclude Include="ShapesLib\Canvas\SfmlCanvas.h">
       <Filter>Header Files\Canvas</Filter>
+    </ClInclude>
+    <ClInclude Include="Application.h">
+      <Filter>Header Files\Application</Filter>
+    </ClInclude>
+    <ClInclude Include="ShapesLib\Client\StreamClient.h">
+      <Filter>Header Files\Client</Filter>
+    </ClInclude>
+    <ClInclude Include="ShapesLib\Client\SfmlClient.h">
+      <Filter>Header Files\Client</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
