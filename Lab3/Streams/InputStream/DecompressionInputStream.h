@@ -1,6 +1,5 @@
 #pragma once
 #include "IInputStream.h"
-#include <queue>
 
 class DecompressionInputStream : public IInputStream
 {
@@ -8,7 +7,7 @@ private:
 	struct Block
 	{
 		uint8_t byte;
-		int count;
+		uint8_t count;
 	};
 
 public:

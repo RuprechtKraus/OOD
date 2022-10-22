@@ -16,8 +16,8 @@ std::uint8_t DecompressionInputStream::ReadByte()
 {
 	if (m_block.count == 0)
 	{
-		m_stream->ReadBlock(static_cast<void*>(&m_block.byte), sizeof(uint8_t));
-		m_stream->ReadBlock(static_cast<void*>(&m_block.count), sizeof(int));
+		m_block.byte = m_stream->ReadByte();
+		m_block.count = m_stream->ReadByte();
 	}
 
 	m_block.count--;
@@ -27,7 +27,7 @@ std::uint8_t DecompressionInputStream::ReadByte()
 
 std::streamsize DecompressionInputStream::ReadBlock(void* dstBuffer, std::streamsize size)
 {
-	char* bufferPtr{ static_cast<char*>(dstBuffer) };
+	auto bufferPtr{ static_cast<char*>(dstBuffer) };
 	uint8_t byte{};
 	std::streamsize gcount{};
 

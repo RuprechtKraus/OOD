@@ -7,7 +7,7 @@ private:
 	struct Block
 	{
 		uint8_t byte;
-		int count;
+		uint8_t count;
 	};
 
 public:
