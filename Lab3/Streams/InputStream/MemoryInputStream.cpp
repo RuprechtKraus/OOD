@@ -1,12 +1,7 @@
 #include "MemoryInputStream.h"
 
-MemoryInputStream::MemoryInputStream(const std::vector<uint8_t>& buffer)
+MemoryInputStream::MemoryInputStream(std::vector<uint8_t>& buffer)
 	: m_buffer(buffer)
-{
-}
-
-MemoryInputStream::MemoryInputStream(std::vector<uint8_t>&& buffer)
-	: m_buffer(std::move(buffer))
 {
 }
 
