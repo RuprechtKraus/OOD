@@ -9,6 +9,7 @@
 #include "InputStream/DecompressionInputStream.h"
 #include "OutputStream/CompressionOutputStream.h"
 #include <string>
+#include <vector>
 
 const std::string TEST_FILES_DIRECTORY{ "Test files/" };
 const std::string EMPTY_TEST_FILENAME{ TEST_FILES_DIRECTORY + "EmptyFileTest.txt" };
@@ -29,13 +30,11 @@ TEST(FileInputStreamTest, ReadingByteFromEmptyFile)
 TEST(FileInputStreamTest, ReadingBlockFromEmptyFile)
 {
 	FileInputStream file(EMPTY_TEST_FILENAME);
-	uint8_t* buffer = new uint8_t[10];
-	std::streamsize bytesRead{ file.ReadBlock(buffer, 10) };
+	std::vector<uint8_t> buffer(10);
+	std::streamsize bytesRead{ file.ReadBlock(buffer.data(), 10) };
 
 	EXPECT_EQ(bytesRead, 0);
 	EXPECT_TRUE(file.IsEOF());
-
-	delete[] buffer;
 }
 
 TEST(FileInputStreamTest, ReadingByteFromFile)
@@ -50,27 +49,23 @@ TEST(FileInputStreamTest, ReadingByteFromFile)
 TEST(FileInputStreamTest, ReadingWholeFileByBlock)
 {
 	FileInputStream file(INPUT_STREAM_FILENAME);
-	uint8_t* buffer = new uint8_t[3];
-	std::streamsize bytesRead{ file.ReadBlock(buffer, 10) };
+	std::vector<uint8_t> buffer(3);
+	std::streamsize bytesRead{ file.ReadBlock(buffer.data(), 10) };
 
 	EXPECT_EQ(bytesRead, 3);
-	EXPECT_EQ(std::memcmp(buffer, "ABC", 3), 0);
+	EXPECT_EQ(std::memcmp(buffer.data(), "ABC", 3), 0);
 	EXPECT_TRUE(file.IsEOF());
-
-	delete[] buffer;
 }
 
 TEST(FileInputStreamTest, ReadingPartOfFileByBlock)
 {
 	FileInputStream file(INPUT_STREAM_FILENAME);
-	uint8_t* buffer = new uint8_t[2];
-	std::streamsize bytesRead{ file.ReadBlock(buffer, 2) };
+	std::vector<uint8_t> buffer(2);
+	std::streamsize bytesRead{ file.ReadBlock(buffer.data(), 2) };
 
 	EXPECT_EQ(bytesRead, 2);
-	EXPECT_EQ(std::memcmp(buffer, "AB", 2), 0);
+	EXPECT_EQ(std::memcmp(buffer.data(), "AB", 2), 0);
 	EXPECT_FALSE(file.IsEOF());
-
-	delete[] buffer;
 }
 
 TEST(FileOutputStreamTest, WriteByte)
@@ -89,15 +84,13 @@ TEST(FileOutputStreamTest, WriteBlock)
 {
 	FileOutputStream outFile(OUTPUT_STREAM_FILENAME);
 	FileInputStream inFile(OUTPUT_STREAM_FILENAME);
-	uint8_t* buffer = new uint8_t[10];
+	std::vector<uint8_t> buffer(10);
 	const char* str = "ABC";
 
 	outFile.WriteBlock(str, 3);
-	inFile.ReadBlock(buffer, 3);
+	inFile.ReadBlock(buffer.data(), 3);
 
-	EXPECT_EQ(std::memcmp(buffer, str, 3), 0);
-
-	delete[] buffer;
+	EXPECT_EQ(std::memcmp(buffer.data(), str, 3), 0);
 }
 
 TEST(FileEncryptionTest, EncryptAndDecryptWithTheSameKey)
@@ -107,14 +100,13 @@ TEST(FileEncryptionTest, EncryptAndDecryptWithTheSameKey)
 	std::unique_ptr<IInputStream> inStream = std::make_unique<DecryptionInputStream>(
 		std::make_unique<FileInputStream>(DECRYPTION_OUTPUT_FILE), std::make_unique<Cryptographer>(3));
 	const char* message = "This is my secret message...";
-	uint8_t* buffer = new uint8_t[50];
+	std::vector<uint8_t> buffer(50);
+	//TODO: В тестах не использовать new и delete
 
 	outStream->WriteBlock(message, 28);
-	inStream->ReadBlock(buffer, 28);
+	inStream->ReadBlock(buffer.data(), 28);
 
-	EXPECT_EQ(std::memcmp(buffer, message, 28), 0);
-
-	delete[] buffer;
+	EXPECT_EQ(std::memcmp(buffer.data(), message, 28), 0);
 }
 
 TEST(FileEncryptionTest, EncryptAndDecryptWithTheDifferentKeys)
@@ -124,14 +116,12 @@ TEST(FileEncryptionTest, EncryptAndDecryptWithTheDifferentKeys)
 	std::unique_ptr<IInputStream> inStream = std::make_unique<DecryptionInputStream>(
 		std::make_unique<FileInputStream>(DECRYPTION_OUTPUT_FILE), std::make_unique<Cryptographer>(6));
 	const char* message = "This is my secret message...";
-	uint8_t* buffer = new uint8_t[50];
+	std::vector<uint8_t> buffer(50);
 
 	outStream->WriteBlock(message, 28);
-	inStream->ReadBlock(buffer, 28);
+	inStream->ReadBlock(buffer.data(), 28);
 
-	EXPECT_NE(std::memcmp(buffer, message, 28), 0);
-
-	delete[] buffer;
+	EXPECT_NE(std::memcmp(buffer.data(), message, 28), 0);
 }
 
 TEST(FileCompressionTest, CompressAndDecompressData)
@@ -141,14 +131,12 @@ TEST(FileCompressionTest, CompressAndDecompressData)
 	std::unique_ptr<IInputStream> inStream = std::make_unique<DecompressionInputStream>(
 		std::make_unique<FileInputStream>(COMPRESSION_OUTPUT_FILE));
 	const char* message = "This is my secret message...";
-	uint8_t* buffer = new uint8_t[50];
+	std::vector<uint8_t> buffer(50);
 
 	outStream->WriteBlock(message, 28);
-	inStream->ReadBlock(buffer, 28);
+	inStream->ReadBlock(buffer.data(), 28);
 
-	EXPECT_NE(std::memcmp(buffer, message, 28), 0);
-
-	delete[] buffer;
+	EXPECT_NE(std::memcmp(buffer.data(), message, 28), 0);
 }
 
 TEST(MemoryInputStreamTest, ReadingByteFromEmptyVector)
@@ -165,13 +153,11 @@ TEST(MemoryInputStreamTest, ReadingBlockFromEmptyVector)
 {
 	std::vector<uint8_t> data;
 	MemoryInputStream stream(data);
-	uint8_t* buffer = new uint8_t[10];
-	std::streamsize bytesRead{ stream.ReadBlock(buffer, 10) };
+	std::vector<uint8_t> buffer(10);
+	std::streamsize bytesRead{ stream.ReadBlock(buffer.data(), 10) };
 
 	EXPECT_EQ(bytesRead, 0);
 	EXPECT_TRUE(stream.IsEOF());
-
-	delete[] buffer;
 }
 
 TEST(MemoryInputStreamTest, ReadingByteFromVector)
@@ -188,28 +174,24 @@ TEST(MemoryInputStreamTest, ReadingWholeVectorByBlock)
 {
 	std::vector<uint8_t> data{ 'A', 'B', 'C' };
 	MemoryInputStream stream(data);
-	uint8_t* buffer = new uint8_t[3];
-	std::streamsize bytesRead{ stream.ReadBlock(buffer, 10) };
+	std::vector<uint8_t> buffer(3);
+	std::streamsize bytesRead{ stream.ReadBlock(buffer.data(), 10) };
 
 	EXPECT_EQ(bytesRead, 3);
-	EXPECT_EQ(std::memcmp(buffer, "ABC", 3), 0);
+	EXPECT_EQ(std::memcmp(buffer.data(), "ABC", 3), 0);
 	EXPECT_TRUE(stream.IsEOF());
-
-	delete[] buffer;
 }
 
 TEST(MemoryInputStreamTest, ReadingPartOfVectorByBlock)
 {
 	std::vector<uint8_t> data{ 'A', 'B', 'C' };
 	MemoryInputStream stream(data);
-	uint8_t* buffer = new uint8_t[2];
-	std::streamsize bytesRead{ stream.ReadBlock(buffer, 2) };
+	std::vector<uint8_t> buffer(2);
+	std::streamsize bytesRead{ stream.ReadBlock(buffer.data(), 2) };
 
 	EXPECT_EQ(bytesRead, 2);
-	EXPECT_EQ(std::memcmp(buffer, "AB", 2), 0);
+	EXPECT_EQ(std::memcmp(buffer.data(), "AB", 2), 0);
 	EXPECT_FALSE(stream.IsEOF());
-
-	delete[] buffer;
 }
 
 TEST(MemoryOutputStreamTest, WriteByte)
