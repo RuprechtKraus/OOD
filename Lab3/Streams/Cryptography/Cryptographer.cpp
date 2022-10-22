@@ -1,7 +1,7 @@
 #include "Cryptographer.h"
 #include <algorithm>
 #include <random>
-#include <ranges>
+#include <numeric>
 
 Cryptographer::Cryptographer(int key)
 	: m_key(key)
@@ -28,6 +28,6 @@ uint8_t Cryptographer::Decrypt(uint8_t byte) const
 void Cryptographer::InitializeLookupTable()
 {
 	std::mt19937 g(m_key);
-	std::ranges::generate(m_lookupTable, [i = 0]() mutable { return i++; });
+	std::iota(m_lookupTable.begin(), m_lookupTable.end(), 0);
 	std::ranges::shuffle(m_lookupTable, g);
 }
