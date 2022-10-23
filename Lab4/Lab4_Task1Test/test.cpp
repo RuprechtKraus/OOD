@@ -1,4 +1,3 @@
-#include "Client/Client.h"
 #include "Designer/Designer.h"
 #include "MockObjects/MockCanvas.h"
 #include "MockObjects/MockFactory.h"

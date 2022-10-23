@@ -1,10 +1,7 @@
 #include "Application.h"
 #include "Canvas/SfmlCanvas.h"
 #include "Canvas/StreamCanvas.h"
-#include "Client/SfmlClient.h"
-#include "Client/StreamClient.h"
 #include "Designer/Designer.h"
-#include "Painter/Painter.h"
 #include "Shapes/ShapeFactory.h"
 #include <fstream>
 #include <iostream>
@@ -26,8 +23,7 @@ void Application::Run()
 
 	ShapeFactory factory;
 	Designer designer(factory);
-	Painter painter;
-	std::unique_ptr<Client> client;
+	PictureDraft draft = designer.CreateDraft(file);
 
 	char key{};
 
@@ -42,16 +38,47 @@ void Application::Run()
 		switch (key)
 		{
 		case '1':
-			client = std::make_unique<StreamClient>();
+			VisualizeDraftUsingStreamCanvas(draft);
 			break;
 		case '2':
-			client = std::make_unique<SfmlClient>();
+			VisualizeDraftUsingSfmlCanvas(draft);
 			break;
 		default:
 			continue;
 		}
 
-		client->OrderPainting(file, designer, painter);
 		break;
+	}
+}
+
+void Application::VisualizeDraftUsingStreamCanvas(
+	const PictureDraft& draft)
+{
+	StreamCanvas canvas;
+	Painter painter;
+	painter.DrawPicture(draft, canvas);
+}
+
+void Application::VisualizeDraftUsingSfmlCanvas(
+	const PictureDraft& draft)
+{
+	sf::RenderWindow window(sf::VideoMode(1280, 720), "Shapes", sf::Style::Close);
+	sf::Event event{};
+	SfmlCanvas canvas(window);
+	Painter painter;
+
+	window.clear(sf::Color(255, 255, 255));
+	painter.DrawPicture(draft, canvas);
+	window.display();
+
+	while (window.isOpen())
+	{
+		while (window.pollEvent(event))
+		{
+			if (event.type == sf::Event::Closed)
+			{
+				window.close();
+			}
+		}
 	}
 }

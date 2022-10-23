@@ -40,12 +40,6 @@
     <Filter Include="Source Files\Painter">
       <UniqueIdentifier>{e4decd3a-6976-4673-8b65-47835d42c30f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Client">
-      <UniqueIdentifier>{47e64052-5462-4eac-ba38-f33c44eb41cc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Client">
-      <UniqueIdentifier>{27ab2680-b9ce-4dc9-847b-b67825f65eef}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Application">
       <UniqueIdentifier>{90541898-bc4f-4fa1-8ed5-3b0a014c4b6e}</UniqueIdentifier>
     </Filter>
@@ -84,20 +78,11 @@
     <ClCompile Include="ShapesLib\Painter\Painter.cpp">
       <Filter>Source Files\Painter</Filter>
     </ClCompile>
-    <ClCompile Include="ShapesLib\Client\Client.cpp">
-      <Filter>Source Files\Client</Filter>
-    </ClCompile>
     <ClCompile Include="ShapesLib\Canvas\SfmlCanvas.cpp">
       <Filter>Source Files\Canvas</Filter>
     </ClCompile>
     <ClCompile Include="Application.cpp">
       <Filter>Source Files\Application</Filter>
-    </ClCompile>
-    <ClCompile Include="ShapesLib\Client\StreamClient.cpp">
-      <Filter>Source Files\Client</Filter>
-    </ClCompile>
-    <ClCompile Include="ShapesLib\Client\SfmlClient.cpp">
-      <Filter>Source Files\Client</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -146,9 +131,6 @@
     <ClInclude Include="ShapesLib\Painter\Painter.h">
       <Filter>Header Files\Painter</Filter>
     </ClInclude>
-    <ClInclude Include="ShapesLib\Client\Client.h">
-      <Filter>Header Files\Client</Filter>
-    </ClInclude>
     <ClInclude Include="ShapesLib\Designer\IDesigner.h">
       <Filter>Header Files\Designer</Filter>
     </ClInclude>
@@ -157,12 +139,6 @@
     </ClInclude>
     <ClInclude Include="Application.h">
       <Filter>Header Files\Application</Filter>
-    </ClInclude>
-    <ClInclude Include="ShapesLib\Client\StreamClient.h">
-      <Filter>Header Files\Client</Filter>
-    </ClInclude>
-    <ClInclude Include="ShapesLib\Client\SfmlClient.h">
-      <Filter>Header Files\Client</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
