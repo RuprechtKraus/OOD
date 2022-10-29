@@ -25,6 +25,18 @@
     <Filter Include="Source Files\Document\Elements">
       <UniqueIdentifier>{8c537648-7488-4ee8-8b7b-ef5340dbb301}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Command">
+      <UniqueIdentifier>{82f25186-9471-4c9a-87f2-90fc4e710c98}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Command">
+      <UniqueIdentifier>{f5ea0a61-c512-4774-886c-ee38ac4a1db9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\ResourceRepository">
+      <UniqueIdentifier>{6f3d363b-3599-4916-aae5-ab0b2ea3d3a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ResourceRepository">
+      <UniqueIdentifier>{5f9e6760-e600-4d2d-bb53-4c8716122b4f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Editor.cpp">
@@ -41,6 +53,15 @@
     </ClCompile>
     <ClCompile Include="Document\Document.cpp">
       <Filter>Source Files\Document</Filter>
+    </ClCompile>
+    <ClCompile Include="Command\InsertParagraphCommand.cpp">
+      <Filter>Source Files\Command</Filter>
+    </ClCompile>
+    <ClCompile Include="Command\InsertImageCommand.cpp">
+      <Filter>Source Files\Command</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceRepository\ResourceRepository.cpp">
+      <Filter>Source Files\ResourceRepository</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -64,6 +85,21 @@
     </ClInclude>
     <ClInclude Include="Document\Document.h">
       <Filter>Header Files\Document</Filter>
+    </ClInclude>
+    <ClInclude Include="Command\ICommand.h">
+      <Filter>Header Files\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Command\InsertParagraphCommand.h">
+      <Filter>Header Files\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Command\InsertImageCommand.h">
+      <Filter>Header Files\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceRepository\IResourceRepository.h">
+      <Filter>Header Files\ResourceRepository</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceRepository\ResourceRepository.h">
+      <Filter>Header Files\ResourceRepository</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

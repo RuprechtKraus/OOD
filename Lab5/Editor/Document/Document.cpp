@@ -1,7 +1,7 @@
 #include "Document.h"
 #include "Elements/Image.h"
 #include "Elements/Paragraph.h"
-#include <assert.h>
+#include <filesystem>
 
 std::shared_ptr<IParagraph> Document::InsertParagraph(const std::string& text,
 	std::optional<size_t> position)
@@ -25,7 +25,11 @@ void Document::InsertItem(DocumentItem&& item, std::optional<size_t> position)
 {
 	if (position)
 	{
-		assert(position.value() < m_items.size());
+		if (position.value() >= m_items.size())
+		{
+			throw std::out_of_range("Insert position exceeds item count");
+		}
+
 		m_items.insert(m_items.begin() + position.value(), item);
 	}
 	else
@@ -41,19 +45,31 @@ size_t Document::GetItemsCount() const noexcept
 
 ConstDocumentItem Document::GetItem(size_t index) const
 {
-	assert(index < m_items.size());
+	if (index >= m_items.size())
+	{
+		throw std::out_of_range("Index exceeds item count");
+	}
+
 	return m_items[index];
 }
 
 DocumentItem Document::GetItem(size_t index)
 {
-	assert(index < m_items.size());
+	if (index >= m_items.size())
+	{
+		throw std::out_of_range("Index exceeds item count");
+	}
+
 	return m_items[index];
 }
 
 void Document::DeleteItem(size_t index)
 {
-	assert(index < m_items.size());
+	if (index >= m_items.size())
+	{
+		throw std::out_of_range("Index exceeds item count");
+	}
+
 	m_items.erase(m_items.begin() + index);
 }
 

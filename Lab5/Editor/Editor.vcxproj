@@ -105,6 +105,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>C:\Users\Ruprecht Kraus\source\repos\OOD\Lab5\Editor;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -120,6 +121,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>C:\Users\Ruprecht Kraus\source\repos\OOD\Lab5\Editor;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -129,13 +131,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Command\InsertImageCommand.cpp" />
+    <ClCompile Include="Command\InsertParagraphCommand.cpp" />
     <ClCompile Include="Document\Document.cpp" />
     <ClCompile Include="Document\DocumentItem.cpp" />
     <ClCompile Include="Document\Elements\Image.cpp" />
     <ClCompile Include="Document\Elements\Paragraph.cpp" />
     <ClCompile Include="Editor.cpp" />
+    <ClCompile Include="ResourceRepository\ResourceRepository.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Command\ICommand.h" />
+    <ClInclude Include="Command\InsertImageCommand.h" />
+    <ClInclude Include="Command\InsertParagraphCommand.h" />
     <ClInclude Include="Document\Document.h" />
     <ClInclude Include="Document\DocumentItem.h" />
     <ClInclude Include="Document\Elements\IImage.h" />
@@ -143,6 +151,8 @@
     <ClInclude Include="Document\Elements\IParagraph.h" />
     <ClInclude Include="Document\Elements\Paragraph.h" />
     <ClInclude Include="Document\IDocument.h" />
+    <ClInclude Include="ResourceRepository\IResourceRepository.h" />
+    <ClInclude Include="ResourceRepository\ResourceRepository.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

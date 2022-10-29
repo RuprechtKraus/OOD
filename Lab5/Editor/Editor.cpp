@@ -2,19 +2,20 @@
 #include "Document/DocumentItem.h"
 #include "Document/Elements/Image.h"
 #include "Document/Elements/Paragraph.h"
+#include "Command/InsertImageCommand.h"
 #include <iostream>
+#include "ResourceRepository/ResourceRepository.h"
 
 int main()
 {
 	Document document;
+	ResourceRepository repository(R"(C:\Users\Ruprecht Kraus\source\repos\OOD\Lab5\Editor\resources)");
 
-	document.InsertParagraph("Chapter 1");
-	document.InsertParagraph("Chapter 2");
-	document.InsertParagraph("Chapter 3");
+	InsertImageCommand imageCommand(document, repository,
+		R"(C:\Users\Ruprecht Kraus\Desktop\Wallpapers\3dQ4Wt0iEg8.jpg)",
+		100, 100);
 
-	document.InsertImage("Image 1", 10, 10);
-	document.InsertImage("Image 2", 20, 20);
-	document.InsertImage("Image 3", 30, 30);
+	imageCommand.Execute();
 
 	return 0;
 }
