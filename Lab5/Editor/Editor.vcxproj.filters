@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\Document">
+      <UniqueIdentifier>{27a1dd6c-2df8-4fce-bf34-84f7d6a1af82}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Document">
+      <UniqueIdentifier>{c0aeb0b8-e0d9-4fad-9391-a8a09b67f90c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Document\Elements">
+      <UniqueIdentifier>{d21465c3-bdcd-41a4-bd95-643bd75484c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Document\Elements">
+      <UniqueIdentifier>{8c537648-7488-4ee8-8b7b-ef5340dbb301}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Editor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Document\DocumentItem.cpp">
+      <Filter>Source Files\Document</Filter>
+    </ClCompile>
+    <ClCompile Include="Document\Elements\Image.cpp">
+      <Filter>Source Files\Document\Elements</Filter>
+    </ClCompile>
+    <ClCompile Include="Document\Elements\Paragraph.cpp">
+      <Filter>Source Files\Document\Elements</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Document\IDocument.h">
+      <Filter>Header Files\Document</Filter>
+    </ClInclude>
+    <ClInclude Include="Document\DocumentItem.h">
+      <Filter>Header Files\Document</Filter>
+    </ClInclude>
+    <ClInclude Include="Document\Elements\IImage.h">
+      <Filter>Header Files\Document\Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="Document\Elements\IParagraph.h">
+      <Filter>Header Files\Document\Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="Document\Elements\Image.h">
+      <Filter>Header Files\Document\Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="Document\Elements\Paragraph.h">
+      <Filter>Header Files\Document\Elements</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
