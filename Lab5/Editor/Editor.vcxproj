@@ -129,12 +129,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Document\Document.cpp" />
     <ClCompile Include="Document\DocumentItem.cpp" />
     <ClCompile Include="Document\Elements\Image.cpp" />
     <ClCompile Include="Document\Elements\Paragraph.cpp" />
     <ClCompile Include="Editor.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Document\Document.h" />
     <ClInclude Include="Document\DocumentItem.h" />
     <ClInclude Include="Document\Elements\IImage.h" />
     <ClInclude Include="Document\Elements\Image.h" />

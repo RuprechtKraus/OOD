@@ -39,6 +39,9 @@
     <ClCompile Include="Document\Elements\Paragraph.cpp">
       <Filter>Source Files\Document\Elements</Filter>
     </ClCompile>
+    <ClCompile Include="Document\Document.cpp">
+      <Filter>Source Files\Document</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Document\IDocument.h">
@@ -58,6 +61,9 @@
     </ClInclude>
     <ClInclude Include="Document\Elements\Paragraph.h">
       <Filter>Header Files\Document\Elements</Filter>
+    </ClInclude>
+    <ClInclude Include="Document\Document.h">
+      <Filter>Header Files\Document</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
