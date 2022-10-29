@@ -9,9 +9,9 @@
 int main()
 {
 	Document document;
-	ResourceRepository repository(R"(C:\Users\Ruprecht Kraus\source\repos\OOD\Lab5\Editor\resources)");
+	ResourceRepository imageRepository(R"(images)");
 
-	InsertImageCommand imageCommand(document, repository,
+	InsertImageCommand imageCommand(document, imageRepository,
 		R"(C:\Users\Ruprecht Kraus\Desktop\Wallpapers\3dQ4Wt0iEg8.jpg)",
 		100, 100);
 

@@ -24,6 +24,7 @@ void InsertImageCommand::Execute()
 	m_document.InsertImage(imagePath, m_width, m_height, m_position);
 }
 
+// TODO: Добавить отмету вставки изображения
 void InsertImageCommand::Revert()
 {
 	throw std::logic_error("Method is not implemented");

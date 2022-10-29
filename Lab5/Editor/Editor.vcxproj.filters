@@ -63,6 +63,18 @@
     <ClCompile Include="ResourceRepository\ResourceRepository.cpp">
       <Filter>Source Files\ResourceRepository</Filter>
     </ClCompile>
+    <ClCompile Include="Command\SetTitleCommand.cpp">
+      <Filter>Source Files\Command</Filter>
+    </ClCompile>
+    <ClCompile Include="Command\ReplaceTextCommand.cpp">
+      <Filter>Source Files\Command</Filter>
+    </ClCompile>
+    <ClCompile Include="Command\ResizeImageCommand.cpp">
+      <Filter>Source Files\Command</Filter>
+    </ClCompile>
+    <ClCompile Include="Command\DeleteItemCommand.cpp">
+      <Filter>Source Files\Command</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Document\IDocument.h">
@@ -86,7 +98,7 @@
     <ClInclude Include="Document\Document.h">
       <Filter>Header Files\Document</Filter>
     </ClInclude>
-    <ClInclude Include="Command\ICommand.h">
+    <ClInclude Include="Command\IRevertableCommand.h">
       <Filter>Header Files\Command</Filter>
     </ClInclude>
     <ClInclude Include="Command\InsertParagraphCommand.h">
@@ -100,6 +112,18 @@
     </ClInclude>
     <ClInclude Include="ResourceRepository\ResourceRepository.h">
       <Filter>Header Files\ResourceRepository</Filter>
+    </ClInclude>
+    <ClInclude Include="Command\SetTitleCommand.h">
+      <Filter>Header Files\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Command\ReplaceTextCommand.h">
+      <Filter>Header Files\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Command\ResizeImageCommand.h">
+      <Filter>Header Files\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Command\DeleteItemCommand.h">
+      <Filter>Header Files\Command</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

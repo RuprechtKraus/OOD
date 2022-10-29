@@ -1,9 +1,9 @@
 #pragma once
 #include "Document/Document.h"
-#include "ICommand.h"
+#include "IRevertableCommand.h"
 #include "ResourceRepository/IResourceRepository.h"
 
-class InsertImageCommand : public ICommand
+class InsertImageCommand : public IRevertableCommand
 {
 public:
 	InsertImageCommand(

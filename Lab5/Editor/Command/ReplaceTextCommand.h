@@ -2,19 +2,20 @@
 #include "Document/IDocument.h"
 #include "IRevertableCommand.h"
 
-class InsertParagraphCommand : public IRevertableCommand
+class ReplaceTextCommand : IRevertableCommand
 {
 public:
-	InsertParagraphCommand(
+	ReplaceTextCommand(
 		IDocument& document, 
 		const std::string& text, 
-		const std::optional<size_t> position = std::nullopt);
+		size_t index);
 
 	void Execute() override;
 	void Revert() override;
 
 private:
 	IDocument& m_document;
-	std::string m_text;
-	std::optional<size_t> m_position;
+	std::string m_newText;
+	std::string m_oldText;
+	size_t m_index;
 };

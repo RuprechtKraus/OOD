@@ -1,9 +1,9 @@
 #pragma once
 
-class ICommand
+class IRevertableCommand
 {
 public:
 	virtual void Execute() = 0;
 	virtual void Revert() = 0;
-	virtual ~ICommand() = default;
+	virtual ~IRevertableCommand() = default;
 };

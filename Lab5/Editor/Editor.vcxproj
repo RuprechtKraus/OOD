@@ -131,8 +131,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Command\DeleteItemCommand.cpp" />
     <ClCompile Include="Command\InsertImageCommand.cpp" />
     <ClCompile Include="Command\InsertParagraphCommand.cpp" />
+    <ClCompile Include="Command\ReplaceTextCommand.cpp" />
+    <ClCompile Include="Command\ResizeImageCommand.cpp" />
+    <ClCompile Include="Command\SetTitleCommand.cpp" />
     <ClCompile Include="Document\Document.cpp" />
     <ClCompile Include="Document\DocumentItem.cpp" />
     <ClCompile Include="Document\Elements\Image.cpp" />
@@ -141,9 +145,13 @@
     <ClCompile Include="ResourceRepository\ResourceRepository.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Command\ICommand.h" />
+    <ClInclude Include="Command\DeleteItemCommand.h" />
+    <ClInclude Include="Command\IRevertableCommand.h" />
     <ClInclude Include="Command\InsertImageCommand.h" />
     <ClInclude Include="Command\InsertParagraphCommand.h" />
+    <ClInclude Include="Command\ReplaceTextCommand.h" />
+    <ClInclude Include="Command\ResizeImageCommand.h" />
+    <ClInclude Include="Command\SetTitleCommand.h" />
     <ClInclude Include="Document\Document.h" />
     <ClInclude Include="Document\DocumentItem.h" />
     <ClInclude Include="Document\Elements\IImage.h" />
