@@ -3,6 +3,11 @@
 #include "Elements/Paragraph.h"
 #include <filesystem>
 
+Document::Document(ICommandHistory& history)
+	: m_history(history)
+{
+}
+
 std::shared_ptr<IParagraph> Document::InsertParagraph(const std::string& text,
 	std::optional<size_t> position)
 {
@@ -83,24 +88,24 @@ void Document::SetTitle(const std::string& title)
 	m_title = title;
 }
 
-bool Document::CanUndo() const
+bool Document::CanUndo() const noexcept
 {
-	throw std::logic_error("Method is not implemented");
+	return m_history.CanUndo();
 }
 
 void Document::Undo()
 {
-	throw std::logic_error("Method is not implemented");
+	m_history.Undo();
 }
 
-bool Document::CanRedo() const
+bool Document::CanRedo() const noexcept
 {
-	throw std::logic_error("Method is not implemented");
+	return m_history.CanRedo();
 }
 
 void Document::Redo()
 {
-	throw std::logic_error("Method is not implemented");
+	m_history.Redo();
 }
 
 void Document::Save(const Path& path) const

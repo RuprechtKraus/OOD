@@ -1,10 +1,13 @@
 #pragma once
 #include "IDocument.h"
+#include "CommandHistory/ICommandHistory.h"
 #include <vector>
 
 class Document : public IDocument
 {
 public:
+	Document(ICommandHistory& history);
+
 	std::shared_ptr<IParagraph> InsertParagraph(const std::string& text,
 		std::optional<size_t> position = std::nullopt) override;
 	std::shared_ptr<IImage> InsertImage(const Path& path, int width, int height,
@@ -19,9 +22,9 @@ public:
 	std::string GetTitle() const override;
 	void SetTitle(const std::string& title) override;
 
-	bool CanUndo() const override;
+	bool CanUndo() const noexcept override;
 	void Undo() override;
-	bool CanRedo() const override;
+	bool CanRedo() const noexcept override;
 	void Redo() override;
 
 	void Save(const Path& path) const override;
@@ -29,6 +32,7 @@ public:
 private:
 	void InsertItem(DocumentItem&& item, std::optional<size_t> position);
 
+	ICommandHistory& m_history;
 	std::vector<DocumentItem> m_items;
 	std::string m_title;
 };

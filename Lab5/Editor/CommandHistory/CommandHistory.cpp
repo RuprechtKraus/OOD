@@ -27,14 +27,9 @@ void CommandHistory::AddCommand(std::unique_ptr<IRevertableCommand>&& command)
 
 void CommandHistory::Undo()
 {
-	if (IsEmpty())
+	if (!CanUndo())
 	{
-		throw std::logic_error("History is empty");
-	}
-
-	if (m_index == 0)
-	{
-		throw std::logic_error("Nothing to undo");
+		throw std::logic_error("Unable to undo");
 	}
 
 	m_commands[--m_index]->Revert();
@@ -42,12 +37,22 @@ void CommandHistory::Undo()
 
 void CommandHistory::Redo()
 {
-	if (m_index == m_commands.size())
+	if (!CanRedo())
 	{
-		throw std::logic_error("Nothing to redo");
+		throw std::logic_error("Unable to redo");
 	}
 
 	m_commands[m_index++]->Execute();
+}
+
+bool CommandHistory::CanUndo() const noexcept
+{
+	return IsEmpty() || m_index == 0;
+}
+
+bool CommandHistory::CanRedo() const noexcept
+{
+	return m_index == m_commands.size();
 }
 
 bool CommandHistory::IsEmpty() const noexcept

@@ -13,6 +13,8 @@ public:
 	void AddCommand(std::unique_ptr<IRevertableCommand>&& command) override;
 	void Undo() override;
 	void Redo() override;
+	bool CanUndo() const noexcept override;
+	bool CanRedo() const noexcept override;
 	bool IsEmpty() const noexcept override;
 	bool IsFull() const noexcept override;
 
