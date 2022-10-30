@@ -40,6 +40,12 @@
     <Filter Include="Header Files\Filesystem">
       <UniqueIdentifier>{fda56d59-9ce1-4f0b-9237-5bca88e52de4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\CommandHistory">
+      <UniqueIdentifier>{62abdcb4-7be3-4bc2-86e6-1ca782289af6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\CommandHistory">
+      <UniqueIdentifier>{15830a0e-90b5-43b5-8914-a2d6d4fa90f2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Editor.cpp">
@@ -77,6 +83,9 @@
     </ClCompile>
     <ClCompile Include="Command\DeleteItemCommand.cpp">
       <Filter>Source Files\Command</Filter>
+    </ClCompile>
+    <ClCompile Include="CommandHistory\CommandHistory.cpp">
+      <Filter>Source Files\CommandHistory</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -133,6 +142,12 @@
     </ClInclude>
     <ClInclude Include="Filesystem\FilenameGenerator.h">
       <Filter>Header Files\Filesystem</Filter>
+    </ClInclude>
+    <ClInclude Include="CommandHistory\CommandHistory.h">
+      <Filter>Header Files\CommandHistory</Filter>
+    </ClInclude>
+    <ClInclude Include="CommandHistory\ICommandHistory.h">
+      <Filter>Header Files\CommandHistory</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

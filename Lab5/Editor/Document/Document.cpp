@@ -23,7 +23,7 @@ std::shared_ptr<IImage> Document::InsertImage(const Path& path, int width, int h
 
 void Document::InsertItem(DocumentItem&& item, std::optional<size_t> position)
 {
-	if (position)
+	if (position && position.value() != GetItemsCount())
 	{
 		if (position.value() >= m_items.size())
 		{
