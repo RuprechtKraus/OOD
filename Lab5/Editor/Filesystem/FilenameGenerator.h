@@ -6,14 +6,10 @@
 
 namespace fs = std::filesystem;
 
-constexpr unsigned DEFAULT_FILENAME_LENGTH = 10;
-
-static Path GetRandomFilename(const Path& extension, unsigned length = DEFAULT_FILENAME_LENGTH)
+static Path GetRandomFilename(const Path& extension, unsigned length = 10)
 {
-	static constexpr char AlphaNumeric[] = "0123456789"
-										   "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-										   "abcdefghijklmnopqrstuvwxyz";
-	static constexpr unsigned AlphaNumericSize = sizeof(AlphaNumeric) - 1;
+	static constexpr char AlphaNumeric[] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+	static constexpr unsigned AlphaNumericSize = sizeof(AlphaNumeric) - 2;
 
 	unsigned s = std::chrono::system_clock::now().time_since_epoch().count();
 	Path filename;

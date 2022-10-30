@@ -2,6 +2,11 @@
 #include "Elements/Image.h"
 #include "Elements/Paragraph.h"
 #include <filesystem>
+#include <format>
+#include <fstream>
+#include <ranges>
+
+namespace fs = std::filesystem;
 
 Document::Document(ICommandHistory& history)
 	: m_history(history)
@@ -110,5 +115,39 @@ void Document::Redo()
 
 void Document::Save(const Path& path) const
 {
-	throw std::logic_error("Method is not implemented");
+	Path imagesPath = path.parent_path() / "images";
+	std::ofstream file(path.string());
+	fs::create_directories(imagesPath);
+
+	file << "<!DOCTYPE html>\n"
+			"<html lang=\"\">\n"
+			"<head>\n"
+			"\t<meta charset=\"UTF-8\">\n"
+			"\t<title>"
+		 << GetTitle() << "</title>\n"
+						  "</head>\n"
+						  "<body>\n";
+
+	std::ranges::for_each(m_items, [&](const ConstDocumentItem& item) {
+		if (item.GetImage())
+		{
+			auto image = item.GetImage();
+			Path imagePath = image->GetPath();
+			fs::copy_file(imagePath, imagesPath / imagePath.filename());
+
+			file << std::format("\t<img src=\"{}\" width=\"{}\" height=\"{}\">",
+				image->GetPath().string(),
+				image->GetWidth(),
+				image->GetHeight())
+				 << '\n';
+		}
+		else
+		{
+			auto paragraph = item.GetParagraph();
+			file << std::format("\t<p>{}</p>", paragraph->GetText()) << '\n';
+		}
+	});
+
+	file << "</body>\n"
+			"</html>";
 }
