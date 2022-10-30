@@ -2,7 +2,7 @@
 
 SetTitleCommand::SetTitleCommand(IDocument& document, const std::string& text)
 	: m_document(document)
-	, m_newTitle(m_newTitle)
+	, m_newTitle(text)
 {
 }
 

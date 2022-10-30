@@ -160,6 +160,7 @@
     <ClInclude Include="Document\Elements\IParagraph.h" />
     <ClInclude Include="Document\Elements\Paragraph.h" />
     <ClInclude Include="Document\IDocument.h" />
+    <ClInclude Include="Filesystem\FilenameGenerator.h" />
     <ClInclude Include="ResourceRepository\IResourceRepository.h" />
     <ClInclude Include="ResourceRepository\ResourceRepository.h" />
   </ItemGroup>

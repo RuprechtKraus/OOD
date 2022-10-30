@@ -11,7 +11,5 @@ public:
 	Path GetResourcesPath() const override;
 
 private:
-	static std::string GenerateFileName(const std::string& extension);
-
 	Path m_path;
 };

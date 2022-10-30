@@ -37,6 +37,9 @@
     <Filter Include="Source Files\ResourceRepository">
       <UniqueIdentifier>{5f9e6760-e600-4d2d-bb53-4c8716122b4f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Filesystem">
+      <UniqueIdentifier>{fda56d59-9ce1-4f0b-9237-5bca88e52de4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Editor.cpp">
@@ -127,6 +130,9 @@
     </ClInclude>
     <ClInclude Include="Command\Command.h">
       <Filter>Header Files\Command</Filter>
+    </ClInclude>
+    <ClInclude Include="Filesystem\FilenameGenerator.h">
+      <Filter>Header Files\Filesystem</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
