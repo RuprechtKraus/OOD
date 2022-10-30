@@ -1,5 +1,7 @@
 #include "InsertImageCommand.h"
 
+namespace fs = std::filesystem;
+
 InsertImageCommand::InsertImageCommand(
 	IDocument& document,
 	IResourceRepository& repository,
@@ -9,23 +11,30 @@ InsertImageCommand::InsertImageCommand(
 	std::optional<size_t> position)
 	: m_document(document)
 	, m_repository(repository)
-	, m_path(path)
+	, m_sourcePath(path)
 	, m_width(width)
 	, m_height(height)
 	, m_position(position)
 {
 }
 
-void InsertImageCommand::Execute()
+InsertImageCommand::~InsertImageCommand()
 {
-	Path imagePath = m_repository.AddResource(m_path);
-	m_name = imagePath.filename().string();
-
-	m_document.InsertImage(imagePath, m_width, m_height, m_position);
+	m_repository.DeleteResource(m_resourcePath.filename().string());
 }
 
-// TODO: Добавить отмету вставки изображения
+void InsertImageCommand::Execute()
+{
+	if (m_resourcePath.empty())
+	{
+		m_resourcePath = m_repository.AddResource(m_sourcePath);
+	}
+
+	m_document.InsertImage(m_resourcePath, m_width, m_height, m_position);
+}
+
+
 void InsertImageCommand::Revert()
 {
-	throw std::logic_error("Method is not implemented");
+	m_document.DeleteItem(m_position.value_or(m_document.GetItemsCount() - 1));
 }

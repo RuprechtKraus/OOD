@@ -145,6 +145,7 @@
     <ClCompile Include="ResourceRepository\ResourceRepository.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Command\Command.h" />
     <ClInclude Include="Command\DeleteItemCommand.h" />
     <ClInclude Include="Command\IRevertableCommand.h" />
     <ClInclude Include="Command\InsertImageCommand.h" />

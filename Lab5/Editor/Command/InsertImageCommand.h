@@ -17,11 +17,13 @@ public:
 	void Execute() override;
 	void Revert() override;
 
+	~InsertImageCommand() override;
+
 private:
 	IDocument& m_document;
 	IResourceRepository& m_repository;
-	std::string m_name;
-	Path m_path;
+	Path m_resourcePath;
+	Path m_sourcePath;
 	int m_width;
 	int m_height;
 	std::optional<size_t> m_position;

@@ -125,5 +125,8 @@
     <ClInclude Include="Command\DeleteItemCommand.h">
       <Filter>Header Files\Command</Filter>
     </ClInclude>
+    <ClInclude Include="Command\Command.h">
+      <Filter>Header Files\Command</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

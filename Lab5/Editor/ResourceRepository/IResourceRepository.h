@@ -12,7 +12,7 @@ public:
 	virtual Path AddResource(const Path& target) = 0;
 
 	//Удаляет ресурс из папки с ресурсами
-	virtual void DeleteResource(const std::string& target) = 0;
+	virtual void DeleteResource(const std::string& name) = 0;
 
 	//Возвращает путь к папке с ресурсами
 	virtual Path GetResourcesPath() const = 0;

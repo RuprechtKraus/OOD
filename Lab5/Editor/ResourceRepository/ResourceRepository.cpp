@@ -23,9 +23,9 @@ Path ResourceRepository::AddResource(const Path& target)
 	return resourcePath;
 }
 
-void ResourceRepository::DeleteResource(const std::string& target)
+void ResourceRepository::DeleteResource(const std::string& name)
 {
-	Path path = m_path.string() + target;
+	Path path = m_path.string() + name;
 	fs::remove(path);
 }
 

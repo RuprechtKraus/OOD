@@ -15,8 +15,7 @@ void InsertParagraphCommand::Execute()
 	m_document.InsertParagraph(m_text, m_position);
 }
 
-// TODO: Добавить отмену вставки параграфа
 void InsertParagraphCommand::Revert()
 {
-	throw std::logic_error("Method is not implemented");
+	m_document.DeleteItem(m_position.value_or(m_document.GetItemsCount() - 1));
 }
