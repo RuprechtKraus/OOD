@@ -14,11 +14,25 @@ ResourceRepository::ResourceRepository(const Path& path)
 	fs::create_directories(m_path);
 }
 
+ResourceRepository::~ResourceRepository()
+{
+	for (auto& resource : m_resourceSource)
+	{
+		DeleteResource(resource.second.filename().string());
+	}
+}
+
 Path ResourceRepository::AddResource(const Path& target)
 {
+	if (m_resourceSource.find(target) != m_resourceSource.end())
+	{
+		return m_resourceSource[target];
+	}
+
 	auto extension = target.extension();
 	Path filename = GetRandomFilename(extension);
 	Path resourcePath = m_path.string() + filename.string();
+	m_resourceSource[target] = resourcePath;
 	fs::copy_file(target, resourcePath);
 
 	return resourcePath;

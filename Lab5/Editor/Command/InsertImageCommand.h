@@ -17,8 +17,6 @@ public:
 	void Execute() override;
 	void Revert() override;
 
-	~InsertImageCommand() override;
-
 private:
 	IDocument& m_document;
 	IResourceRepository& m_repository;

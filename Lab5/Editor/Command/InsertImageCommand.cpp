@@ -18,21 +18,11 @@ InsertImageCommand::InsertImageCommand(
 {
 }
 
-InsertImageCommand::~InsertImageCommand()
-{
-	m_repository.DeleteResource(m_resourcePath.filename().string());
-}
-
 void InsertImageCommand::Execute()
 {
-	if (m_resourcePath.empty())
-	{
-		m_resourcePath = m_repository.AddResource(m_sourcePath);
-	}
-
+	m_resourcePath = m_repository.AddResource(m_sourcePath);
 	m_document.InsertImage(m_resourcePath, m_width, m_height, m_position);
 }
-
 
 void InsertImageCommand::Revert()
 {

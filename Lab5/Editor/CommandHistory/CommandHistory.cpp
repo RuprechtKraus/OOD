@@ -47,12 +47,12 @@ void CommandHistory::Redo()
 
 bool CommandHistory::CanUndo() const noexcept
 {
-	return IsEmpty() || m_index == 0;
+	return !IsEmpty() && m_index != 0;
 }
 
 bool CommandHistory::CanRedo() const noexcept
 {
-	return m_index == m_commands.size();
+	return m_index != m_commands.size();
 }
 
 bool CommandHistory::IsEmpty() const noexcept
