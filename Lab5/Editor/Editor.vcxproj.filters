@@ -46,6 +46,15 @@
     <Filter Include="Source Files\CommandHistory">
       <UniqueIdentifier>{15830a0e-90b5-43b5-8914-a2d6d4fa90f2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\DocumentController">
+      <UniqueIdentifier>{c03dc2ca-a806-49d0-b5c4-4fe4267280ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\DocumentController">
+      <UniqueIdentifier>{4a5ecd4c-15a5-46e4-8cac-53b76384a836}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Utils">
+      <UniqueIdentifier>{56326773-9268-4da3-9c46-b385f8621272}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Editor.cpp">
@@ -86,6 +95,9 @@
     </ClCompile>
     <ClCompile Include="CommandHistory\CommandHistory.cpp">
       <Filter>Source Files\CommandHistory</Filter>
+    </ClCompile>
+    <ClCompile Include="DocumentController\DocumentController.cpp">
+      <Filter>Source Files\DocumentController</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -148,6 +160,12 @@
     </ClInclude>
     <ClInclude Include="CommandHistory\ICommandHistory.h">
       <Filter>Header Files\CommandHistory</Filter>
+    </ClInclude>
+    <ClInclude Include="DocumentController\DocumentController.h">
+      <Filter>Header Files\DocumentController</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils\StringUtils.h">
+      <Filter>Header Files\Utils</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

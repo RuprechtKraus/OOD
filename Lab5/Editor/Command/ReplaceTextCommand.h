@@ -2,7 +2,7 @@
 #include "Document/IDocument.h"
 #include "IRevertableCommand.h"
 
-class ReplaceTextCommand : IRevertableCommand
+class ReplaceTextCommand : public IRevertableCommand
 {
 public:
 	ReplaceTextCommand(

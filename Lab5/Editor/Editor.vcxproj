@@ -138,6 +138,7 @@
     <ClCompile Include="Command\ReplaceTextCommand.cpp" />
     <ClCompile Include="Command\ResizeImageCommand.cpp" />
     <ClCompile Include="Command\SetTitleCommand.cpp" />
+    <ClCompile Include="DocumentController\DocumentController.cpp" />
     <ClCompile Include="Document\Document.cpp" />
     <ClCompile Include="Document\DocumentItem.cpp" />
     <ClCompile Include="Document\Elements\Image.cpp" />
@@ -156,6 +157,7 @@
     <ClInclude Include="Command\ReplaceTextCommand.h" />
     <ClInclude Include="Command\ResizeImageCommand.h" />
     <ClInclude Include="Command\SetTitleCommand.h" />
+    <ClInclude Include="DocumentController\DocumentController.h" />
     <ClInclude Include="Document\Document.h" />
     <ClInclude Include="Document\DocumentItem.h" />
     <ClInclude Include="Document\Elements\IImage.h" />
@@ -166,6 +168,7 @@
     <ClInclude Include="Filesystem\FilenameGenerator.h" />
     <ClInclude Include="ResourceRepository\IResourceRepository.h" />
     <ClInclude Include="ResourceRepository\ResourceRepository.h" />
+    <ClInclude Include="Utils\StringUtils.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
