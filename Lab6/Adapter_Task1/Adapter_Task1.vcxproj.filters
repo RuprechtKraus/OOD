@@ -13,10 +13,24 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Файлы заголовков\GraphicsLib">
+      <UniqueIdentifier>{3655e0aa-9b0c-4a1c-83a8-d41e4ca46a15}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\ShapeDrawingLib">
+      <UniqueIdentifier>{74ae8b90-dceb-45e5-8718-f60cba1af9a9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Adapter_Task1.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="GraphicsLib\GraphicsLib.h">
+      <Filter>Файлы заголовков\GraphicsLib</Filter>
+    </ClInclude>
+    <ClInclude Include="ShapeDrawingLib\ShapeDrawingLib.h">
+      <Filter>Файлы заголовков\ShapeDrawingLib</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
