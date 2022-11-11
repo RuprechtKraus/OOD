@@ -1,4 +1,6 @@
-﻿#include "ShapeDrawingLib/ShapeDrawingLib.h"
+﻿#include "ModernGraphicsLib/ModernGraphicsLib.h"
+#include "ModernGraphicsLibAdapter/ModernGraphicsRendererAdapter.h"
+#include "ShapeDrawingLib/ShapeDrawingLib.h"
 #include <iostream>
 
 // Пространство имен приложения (доступно для модификации)
@@ -21,9 +23,27 @@ void PaintPictureOnCanvas()
 	shape_drawing_lib::CanvasPainter painter(simpleCanvas);
 	PaintPicture(painter);
 }
+
+void PaintPictureOnModernGraphicsRenderer()
+{
+	modern_graphics_lib::ModernGraphicsRenderer renderer(std::cout);
+	ModernGraphicsRendererAdapter rendererAdapter(renderer);
+	shape_drawing_lib::CanvasPainter painter(rendererAdapter);
+	PaintPicture(painter);
+}
 } // namespace app
 
 int main()
 {
-	app::PaintPictureOnCanvas();
+	std::cout << "Should we use new API (y)?";
+	std::string userInput;
+
+	if (std::getline(std::cin, userInput) && (userInput == "y" || userInput == "Y"))
+	{
+		app::PaintPictureOnModernGraphicsRenderer();
+	}
+	else
+	{
+		app::PaintPictureOnCanvas();
+	}
 }

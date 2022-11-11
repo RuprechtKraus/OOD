@@ -19,6 +19,12 @@
     <Filter Include="Файлы заголовков\ShapeDrawingLib">
       <UniqueIdentifier>{74ae8b90-dceb-45e5-8718-f60cba1af9a9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Файлы заголовков\ModernGraphicsLib">
+      <UniqueIdentifier>{2c9cdf6f-8c55-4eab-b9bd-69bf1027765e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Файлы заголовков\ModernGraphicsLibAdapter">
+      <UniqueIdentifier>{88d95a56-38d8-4667-ad13-ee71ce9b4c8f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Adapter_Task1.cpp">
@@ -31,6 +37,12 @@
     </ClInclude>
     <ClInclude Include="ShapeDrawingLib\ShapeDrawingLib.h">
       <Filter>Файлы заголовков\ShapeDrawingLib</Filter>
+    </ClInclude>
+    <ClInclude Include="ModernGraphicsLib\ModernGraphicsLib.h">
+      <Filter>Файлы заголовков\ModernGraphicsLib</Filter>
+    </ClInclude>
+    <ClInclude Include="ModernGraphicsLibAdapter\ModernGraphicsRendererAdapter.h">
+      <Filter>Файлы заголовков\ModernGraphicsLibAdapter</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
