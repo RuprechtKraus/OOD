@@ -1,5 +1,4 @@
 #pragma once
-#include <format>
 #include <iostream>
 
 // ѕространство имен современной графической библиотеки (недоступно дл€ изменени€)
@@ -22,52 +21,17 @@ public:
 class ModernGraphicsRenderer
 {
 public:
-	ModernGraphicsRenderer(std::ostream& strm)
-		: m_out(strm)
-	{
-	}
-
-	~ModernGraphicsRenderer()
-	{
-		if (m_drawing) // «авершаем рисование, если оно было начато
-		{
-			EndDraw();
-		}
-	}
+	ModernGraphicsRenderer(std::ostream& strm);
+	~ModernGraphicsRenderer();
 
 	// Ётот метод должен быть вызван в начале рисовани€
-	void BeginDraw()
-	{
-		if (m_drawing)
-		{
-			throw std::logic_error("Drawing has already begun");
-		}
-		m_out << "<draw>" << std::endl;
-		m_drawing = true;
-	}
+	void BeginDraw();
 
 	// ¬ыполн€ет рисование линии
-	void DrawLine(const Point& start, const Point& end)
-	{
-		if (!m_drawing)
-		{
-			throw std::logic_error("DrawLine is allowed between BeginDraw()/EndDraw() only");
-		}
-		m_out << std::format(
-			R"(  <line fromX="{}" fromY="{}" toX="{}" toY="{}"/>)", start.x, start.y, end.x, end.y)
-			  << std::endl;
-	}
+	void DrawLine(const Point& start, const Point& end);
 
 	// Ётот метод должен быть вызван в конце рисовани€
-	void EndDraw()
-	{
-		if (!m_drawing)
-		{
-			throw std::logic_error("Drawing has not been started");
-		}
-		m_out << "</draw>" << std::endl;
-		m_drawing = false;
-	}
+	void EndDraw();
 
 private:
 	std::ostream& m_out;

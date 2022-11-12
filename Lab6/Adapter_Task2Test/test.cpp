@@ -1,9 +1,8 @@
+#include "pch.h"
+
 #include "ModernGraphicsLibAdapter/ModernGraphicsRendererAdapter.h"
 #include "ShapeDrawingLib/ShapeDrawingLib.h"
-#include "gtest/gtest.h"
-#include <sstream>
 
-namespace mgl = modern_graphics_lib;
 namespace sdl = shape_drawing_lib;
 
 TEST(ModernGraphicsRendererAdapterTest, Handles_LineTo_method)
@@ -11,8 +10,7 @@ TEST(ModernGraphicsRendererAdapterTest, Handles_LineTo_method)
 	std::ostringstream out;
 
 	{
-		mgl::ModernGraphicsRenderer renderer(out);
-		ModernGraphicsRendererAdapter rendererAdapter(renderer);
+		ModernGraphicsRendererAdapter rendererAdapter(out);
 
 		rendererAdapter.LineTo(5, 5);
 	}
@@ -29,8 +27,7 @@ TEST(ModernGraphicsRendererAdapterTest, Handles_drawing_triangle)
 	std::ostringstream out;
 
 	{
-		mgl::ModernGraphicsRenderer renderer(out);
-		ModernGraphicsRendererAdapter rendererAdapter(renderer);
+		ModernGraphicsRendererAdapter rendererAdapter(out);
 		sdl::Triangle triangle({ 0, 0 }, { 5, 5 }, { 0, 5 });
 
 		triangle.Draw(rendererAdapter);
@@ -49,8 +46,7 @@ TEST(ModernGraphicsRendererAdapterTest, Handles_drawing_rectangle)
 	std::ostringstream out;
 
 	{
-		mgl::ModernGraphicsRenderer renderer(out);
-		ModernGraphicsRendererAdapter renderAdapter(renderer);
+		ModernGraphicsRendererAdapter renderAdapter(out);
 		sdl::Rectangle rectangle({ 0, 0 }, 5, 5);
 
 		rectangle.Draw(renderAdapter);

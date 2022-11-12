@@ -129,6 +129,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\Adapter_Task1\ModernGraphicsLib\ModernGraphicsLib.cpp" />
     <ClCompile Include="Adapter_Task2.cpp" />
   </ItemGroup>
   <ItemGroup>
