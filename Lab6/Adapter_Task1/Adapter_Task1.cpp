@@ -2,6 +2,7 @@
 #include "ModernGraphicsLibAdapter/ModernGraphicsRendererAdapter.h"
 #include "ShapeDrawingLib/ShapeDrawingLib.h"
 #include <iostream>
+#include <string>
 
 // Пространство имен приложения (доступно для модификации)
 namespace app

@@ -130,6 +130,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Adapter_Task1.cpp" />
+    <ClCompile Include="ModernGraphicsLib\ModernGraphicsLib.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GraphicsLib\GraphicsLib.h" />

@@ -30,6 +30,9 @@
     <ClCompile Include="Adapter_Task1.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="ModernGraphicsLib\ModernGraphicsLib.cpp">
+      <Filter>Файлы заголовков\ModernGraphicsLib</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GraphicsLib\GraphicsLib.h">
