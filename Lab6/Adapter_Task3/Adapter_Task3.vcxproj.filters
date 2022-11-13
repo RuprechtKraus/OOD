@@ -27,10 +27,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Adapter_Task2.cpp">
+    <ClCompile Include="Adapter_Task3.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
-    <ClCompile Include="..\Adapter_Task2\ModernGraphicsLib\ModernGraphicsLib.cpp">
+    <ClCompile Include="..\Adapter_Task3\ModernGraphicsLib\ModernGraphicsLib.cpp">
       <Filter>Файлы заголовков\ModernGraphicsLib</Filter>
     </ClCompile>
   </ItemGroup>
