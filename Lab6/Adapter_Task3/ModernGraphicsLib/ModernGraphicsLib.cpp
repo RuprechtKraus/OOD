@@ -37,7 +37,7 @@ void ModernGraphicsRenderer::DrawLine(const Point& start, const Point& end, cons
 		R"(  <line fromX="{}" fromY="{}" toX="{}" toY="{}">)", start.x, start.y, end.x, end.y)
 		  << '\n'
 		  << std::format(
-				 R"(    <color r="{:.2f}" g="{:.2f}" b="{:.2f}" a="{:.2f}" />)", color.r, color.g, color.b, color.a)
+				 R"(    <color r="{:.2f}" g="{:.2f}" b="{:.2f}" a="{:.2f}"/>)", color.r, color.g, color.b, color.a)
 		  << '\n'
 		  << "  </line>"
 		  << std::endl;
