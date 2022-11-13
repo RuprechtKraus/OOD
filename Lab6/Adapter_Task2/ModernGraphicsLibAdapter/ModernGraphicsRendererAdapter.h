@@ -4,7 +4,7 @@
 
 namespace mgl = modern_graphics_lib;
 
-class ModernGraphicsRendererAdapter : public graphics_lib::ICanvas, public mgl::ModernGraphicsRenderer
+class ModernGraphicsRendererAdapter : public graphics_lib::ICanvas, private mgl::ModernGraphicsRenderer
 {
 public:
 	ModernGraphicsRendererAdapter(std::ostream& out)
