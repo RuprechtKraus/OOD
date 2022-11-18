@@ -1,7 +1,7 @@
 #pragma once
 #include <vector>
-#include "CommonTypes/Defaults.h"
-#include "CommonTypes/Point.h"
+#include "Defaults.h"
+#include "Common/Point.h"
 
 class ICanvas
 {
