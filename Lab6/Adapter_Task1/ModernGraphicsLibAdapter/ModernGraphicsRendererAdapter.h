@@ -14,6 +14,11 @@ public:
 	{
 	}
 
+	~ModernGraphicsRendererAdapter()
+	{
+		m_renderer.EndDraw();
+	}
+
 	void MoveTo(int x, int y) override
 	{
 		m_penCoordinates.x = x;

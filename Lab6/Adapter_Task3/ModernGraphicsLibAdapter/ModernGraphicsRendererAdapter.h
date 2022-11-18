@@ -16,6 +16,11 @@ public:
 	{
 	}
 
+	~ModernGraphicsRendererAdapter()
+	{
+		EndDraw();
+	}
+
 	void SetColor(uint32_t rgbColor) override
 	{
 		float r = ((rgbColor & 0xff0000) >> 16) / 255.0f,

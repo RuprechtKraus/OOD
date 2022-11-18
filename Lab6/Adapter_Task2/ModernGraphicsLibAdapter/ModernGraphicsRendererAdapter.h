@@ -13,6 +13,11 @@ public:
 		, m_drawing(false)
 	{
 	}
+	
+	~ModernGraphicsRendererAdapter()
+	{
+		EndDraw();
+	}
 
 	void MoveTo(int x, int y) override
 	{
