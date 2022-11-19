@@ -2,10 +2,11 @@
 
 void Shape::SetFrame(const FrameRect& frame) noexcept
 {
-	int factorX = frame.width / m_frame.width;
-	int factorY = frame.height / m_frame.height;
+	FrameRect oldFrame = m_frame;
+	double factorX = static_cast<double>(frame.width) / m_frame.width;
+	double factorY = static_cast<double>(frame.height) / m_frame.height;
 	m_frame = frame;
-	AdjustScale(factorX, factorY);
+	AdjustShape(oldFrame, factorX, factorY);
 }
 
 std::optional<FrameRect> Shape::GetFrame() const

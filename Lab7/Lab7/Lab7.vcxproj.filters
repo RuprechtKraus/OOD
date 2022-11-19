@@ -13,11 +13,17 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="CommonTypes">
-      <UniqueIdentifier>{0004600f-0f34-42c6-87a1-e9091a4895f8}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Canvas">
       <UniqueIdentifier>{a643a027-b818-4f68-a1b4-3e77ec348bc1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common">
+      <UniqueIdentifier>{0004600f-0f34-42c6-87a1-e9091a4895f8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Shape">
+      <UniqueIdentifier>{823ed6f8-43f2-4a34-87dd-e60a0573f50b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Style">
+      <UniqueIdentifier>{85d1c8e6-4cd8-4635-af88-d5e9f5cad216}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -27,22 +33,55 @@
     <ClCompile Include="Canvas\ConsoleCanvas.cpp">
       <Filter>Canvas</Filter>
     </ClCompile>
+    <ClCompile Include="Shape\Shape.cpp">
+      <Filter>Shape</Filter>
+    </ClCompile>
+    <ClCompile Include="Shape\Triangle.cpp">
+      <Filter>Shape</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CommonTypes\FrameRect.h">
-      <Filter>CommonTypes</Filter>
-    </ClInclude>
-    <ClInclude Include="CommonTypes\Point.h">
-      <Filter>CommonTypes</Filter>
-    </ClInclude>
     <ClInclude Include="Canvas\ICanvas.h">
       <Filter>Canvas</Filter>
     </ClInclude>
-    <ClInclude Include="CommonTypes\Defaults.h">
-      <Filter>CommonTypes</Filter>
-    </ClInclude>
     <ClInclude Include="Canvas\ConsoleCanvas.h">
       <Filter>Canvas</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\FrameRect.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Common\Point.h">
+      <Filter>Common</Filter>
+    </ClInclude>
+    <ClInclude Include="Shape\IDrawable.h">
+      <Filter>Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="Shape\IShape.h">
+      <Filter>Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="Style\IStyle.h">
+      <Filter>Style</Filter>
+    </ClInclude>
+    <ClInclude Include="Defaults.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Style\ILineStyle.h">
+      <Filter>Style</Filter>
+    </ClInclude>
+    <ClInclude Include="Style\StyleImpl.h">
+      <Filter>Style</Filter>
+    </ClInclude>
+    <ClInclude Include="Style\LineStyle.h">
+      <Filter>Style</Filter>
+    </ClInclude>
+    <ClInclude Include="Style\Style.h">
+      <Filter>Style</Filter>
+    </ClInclude>
+    <ClInclude Include="Shape\Shape.h">
+      <Filter>Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="Shape\Triangle.h">
+      <Filter>Shape</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,5 +1,7 @@
 #pragma once
 #include "IShape.h"
+#include "Style/LineStyle.h"
+#include "Style/Style.h"
 #include <memory>
 
 class Shape : public IShape
@@ -15,10 +17,9 @@ public:
 	std::shared_ptr<const IStyle> GetFillStyle() const override;
 
 protected:
-	virtual void AdjustScale(int scaleFactorX, int scaleFactorY) = 0;
+	virtual void AdjustShape(const FrameRect& oldFrame, double scaleFactorX, double scaleFactorY) = 0;
 
-private:
 	FrameRect m_frame;
-	std::shared_ptr<ILineStyle> m_lineStyle;
-	std::shared_ptr<IStyle> m_fillStyle;
+	std::shared_ptr<ILineStyle> m_lineStyle = std::make_shared<LineStyle>();
+	std::shared_ptr<IStyle> m_fillStyle = std::make_shared<Style>();
 };
