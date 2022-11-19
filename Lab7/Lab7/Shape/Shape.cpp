@@ -1,5 +1,25 @@
 #include "Shape.h"
 
+void Shape::Draw(ICanvas& canvas) const
+{
+	PrepareCanvas(canvas);
+	DrawImpl(canvas);
+}
+
+void Shape::PrepareCanvas(ICanvas& canvas) const
+{
+	auto lineColor = m_lineStyle->IsEnabled().value() ? m_lineStyle->GetColor()
+													  : std::optional<RGBAColor>();
+	auto lineWidth = m_lineStyle->IsEnabled().value() ? m_lineStyle->GetLineWidth()
+													  : std::optional<int>();
+	auto fillColor = m_fillStyle->IsEnabled().value() ? m_fillStyle->GetColor()
+													  : std::optional<RGBAColor>();
+
+	canvas.SetLineColor(lineColor);
+	canvas.SetLineWidth(lineWidth);
+	canvas.SetFillColor(fillColor);
+}
+
 void Shape::SetFrame(const FrameRect& frame) noexcept
 {
 	FrameRect oldFrame = m_frame;

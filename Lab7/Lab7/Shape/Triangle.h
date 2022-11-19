@@ -1,5 +1,4 @@
 #pragma once
-#include "Common/Point.h"
 #include "Shape.h"
 
 class Triangle : public Shape
@@ -7,11 +6,9 @@ class Triangle : public Shape
 public:
 	Triangle(const Point& vertex1, const Point& vertex2, const Point& vertex3) noexcept;
 
-	void Draw(ICanvas& canvas) const override;
-
 private:
-	void PrepareCanvas(ICanvas& canvas) const;
-	void AdjustShape(const FrameRect& oldFrame, double scaleFactorX, double scaleFactorY) override;
+	void DrawImpl(ICanvas& canvas) const final;
+	void AdjustShape(const FrameRect& oldFrame, double scaleFactorX, double scaleFactorY) final;
 	static Point AdjustPoint(
 		const Point& point, 
 		const FrameRect& oldFrame, 

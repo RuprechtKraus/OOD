@@ -14,24 +14,9 @@ Triangle::Triangle(const Point& vertex1, const Point& vertex2, const Point& vert
 	m_frame.height = bottommost - topmost;
 }
 
-void Triangle::Draw(ICanvas& canvas) const
+void Triangle::DrawImpl(ICanvas& canvas) const
 {
-	PrepareCanvas(canvas);
 	canvas.DrawPolygon({ m_vertex1, m_vertex2, m_vertex3 });
-}
-
-void Triangle::PrepareCanvas(ICanvas& canvas) const
-{
-	auto lineColor = m_lineStyle->IsEnabled().value() ? m_lineStyle->GetColor()
-													  : std::optional<RGBAColor>();
-	auto lineWidth = m_lineStyle->IsEnabled().value() ? m_lineStyle->GetLineWidth()
-													  : std::optional<int>();
-	auto fillColor = m_fillStyle->IsEnabled().value() ? m_fillStyle->GetColor()
-													  : std::optional<RGBAColor>();
-
-	canvas.SetLineColor(lineColor);
-	canvas.SetLineWidth(lineWidth);
-	canvas.SetFillColor(fillColor);
 }
 
 void Triangle::AdjustShape(const FrameRect& oldFrame, double scaleFactorX, double scaleFactorY)
