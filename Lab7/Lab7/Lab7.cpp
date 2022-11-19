@@ -1,29 +1,30 @@
 ﻿#include "Canvas/ConsoleCanvas.h"
 #include "Shape/Triangle.h"
 #include "Shape/Rectangle.h"
+#include "Shape/Ellipse.h"
 #include <iostream>
 #include <format>
 
 int main()
 {
 	ConsoleCanvas canvas;
-	Rectangle rectangle({ 2, 2 }, 4, 4);
+	Ellipse ellipse({ 3, 3 }, 1, 3);
 
-	rectangle.GetOutlineStyle()->SetColor(0xDC143C);
-	rectangle.GetOutlineStyle()->SetLineWidth(2);
-	rectangle.GetFillStyle()->SetColor(0x761DCF);
+	ellipse.GetOutlineStyle()->SetColor(0xDC143C);
+	ellipse.GetOutlineStyle()->SetLineWidth(2);
+	ellipse.GetFillStyle()->SetColor(0x761DCF);
 
-	rectangle.Draw(canvas);
+	ellipse.Draw(canvas);
 
-	FrameRect frame = rectangle.GetFrame().value();
+	FrameRect frame = ellipse.GetFrame().value();
 
 	std::cout << std::format("TopLeft: {} {}, width: {}, height: {}", 
 		frame.topLeft.x, frame.topLeft.y, frame.width, frame.height);
 	std::cout << std::endl;
 	
-	rectangle.SetFrame({ { 1, 1 }, 3, 6 });
+	ellipse.SetFrame({ { 1, 2 }, 2, 2 });
 
-	frame = rectangle.GetFrame().value();
+	frame = ellipse.GetFrame().value();
 
 	std::cout << std::format("TopLeft: {} {}, width: {}, height: {}",
 		frame.topLeft.x, frame.topLeft.y, frame.width, frame.height);

@@ -42,6 +42,9 @@
     <ClCompile Include="Shape\Rectangle.cpp">
       <Filter>Shape</Filter>
     </ClCompile>
+    <ClCompile Include="Shape\Ellipse.cpp">
+      <Filter>Shape</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Canvas\ICanvas.h">
@@ -87,6 +90,9 @@
       <Filter>Shape</Filter>
     </ClInclude>
     <ClInclude Include="Shape\Rectangle.h">
+      <Filter>Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="Shape\Ellipse.h">
       <Filter>Shape</Filter>
     </ClInclude>
   </ItemGroup>

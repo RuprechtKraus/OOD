@@ -1,16 +1,16 @@
 #pragma once
 #include "Shape.h"
 
-class Rectangle : public Shape
+class Ellipse : public Shape
 {
 public:
-	Rectangle(const Point& topLeft, int width, int height) noexcept;
+	Ellipse(const Point& center, int horizontalRadius, int verticalRadius) noexcept;
 
 private:
 	void DrawImpl(ICanvas& canvas) const final;
 	void AdjustShape(const FrameRect& oldFrame, double scaleFactorX, double scaleFactorY) final;
 
-	Point m_topLeft;
-	int m_width;
-	int m_height;
+	Point m_center;
+	int m_horizontalRadius;
+	int m_verticalRadius;
 };

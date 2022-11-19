@@ -1,6 +1,6 @@
 #include "Rectangle.h"
 
-Rectangle::Rectangle(const Point& topLeft, int width, int height)
+Rectangle::Rectangle(const Point& topLeft, int width, int height) noexcept
 	: m_topLeft(topLeft)
 	, m_width(width)
 	, m_height(height)
