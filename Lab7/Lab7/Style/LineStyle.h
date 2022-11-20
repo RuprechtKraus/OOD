@@ -16,5 +16,5 @@ public:
 	}
 
 private:
-	std::optional<int> m_lineWidth;
+	std::optional<int> m_lineWidth = 1;
 };

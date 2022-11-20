@@ -16,18 +16,32 @@ try
 	triangle1->GetFillStyle()->SetColor(0x761DCF);
 
 	std::shared_ptr<IShape> triangle2 = std::make_shared<Triangle>(Point{ 3, 1 }, Point{ 6, 4 }, Point{ 3, 7 });
-	triangle2->GetOutlineStyle()->SetColor(0xAABBCC);
+	triangle2->GetOutlineStyle()->SetColor(0xDC143C);
 	triangle2->GetFillStyle()->Enable(false);
+
+	std::shared_ptr<IShape> triangle3 = std::make_shared<Triangle>(Point{ 3, 1 }, Point{ 6, 4 }, Point{ 3, 7 });
+	triangle3->GetOutlineStyle()->SetColor(0xDC143C);
+	triangle3->GetFillStyle()->Enable(false);
 
 	std::shared_ptr<IShapeGroup> group = std::make_shared<ShapeGroup>();
 	group->InsertShape(triangle1);
 	group->InsertShape(triangle2);
+	group->InsertShape(triangle3);
 
+	auto styleValue = group->GetOutlineStyle()->GetLineWidth();
+	
+	if (styleValue.has_value())
+	{
+		std::cout << styleValue.value();
+	}
+	else
+	{
+		std::cout << "Style has not value";
+	}
 
-
-	std::shared_ptr<IShape> ellipse = std::make_shared<Ellipse>(Point{ 3, 4 }, 1, 1);
+	/*std::shared_ptr<IShape> ellipse = std::make_shared<Ellipse>(Point{ 3, 4 }, 1, 1);
 	ellipse->GetOutlineStyle()->Enable(false);
-	ellipse->GetFillStyle()->SetColor(0xABCDFAF);
+	ellipse->GetFillStyle()->SetColor(0xABCDFAF);*/
 }
 catch (const std::exception& e)
 {

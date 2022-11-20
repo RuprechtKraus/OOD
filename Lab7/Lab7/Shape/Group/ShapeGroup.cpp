@@ -1,10 +1,27 @@
 #include "ShapeGroup.h"
+#include "Style/Group/GroupLineStyle.h"
+#include "Style/Group/GroupStyle.h"
 #include <algorithm>
 #include <stdexcept>
 
 ShapeGroup::ShapeGroup()
 {
-	// TODO: Добавить инициализацию стилей
+	LineStyleEnumerator lineStyleEnumerator = [this](const LineStyleCallback& callback) {
+		for (auto& shape : m_shapes)
+		{
+			callback(*shape->GetOutlineStyle());
+		}
+	};
+
+	StyleEnumerator fillStyleEnumerator = [this](const StyleCallback& callback) {
+		for (auto& shape : m_shapes)
+		{
+			callback(*shape->GetFillStyle());
+		}
+	};
+
+	m_outlineStyle = std::make_shared<GroupLineStyle>(std::move(lineStyleEnumerator));
+	m_fillStyle = std::make_shared<GroupStyle>(std::move(fillStyleEnumerator));
 }
 
 void ShapeGroup::Draw(ICanvas& canvas) const
@@ -69,7 +86,7 @@ void ShapeGroup::SetFrame(const FrameRect& frame)
 		float newWidth = shapeFrame.width * factorX;
 		float newHeight = shapeFrame.height * factorY;
 
-		shape->SetFrame({ { newX, newY }, newWidth, newHeight});
+		shape->SetFrame({ { newX, newY }, newWidth, newHeight });
 	}
 
 	m_frame = frame;
@@ -82,32 +99,32 @@ std::optional<FrameRect> ShapeGroup::GetFrame() const
 
 std::shared_ptr<ILineStyle> ShapeGroup::GetOutlineStyle()
 {
-	throw std::exception();
+	return m_outlineStyle;
 }
 
 std::shared_ptr<const ILineStyle> ShapeGroup::GetOutlineStyle() const
 {
-	throw std::exception();
+	return m_outlineStyle;
 }
 
 std::shared_ptr<IStyle> ShapeGroup::GetFillStyle()
 {
-	throw std::exception();
+	return m_fillStyle;
 }
 
 std::shared_ptr<const IStyle> ShapeGroup::GetFillStyle() const
 {
-	throw std::exception();
+	return m_fillStyle;
 }
 
 std::shared_ptr<IShapeGroup> ShapeGroup::GetShapeGroup()
 {
-	throw std::exception();
+	return std::shared_ptr<IShapeGroup>(this);
 }
 
 std::shared_ptr<const IShapeGroup> ShapeGroup::GetShapeGroup() const
 {
-	throw std::exception();
+	return std::shared_ptr<const IShapeGroup>(this);
 }
 
 void ShapeGroup::ReevaluateFrame()

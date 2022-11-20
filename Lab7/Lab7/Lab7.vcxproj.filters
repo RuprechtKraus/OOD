@@ -54,6 +54,9 @@
     <ClCompile Include="Shape\Group\ShapeGroup.cpp">
       <Filter>Shape\Group</Filter>
     </ClCompile>
+    <ClCompile Include="Style\Group\GroupLineStyle.cpp">
+      <Filter>Style\Group</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Canvas\ICanvas.h">
@@ -115,6 +118,9 @@
     </ClInclude>
     <ClInclude Include="Shape\Group\ShapeGroup.h">
       <Filter>Shape\Group</Filter>
+    </ClInclude>
+    <ClInclude Include="Style\Group\GroupLineStyle.h">
+      <Filter>Style\Group</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
