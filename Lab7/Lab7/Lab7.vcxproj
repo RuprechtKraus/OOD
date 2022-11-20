@@ -137,6 +137,7 @@
     <ClCompile Include="Shape\Shape.cpp" />
     <ClCompile Include="Shape\ShapeCollection\ShapeCollection.cpp" />
     <ClCompile Include="Shape\Triangle.cpp" />
+    <ClCompile Include="Slide\Slide.cpp" />
     <ClCompile Include="Style\Group\GroupLineStyle.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -155,6 +156,7 @@
     <ClInclude Include="Shape\ShapeCollection\IShapeCollection.h" />
     <ClInclude Include="Shape\ShapeCollection\ShapeCollection.h" />
     <ClInclude Include="Shape\Triangle.h" />
+    <ClInclude Include="Slide\Slide.h" />
     <ClInclude Include="Style\Group\GroupLineStyle.h" />
     <ClInclude Include="Style\Group\GroupStyle.h" />
     <ClInclude Include="Style\Group\GroupStyleImpl.h" />

@@ -34,6 +34,9 @@
     <Filter Include="Shape\ShapeCollection">
       <UniqueIdentifier>{49410051-0678-406a-8cb8-385acd54cf49}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Slide">
+      <UniqueIdentifier>{d26e8c21-9039-4f15-a443-4c7a1d2ac25e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Lab7.cpp">
@@ -62,6 +65,9 @@
     </ClCompile>
     <ClCompile Include="Shape\ShapeCollection\ShapeCollection.cpp">
       <Filter>Shape\ShapeCollection</Filter>
+    </ClCompile>
+    <ClCompile Include="Slide\Slide.cpp">
+      <Filter>Slide</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -133,6 +139,9 @@
     </ClInclude>
     <ClInclude Include="Shape\ShapeCollection\ShapeCollection.h">
       <Filter>Shape\ShapeCollection</Filter>
+    </ClInclude>
+    <ClInclude Include="Slide\Slide.h">
+      <Filter>Slide</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
