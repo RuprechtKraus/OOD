@@ -4,6 +4,6 @@
 struct FrameRect
 {
 	Point topLeft;
-	int width;
-	int height;
+	float width;
+	float height;
 };

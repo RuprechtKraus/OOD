@@ -18,6 +18,9 @@ public:
 	std::shared_ptr<IStyle> GetFillStyle() override;
 	std::shared_ptr<const IStyle> GetFillStyle() const override;
 
+	std::shared_ptr<IShapeGroup> GetShapeGroup() override;
+	std::shared_ptr<const IShapeGroup> GetShapeGroup() const override;
+
 protected:
 	virtual void DrawImpl(ICanvas& canvas) const = 0;
 	virtual void AdjustShape(const FrameRect& oldFrame, double scaleFactorX, double scaleFactorY) = 0;

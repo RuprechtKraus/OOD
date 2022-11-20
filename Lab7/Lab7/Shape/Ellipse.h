@@ -4,13 +4,13 @@
 class Ellipse : public Shape
 {
 public:
-	Ellipse(const Point& center, int horizontalRadius, int verticalRadius) noexcept;
+	Ellipse(const Point& center, float horizontalRadius, float verticalRadius) noexcept;
 
 private:
 	void DrawImpl(ICanvas& canvas) const final;
 	void AdjustShape(const FrameRect& oldFrame, double scaleFactorX, double scaleFactorY) final;
 
 	Point m_center;
-	int m_horizontalRadius;
-	int m_verticalRadius;
+	float m_horizontalRadius;
+	float m_verticalRadius;
 };

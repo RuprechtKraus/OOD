@@ -1,10 +1,12 @@
 #pragma once
 #include "Canvas/ICanvas.h"
-#include "Style/IStyle.h"
-#include "Style/ILineStyle.h"
-#include "IDrawable.h"
 #include "Common/FrameRect.h"
+#include "IDrawable.h"
+#include "Style/ILineStyle.h"
+#include "Style/IStyle.h"
 #include <memory>
+
+class IShapeGroup;
 
 class IShape : public IDrawable
 {
@@ -19,4 +21,9 @@ public:
 
 	virtual std::shared_ptr<IStyle> GetFillStyle() = 0;
 	virtual std::shared_ptr<const IStyle> GetFillStyle() const = 0;
+
+	virtual std::shared_ptr<IShapeGroup> GetShapeGroup() = 0;
+	virtual std::shared_ptr<const IShapeGroup> GetShapeGroup() const = 0;
+
+	virtual ~IShape() = default;
 };

@@ -1,6 +1,6 @@
 #include "Ellipse.h"
 
-Ellipse::Ellipse(const Point& center, int horizontalRadius, int verticalRadius) noexcept
+Ellipse::Ellipse(const Point& center, float horizontalRadius, float verticalRadius) noexcept
 	: m_center(center)
 	, m_horizontalRadius(horizontalRadius)
 	, m_verticalRadius(verticalRadius)
@@ -20,8 +20,8 @@ void Ellipse::DrawImpl(ICanvas& canvas) const
 void Ellipse::AdjustShape(const FrameRect& oldFrame, double scaleFactorX, double scaleFactorY)
 {
 	m_center = {
-		m_frame.topLeft.x + static_cast<float>(m_frame.width) / 2,
-		m_frame.topLeft.y + static_cast<float>(m_frame.height) / 2
+		m_frame.topLeft.x + m_frame.width / 2,
+		m_frame.topLeft.y + m_frame.height / 2
 	};
 	m_horizontalRadius *= scaleFactorX;
 	m_verticalRadius *= scaleFactorY;

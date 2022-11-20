@@ -25,6 +25,12 @@
     <Filter Include="Style">
       <UniqueIdentifier>{85d1c8e6-4cd8-4635-af88-d5e9f5cad216}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Shape\Group">
+      <UniqueIdentifier>{57e08e4f-8796-42f4-b808-2837aa7db56d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Style\Group">
+      <UniqueIdentifier>{909f5d9d-56b8-44bd-8a4c-4f3db88b63b8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Lab7.cpp">
@@ -44,6 +50,9 @@
     </ClCompile>
     <ClCompile Include="Shape\Ellipse.cpp">
       <Filter>Shape</Filter>
+    </ClCompile>
+    <ClCompile Include="Shape\Group\ShapeGroup.cpp">
+      <Filter>Shape\Group</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -94,6 +103,18 @@
     </ClInclude>
     <ClInclude Include="Shape\Ellipse.h">
       <Filter>Shape</Filter>
+    </ClInclude>
+    <ClInclude Include="Shape\Group\IShapeGroup.h">
+      <Filter>Shape\Group</Filter>
+    </ClInclude>
+    <ClInclude Include="Style\Group\GroupStyleImpl.h">
+      <Filter>Style\Group</Filter>
+    </ClInclude>
+    <ClInclude Include="Style\Group\GroupStyle.h">
+      <Filter>Style\Group</Filter>
+    </ClInclude>
+    <ClInclude Include="Shape\Group\ShapeGroup.h">
+      <Filter>Shape\Group</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

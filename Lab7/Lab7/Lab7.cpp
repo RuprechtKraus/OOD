@@ -1,31 +1,35 @@
 ﻿#include "Canvas/ConsoleCanvas.h"
-#include "Shape/Triangle.h"
-#include "Shape/Rectangle.h"
 #include "Shape/Ellipse.h"
-#include <iostream>
+#include "Shape/Group/ShapeGroup.h"
+#include "Shape/Rectangle.h"
+#include "Shape/Triangle.h"
 #include <format>
+#include <iostream>
 
 int main()
+try
 {
 	ConsoleCanvas canvas;
-	Ellipse ellipse({ 3, 3 }, 1, 3);
+	std::shared_ptr<IShape> triangle1 = std::make_shared<Triangle>(Point{ 1, 6 }, Point{ 4, 3 }, Point{ 4, 6 });
+	triangle1->GetOutlineStyle()->SetColor(0xDC143C);
+	triangle1->GetOutlineStyle()->SetLineWidth(2);
+	triangle1->GetFillStyle()->SetColor(0x761DCF);
 
-	ellipse.GetOutlineStyle()->SetColor(0xDC143C);
-	ellipse.GetOutlineStyle()->SetLineWidth(2);
-	ellipse.GetFillStyle()->SetColor(0x761DCF);
+	std::shared_ptr<IShape> triangle2 = std::make_shared<Triangle>(Point{ 3, 1 }, Point{ 6, 4 }, Point{ 3, 7 });
+	triangle2->GetOutlineStyle()->SetColor(0xAABBCC);
+	triangle2->GetFillStyle()->Enable(false);
 
-	ellipse.Draw(canvas);
+	std::shared_ptr<IShapeGroup> group = std::make_shared<ShapeGroup>();
+	group->InsertShape(triangle1);
+	group->InsertShape(triangle2);
 
-	FrameRect frame = ellipse.GetFrame().value();
 
-	std::cout << std::format("TopLeft: {} {}, width: {}, height: {}", 
-		frame.topLeft.x, frame.topLeft.y, frame.width, frame.height);
-	std::cout << std::endl;
-	
-	ellipse.SetFrame({ { 1, 2 }, 2, 2 });
 
-	frame = ellipse.GetFrame().value();
-
-	std::cout << std::format("TopLeft: {} {}, width: {}, height: {}",
-		frame.topLeft.x, frame.topLeft.y, frame.width, frame.height);
+	std::shared_ptr<IShape> ellipse = std::make_shared<Ellipse>(Point{ 3, 4 }, 1, 1);
+	ellipse->GetOutlineStyle()->Enable(false);
+	ellipse->GetFillStyle()->SetColor(0xABCDFAF);
+}
+catch (const std::exception& e)
+{
+	std::cerr << e.what();
 }

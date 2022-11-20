@@ -53,3 +53,13 @@ std::shared_ptr<const IStyle> Shape::GetFillStyle() const
 {
 	return m_fillStyle;
 }
+
+std::shared_ptr<IShapeGroup> Shape::GetShapeGroup()
+{
+	return nullptr;
+}
+
+std::shared_ptr<const IShapeGroup> Shape::GetShapeGroup() const
+{
+	return nullptr;
+}
