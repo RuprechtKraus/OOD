@@ -1,4 +1,10 @@
 #include "Slide.h"
+#include "Shape/ShapeCollection/ShapeCollection.h"
+
+Slide::Slide()
+{
+	m_shapes = std::make_unique<ShapeCollection>();
+}
 
 void Slide::Draw(ICanvas& canvas) const
 {

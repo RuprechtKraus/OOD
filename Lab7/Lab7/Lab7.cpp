@@ -3,7 +3,7 @@
 #include "Shape/Group/ShapeGroup.h"
 #include "Shape/Rectangle.h"
 #include "Shape/Triangle.h"
-#include <format>
+#include "Slide/Slide.h"
 #include <iostream>
 
 int main()
@@ -37,7 +37,9 @@ try
 	group2->InsertShape(group);
 	group2->InsertShape(ellipse, 0);
 
-	group2->Draw(canvas);
+	Slide slide;
+	slide.GetShapes().InsertShape(group2);
+	slide.Draw(canvas);
 }
 catch (const std::exception& e)
 {

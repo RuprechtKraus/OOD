@@ -6,6 +6,8 @@
 class Slide : public IDrawable
 {
 public:
+	Slide();
+
 	void Draw(ICanvas& canvas) const override;
 	IShapeCollection& GetShapes() noexcept;
 
