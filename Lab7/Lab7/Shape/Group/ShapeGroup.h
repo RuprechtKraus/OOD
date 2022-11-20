@@ -1,6 +1,7 @@
 #pragma once
 #include "IShapeGroup.h"
 #include <vector>
+#include "Shape/ShapeCollection/ShapeCollection.h"
 
 class ShapeGroup : public IShapeGroup
 {
@@ -8,7 +9,9 @@ public:
 	ShapeGroup();
 
 	void Draw(ICanvas& canvas) const;
+
 	size_t GetShapeCount() const override;
+	bool IsEmpty() const noexcept override;
 
 	void InsertShape(
 		const std::shared_ptr<IShape>& shape,
@@ -32,12 +35,9 @@ public:
 
 private:
 	void ReevaluateFrame();
-	void AssertIndexWithinRangeExclusive(size_t index) const;
-	void AssertIndexWithinRangeInclusive(size_t index) const;
 
 	std::optional<FrameRect> m_frame = std::nullopt;
-
-	std::vector<std::shared_ptr<IShape>> m_shapes;
+	std::shared_ptr<IShapeCollection> m_shapes;
 	std::shared_ptr<ILineStyle> m_outlineStyle;
 	std::shared_ptr<IStyle> m_fillStyle;
 };

@@ -28,7 +28,7 @@ try
 	group->InsertShape(triangle2);
 	group->InsertShape(triangle3);
 
-	auto styleValue = group->GetOutlineStyle()->GetLineWidth();
+	auto styleValue = group->GetOutlineStyle()->GetColor();
 	
 	if (styleValue.has_value())
 	{

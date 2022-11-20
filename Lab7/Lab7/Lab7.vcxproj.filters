@@ -31,6 +31,9 @@
     <Filter Include="Style\Group">
       <UniqueIdentifier>{909f5d9d-56b8-44bd-8a4c-4f3db88b63b8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Shape\ShapeCollection">
+      <UniqueIdentifier>{49410051-0678-406a-8cb8-385acd54cf49}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Lab7.cpp">
@@ -56,6 +59,9 @@
     </ClCompile>
     <ClCompile Include="Style\Group\GroupLineStyle.cpp">
       <Filter>Style\Group</Filter>
+    </ClCompile>
+    <ClCompile Include="Shape\ShapeCollection\ShapeCollection.cpp">
+      <Filter>Shape\ShapeCollection</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -121,6 +127,12 @@
     </ClInclude>
     <ClInclude Include="Style\Group\GroupLineStyle.h">
       <Filter>Style\Group</Filter>
+    </ClInclude>
+    <ClInclude Include="Shape\ShapeCollection\IShapeCollection.h">
+      <Filter>Shape\ShapeCollection</Filter>
+    </ClInclude>
+    <ClInclude Include="Shape\ShapeCollection\ShapeCollection.h">
+      <Filter>Shape\ShapeCollection</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -7,67 +7,73 @@
 ShapeGroup::ShapeGroup()
 {
 	LineStyleEnumerator lineStyleEnumerator = [this](const LineStyleCallback& callback) {
-		for (auto& shape : m_shapes)
+		for (size_t i = 0; i < m_shapes->GetShapeCount(); i++)
+		{
+			callback(*m_shapes->GetShapeAt(i)->GetOutlineStyle());
+		}
+		/*for (auto& shape : m_shapes)
 		{
 			callback(*shape->GetOutlineStyle());
-		}
+		}*/
 	};
 
 	StyleEnumerator fillStyleEnumerator = [this](const StyleCallback& callback) {
-		for (auto& shape : m_shapes)
+		for (size_t i = 0; i < m_shapes->GetShapeCount(); i++)
 		{
-			callback(*shape->GetFillStyle());
+			callback(*m_shapes->GetShapeAt(i)->GetFillStyle());
 		}
 	};
 
+	m_shapes = std::make_shared<ShapeCollection>();
 	m_outlineStyle = std::make_shared<GroupLineStyle>(std::move(lineStyleEnumerator));
 	m_fillStyle = std::make_shared<GroupStyle>(std::move(fillStyleEnumerator));
 }
 
 void ShapeGroup::Draw(ICanvas& canvas) const
 {
-	for (const auto& shape : m_shapes)
+	for (size_t i = 0; i < m_shapes->GetShapeCount(); i++)
 	{
-		shape->Draw(canvas);
+		m_shapes->GetShapeAt(i)->Draw(canvas);
 	}
 }
 
 size_t ShapeGroup::GetShapeCount() const
 {
-	return m_shapes.size();
+	return m_shapes->GetShapeCount();
 }
+
+bool ShapeGroup::IsEmpty() const noexcept
+{
+	return m_shapes->IsEmpty();
+}
+
 
 void ShapeGroup::InsertShape(
 	const std::shared_ptr<IShape>& shape,
 	std::optional<size_t> position)
 {
-	size_t offset = position.value_or(m_shapes.size());
-	AssertIndexWithinRangeExclusive(offset);
-	m_shapes.insert(m_shapes.begin() + offset, shape);
+	m_shapes->InsertShape(shape, position);
 	ReevaluateFrame();
 }
 
 void ShapeGroup::RemoveShape(size_t position)
 {
-	AssertIndexWithinRangeInclusive(position);
-	m_shapes.erase(m_shapes.begin() + position);
+	m_shapes->RemoveShape(position);
 }
 
 std::shared_ptr<IShape> ShapeGroup::GetShapeAt(size_t position)
 {
-	AssertIndexWithinRangeInclusive(position);
-	return m_shapes[position];
+	return m_shapes->GetShapeAt(position);
 }
 
 std::shared_ptr<const IShape> ShapeGroup::GetShapeAt(size_t position) const
 {
-	AssertIndexWithinRangeInclusive(position);
-	return m_shapes.at(position);
+	return m_shapes->GetShapeAt(position);
 }
 
 void ShapeGroup::SetFrame(const FrameRect& frame)
 {
-	if (m_shapes.empty())
+	if (IsEmpty())
 	{
 		throw std::logic_error("Cannot set frame of empty group");
 	}
@@ -77,8 +83,9 @@ void ShapeGroup::SetFrame(const FrameRect& frame)
 	double factorX = static_cast<double>(frame.width) / groupFrame.width;
 	double factorY = static_cast<double>(frame.height) / groupFrame.height;
 
-	for (const auto& shape : m_shapes)
+	for (size_t i = 0; i < m_shapes->GetShapeCount(); i++)
 	{
+		auto shape = m_shapes->GetShapeAt(i);
 		FrameRect shapeFrame = shape->GetFrame().value();
 
 		float newX = frame.topLeft.x + (shapeFrame.topLeft.x - groupFrame.topLeft.x) * factorX;
@@ -129,7 +136,7 @@ std::shared_ptr<const IShapeGroup> ShapeGroup::GetShapeGroup() const
 
 void ShapeGroup::ReevaluateFrame()
 {
-	if (m_shapes.empty())
+	if (IsEmpty())
 	{
 		m_frame = std::nullopt;
 		return;
@@ -141,8 +148,9 @@ void ShapeGroup::ReevaluateFrame()
 	float maxX, maxY;
 	maxX = maxY = std::numeric_limits<float>::min();
 
-	for (const auto& shape : m_shapes)
+	for (size_t i = 0; i < m_shapes->GetShapeCount(); i++)
 	{
+		auto shape = m_shapes->GetShapeAt(i);
 		if (!shape->GetFrame().has_value())
 		{
 			throw std::runtime_error("Cannot evaluate group frame");
@@ -162,20 +170,4 @@ void ShapeGroup::ReevaluateFrame()
 		maxX - minX,
 		maxY - minY
 	};
-}
-
-void ShapeGroup::AssertIndexWithinRangeExclusive(size_t index) const
-{
-	if (index > m_shapes.size())
-	{
-		throw std::out_of_range("Index is out of range");
-	}
-}
-
-void ShapeGroup::AssertIndexWithinRangeInclusive(size_t index) const
-{
-	if (index >= m_shapes.size())
-	{
-		throw std::out_of_range("Index is out of range");
-	}
 }
