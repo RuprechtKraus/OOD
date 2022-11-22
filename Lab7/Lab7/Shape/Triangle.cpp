@@ -14,23 +14,32 @@ Triangle::Triangle(const Point& vertex1, const Point& vertex2, const Point& vert
 	m_frame.height = bottommost - topmost;
 }
 
+void Triangle::SetFrame(const FrameRect& frame) noexcept
+{
+	auto oldFrame = m_frame;
+	double scaleFactorX = frame.width / m_frame.width;
+	double scaleFactorY = frame.height / m_frame.height;
+	m_frame = frame;
+	AdjustShape(oldFrame, scaleFactorX, scaleFactorY);
+}
+
 void Triangle::DrawImpl(ICanvas& canvas) const
 {
 	canvas.DrawPolygon({ m_vertex1, m_vertex2, m_vertex3 });
 }
 
 void Triangle::AdjustShape(const FrameRect& oldFrame, double scaleFactorX, double scaleFactorY)
-{   
+{
 	m_vertex1 = AdjustPoint(m_vertex1, oldFrame, m_frame, scaleFactorX, scaleFactorY);
 	m_vertex2 = AdjustPoint(m_vertex2, oldFrame, m_frame, scaleFactorX, scaleFactorY);
 	m_vertex3 = AdjustPoint(m_vertex3, oldFrame, m_frame, scaleFactorX, scaleFactorY);
 }
 
 Point Triangle::AdjustPoint(
-	const Point& point, 
-	const FrameRect& oldFrame, 
-	const FrameRect& newFrame, 
-	double scaleFactorX, 
+	const Point& point,
+	const FrameRect& oldFrame,
+	const FrameRect& newFrame,
+	double scaleFactorX,
 	double scaleFactorY)
 {
 	Point result{};

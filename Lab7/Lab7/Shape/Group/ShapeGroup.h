@@ -6,12 +6,11 @@
 class ShapeGroup : public IShapeGroup
 {
 public:
-	ShapeGroup();
+	[[nodiscard]] static std::shared_ptr<ShapeGroup> Create();
 
 	void Draw(ICanvas& canvas) const;
 
 	size_t GetShapeCount() const override;
-	bool IsEmpty() const noexcept override;
 
 	void InsertShape(
 		const std::shared_ptr<IShape>& shape,
@@ -34,9 +33,10 @@ public:
 	std::shared_ptr<const IShapeGroup> GetShapeGroup() const override;
 
 private:
-	void ReevaluateFrame();
+	ShapeGroup() = default;
 
-	std::optional<FrameRect> m_frame = std::nullopt;
+	std::optional<FrameRect> EvaluateFrame() const;
+
 	std::shared_ptr<IShapeCollection> m_shapes;
 	std::shared_ptr<ILineStyle> m_outlineStyle;
 	std::shared_ptr<IStyle> m_fillStyle;

@@ -20,15 +20,6 @@ void Shape::PrepareCanvas(ICanvas& canvas) const
 	canvas.SetFillColor(fillColor);
 }
 
-void Shape::SetFrame(const FrameRect& frame) noexcept
-{
-	FrameRect oldFrame = m_frame;
-	double factorX = static_cast<double>(frame.width) / m_frame.width;
-	double factorY = static_cast<double>(frame.height) / m_frame.height;
-	m_frame = frame;
-	AdjustShape(oldFrame, factorX, factorY);
-}
-
 std::optional<FrameRect> Shape::GetFrame() const
 {
 	return m_frame;

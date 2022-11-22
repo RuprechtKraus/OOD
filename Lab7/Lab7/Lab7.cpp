@@ -24,7 +24,8 @@ try
 	triangle3->GetOutlineStyle()->SetColor(0xFF0000);
 	triangle3->GetFillStyle()->Enable(true);
 
-	std::shared_ptr<IShapeGroup> group = std::make_shared<ShapeGroup>();
+	//std::shared_ptr<IShapeGroup> group = std::make_shared<ShapeGroup>();
+	std::shared_ptr<IShapeGroup> group = ShapeGroup::Create();
 	group->InsertShape(triangle1);
 	group->InsertShape(triangle2);
 	group->InsertShape(triangle3);
@@ -33,7 +34,8 @@ try
 	ellipse->GetOutlineStyle()->Enable(false);
 	ellipse->GetFillStyle()->SetColor(0xABCDFAF);
 
-	std::shared_ptr<IShapeGroup> group2 = std::make_shared<ShapeGroup>();
+	//std::shared_ptr<IShapeGroup> group2 = std::make_shared<ShapeGroup>();
+	std::shared_ptr<IShapeGroup> group2 = ShapeGroup::Create();
 	group2->InsertShape(group);
 	group2->InsertShape(ellipse, 0);
 

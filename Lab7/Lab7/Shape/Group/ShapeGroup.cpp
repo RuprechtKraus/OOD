@@ -4,29 +4,50 @@
 #include <algorithm>
 #include <stdexcept>
 
-ShapeGroup::ShapeGroup()
+// ShapeGroup::ShapeGroup()
+//{
+//	LineStyleEnumerator lineStyleEnumerator = [this](const LineStyleCallback& callback) {
+//		for (size_t i = 0; i < m_shapes->GetShapeCount(); i++)
+//		{
+//			callback(*m_shapes->GetShapeAt(i)->GetOutlineStyle());
+//		}
+//	};
+//
+//	StyleEnumerator fillStyleEnumerator = [this](const StyleCallback& callback) {
+//		for (size_t i = 0; i < m_shapes->GetShapeCount(); i++)
+//		{
+//			callback(*m_shapes->GetShapeAt(i)->GetFillStyle());
+//		}
+//	};
+//
+//	m_shapes = std::make_shared<ShapeCollection>();
+//	m_outlineStyle = std::make_shared<GroupLineStyle>(std::move(lineStyleEnumerator));
+//	m_fillStyle = std::make_shared<GroupStyle>(std::move(fillStyleEnumerator));
+// }
+
+std::shared_ptr<ShapeGroup> ShapeGroup::Create()
 {
-	LineStyleEnumerator lineStyleEnumerator = [this](const LineStyleCallback& callback) {
-		for (size_t i = 0; i < m_shapes->GetShapeCount(); i++)
-		{
-			callback(*m_shapes->GetShapeAt(i)->GetOutlineStyle());
-		}
-		/*for (auto& shape : m_shapes)
-		{
-			callback(*shape->GetOutlineStyle());
-		}*/
-	};
+	std::shared_ptr<ShapeGroup> group(new ShapeGroup());
 
-	StyleEnumerator fillStyleEnumerator = [this](const StyleCallback& callback) {
-		for (size_t i = 0; i < m_shapes->GetShapeCount(); i++)
+	LineStyleEnumerator lineStyleEnumerator = [group](const LineStyleCallback& callback) {
+		for (size_t i = 0; i < group->GetShapeCount(); i++)
 		{
-			callback(*m_shapes->GetShapeAt(i)->GetFillStyle());
+			callback(*group->GetShapeAt(i)->GetOutlineStyle());
 		}
 	};
 
-	m_shapes = std::make_shared<ShapeCollection>();
-	m_outlineStyle = std::make_shared<GroupLineStyle>(std::move(lineStyleEnumerator));
-	m_fillStyle = std::make_shared<GroupStyle>(std::move(fillStyleEnumerator));
+	StyleEnumerator fillStyleEnumerator = [group](const StyleCallback& callback) {
+		for (size_t i = 0; i < group->GetShapeCount(); i++)
+		{
+			callback(*group->GetShapeAt(i)->GetFillStyle());
+		}
+	};
+
+	group->m_shapes = std::make_shared<ShapeCollection>();
+	group->m_outlineStyle = std::make_shared<GroupLineStyle>(std::move(lineStyleEnumerator));
+	group->m_fillStyle = std::make_shared<GroupStyle>(std::move(fillStyleEnumerator));
+
+	return group;
 }
 
 void ShapeGroup::Draw(ICanvas& canvas) const
@@ -42,18 +63,11 @@ size_t ShapeGroup::GetShapeCount() const
 	return m_shapes->GetShapeCount();
 }
 
-bool ShapeGroup::IsEmpty() const noexcept
-{
-	return m_shapes->IsEmpty();
-}
-
-
 void ShapeGroup::InsertShape(
 	const std::shared_ptr<IShape>& shape,
 	std::optional<size_t> position)
 {
 	m_shapes->InsertShape(shape, position);
-	ReevaluateFrame();
 }
 
 void ShapeGroup::RemoveShape(size_t position)
@@ -73,12 +87,14 @@ std::shared_ptr<const IShape> ShapeGroup::GetShapeAt(size_t position) const
 
 void ShapeGroup::SetFrame(const FrameRect& frame)
 {
-	if (IsEmpty())
+	auto frameOptional = EvaluateFrame();
+
+	if (!frameOptional)
 	{
 		throw std::logic_error("Cannot set frame of empty group");
 	}
 
-	FrameRect groupFrame = m_frame.value();
+	FrameRect groupFrame = frameOptional.value();
 
 	double factorX = static_cast<double>(frame.width) / groupFrame.width;
 	double factorY = static_cast<double>(frame.height) / groupFrame.height;
@@ -95,13 +111,11 @@ void ShapeGroup::SetFrame(const FrameRect& frame)
 
 		shape->SetFrame({ { newX, newY }, newWidth, newHeight });
 	}
-
-	m_frame = frame;
 }
 
 std::optional<FrameRect> ShapeGroup::GetFrame() const
 {
-	return m_frame;
+	return EvaluateFrame();
 }
 
 std::shared_ptr<ILineStyle> ShapeGroup::GetOutlineStyle()
@@ -126,20 +140,21 @@ std::shared_ptr<const IStyle> ShapeGroup::GetFillStyle() const
 
 std::shared_ptr<IShapeGroup> ShapeGroup::GetShapeGroup()
 {
-	return std::shared_ptr<IShapeGroup>(this);
+	// return std::shared_ptr<IShapeGroup>(this); // Программа будет падать
+	return shared_from_this();
 }
 
 std::shared_ptr<const IShapeGroup> ShapeGroup::GetShapeGroup() const
 {
-	return std::shared_ptr<const IShapeGroup>(this);
+	// return std::shared_ptr<const IShapeGroup>(this);
+	return shared_from_this();
 }
 
-void ShapeGroup::ReevaluateFrame()
+std::optional<FrameRect> ShapeGroup::EvaluateFrame() const
 {
 	if (IsEmpty())
 	{
-		m_frame = std::nullopt;
-		return;
+		return std::nullopt;
 	}
 
 	float minX, minY;
@@ -165,7 +180,7 @@ void ShapeGroup::ReevaluateFrame()
 		maxY = std::max(maxY, frame.topLeft.y + frame.height);
 	}
 
-	m_frame = FrameRect{
+	return FrameRect{
 		{ minX, minY },
 		maxX - minX,
 		maxY - minY

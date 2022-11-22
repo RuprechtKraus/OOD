@@ -5,11 +5,6 @@ size_t ShapeCollection::GetShapeCount() const
 	return m_shapes.size();
 }
 
-bool ShapeCollection::IsEmpty() const noexcept
-{
-	return m_shapes.empty();
-}
-
 void ShapeCollection::InsertShape(const std::shared_ptr<IShape>& shape, std::optional<size_t> position)
 {
 	size_t offset = position.value_or(m_shapes.size());

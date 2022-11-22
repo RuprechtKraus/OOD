@@ -6,6 +6,7 @@
 
 class IShapeGroup : public IShape
 	, public IShapeCollection
+	, public std::enable_shared_from_this<IShapeGroup>
 {
 public:
 	virtual ~IShapeGroup() = default;

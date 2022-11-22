@@ -7,7 +7,6 @@ class ShapeCollection : public IShapeCollection
 {
 public:
 	size_t GetShapeCount() const override;
-	bool IsEmpty() const noexcept override;
 
 	void InsertShape(const std::shared_ptr<IShape>& shape, std::optional<size_t> position) override;
 	void RemoveShape(size_t position) override;
