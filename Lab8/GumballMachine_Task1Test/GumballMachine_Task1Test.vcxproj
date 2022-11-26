@@ -84,7 +84,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <SubSystem>Console</SubSystem>
       <AdditionalLibraryDirectories>C:\Users\Ruprecht Kraus\source\repos\OOD\Lab8\GumballMachine_Task1\x64\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>NoQuarterState.obj;HasQuarterState.obj;SoldOutState.obj;SoldState.obj;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>NoQuarterState.obj;HasQuarterState.obj;SoldOutState.obj;SoldState.obj;GumballMachine.obj;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

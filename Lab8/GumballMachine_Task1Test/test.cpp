@@ -1,10 +1,12 @@
 #include "GumballMachine/IGumballMachine.h"
+#include "GumballMachine/GumballMachine.h"
 #include "State/State.h"
 #include "gmock/gmock.h"
+#include <memory>
 
 using ::testing::Exactly;
-using ::testing::Return;
 using ::testing::NaggyMock;
+using ::testing::Return;
 
 class MockGumballMachine : public IGumballMachine
 {
@@ -17,6 +19,29 @@ public:
 	MOCK_METHOD(void, SetSoldState, (), (override));
 	MOCK_METHOD(void, SetHasQuarterState, (), (override));
 };
+
+TEST(GumballMachineTest, TurningCrunkWithQuarterReducesBallsByOne)
+{
+	GumballMachine machine(5);
+	machine.InsertQuarter();
+	machine.TurnCrank();
+
+	std::string str = machine.ToString();
+	auto it = str.find("Inventory: 4 gumballs");
+
+	EXPECT_TRUE(it != std::string::npos);
+}
+
+TEST(GumballMachineTest, TurningCrunkWithNoQuarterDoesNotReduceBallsByOne)
+{
+	GumballMachine machine(5);
+	machine.TurnCrank();
+
+	std::string str = machine.ToString();
+	auto it = str.find("Inventory: 5 gumballs");
+
+	EXPECT_TRUE(it != std::string::npos);
+}
 
 TEST(GumballMachineNoQuarterState, InsertQuarter)
 {
