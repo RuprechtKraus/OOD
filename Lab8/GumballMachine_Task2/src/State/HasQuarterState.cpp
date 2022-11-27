@@ -44,5 +44,5 @@ void HasQuarterState::Dispense()
 
 std::string HasQuarterState::ToString() const
 {
-	return "Waiting for turn of crank";
+	return "waiting for turn of crank";
 }

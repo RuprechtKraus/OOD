@@ -131,6 +131,7 @@
   <ItemGroup>
     <ClCompile Include="GumballMachine_Task2.cpp" />
     <ClCompile Include="src\GumballMachine\GumballMachineWithState.cpp" />
+    <ClCompile Include="src\GumballMachine\NaiveGumballMachine.cpp" />
     <ClCompile Include="src\State\HasQuarterState.cpp" />
     <ClCompile Include="src\State\NoQuarterState.cpp" />
     <ClCompile Include="src\State\SoldOutState.cpp" />
@@ -139,6 +140,7 @@
   <ItemGroup>
     <ClInclude Include="include\GumballMachine\GumballMachineWithState.h" />
     <ClInclude Include="include\GumballMachine\IGumballMachine.h" />
+    <ClInclude Include="include\GumballMachine\NaiveGumballMachine.h" />
     <ClInclude Include="include\State\HasQuarterState.h" />
     <ClInclude Include="include\State\IState.h" />
     <ClInclude Include="include\State\NoQuarterState.h" />

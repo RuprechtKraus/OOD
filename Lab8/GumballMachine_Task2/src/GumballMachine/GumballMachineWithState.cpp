@@ -2,6 +2,7 @@
 
 GumballMachineWithState::GumballMachineWithState(unsigned numBalls)
 	: m_ballCount(numBalls)
+	, m_quarterCount(0)
 {
 	if (m_ballCount > 0)
 	{

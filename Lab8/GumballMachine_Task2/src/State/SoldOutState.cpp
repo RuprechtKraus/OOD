@@ -27,5 +27,5 @@ void SoldOutState::Dispense()
 
 std::string SoldOutState::ToString() const
 {
-	return "Sold out";
+	return "sold out";
 }

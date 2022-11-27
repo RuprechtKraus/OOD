@@ -48,5 +48,5 @@ void SoldState::Dispense()
 
 std::string SoldState::ToString() const
 {
-	return "Delivering a gumball";
+	return "delivering a gumball";
 }

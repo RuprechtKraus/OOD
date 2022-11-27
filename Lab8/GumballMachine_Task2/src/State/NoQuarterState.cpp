@@ -29,5 +29,5 @@ void NoQuarterState::Dispense()
 
 std::string NoQuarterState::ToString() const
 {
-	return "Waiting for quarter";
+	return "waiting for quarter";
 }

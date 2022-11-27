@@ -1,9 +1,10 @@
 ﻿#include <iostream>
 #include "GumballMachine/GumballMachineWithState.h"
+#include "GumballMachine/NaiveGumballMachine.h"
 
 int main()
 {
-	GumballMachineWithState machine(1);
+	NaiveGumballMachine machine(1);
 	machine.InsertQuarter();
 	machine.InsertQuarter();
 	machine.TurnCrank();
