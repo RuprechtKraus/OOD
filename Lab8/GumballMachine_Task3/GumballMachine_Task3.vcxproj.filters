@@ -25,6 +25,12 @@
     <Filter Include="Файлы заголовков\GumballMachine">
       <UniqueIdentifier>{9e737d77-8d1c-4c57-a018-076b075fe024}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Файлы заголовков\Menu">
+      <UniqueIdentifier>{37e7bd3c-98c8-426a-b9a6-0163434a53f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Исходные файлы\Menu">
+      <UniqueIdentifier>{af78810b-f42b-4402-ad13-36c1c0d90029}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GumballMachine_Task3.cpp">
@@ -44,6 +50,9 @@
     </ClCompile>
     <ClCompile Include="src\GumballMachine\GumballMachineWithState.cpp">
       <Filter>Исходные файлы\GumballMachine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Menu\Menu.cpp">
+      <Filter>Исходные файлы\Menu</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -70,6 +79,9 @@
     </ClInclude>
     <ClInclude Include="include\GumballMachine\IGumballMachine.h">
       <Filter>Файлы заголовков\GumballMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Menu\Menu.h">
+      <Filter>Файлы заголовков\Menu</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
