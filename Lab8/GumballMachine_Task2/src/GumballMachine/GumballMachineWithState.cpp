@@ -101,7 +101,6 @@ void GumballMachineWithState::SetNoQuarterState()
 
 void GumballMachineWithState::SetSoldState()
 {
-	m_quarterCount--;
 	m_currentState.reset(new SoldState(*this));
 }
 

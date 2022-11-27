@@ -27,17 +27,20 @@ void SoldState::Dispense()
 	if (m_gumballMachine.GetBallCount() == 0)
 	{
 		std::cout << "Oops, out of gumballs\n";
-		m_gumballMachine.SetSoldOutState();
 
 		if (m_gumballMachine.GetQuarterCount() > 0)
 		{
 			std::cout << "Ejecting quarters\n";
 			m_gumballMachine.ReleaseAllQuarters();
 		}
+
+		m_gumballMachine.SetSoldOutState();
+		return;
 	}
 	else if (m_gumballMachine.GetQuarterCount() == 0)
 	{
 		m_gumballMachine.SetNoQuarterState();
+		return;
 	}
 
 	m_gumballMachine.SetHasQuarterState();
