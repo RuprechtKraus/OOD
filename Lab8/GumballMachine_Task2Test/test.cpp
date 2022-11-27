@@ -1,29 +1,7 @@
 #include "GumballMachine/GumballMachineWithState.h"
-#include "GumballMachine/IGumballMachine.h"
 #include "GumballMachine/NaiveGumballMachine.h"
 #include "gmock/gmock.h"
 #include "gtest/gtest.h"
-
-using ::testing::Exactly;
-using ::testing::NaggyMock;
-using ::testing::Return;
-
-class MockGumballMachine : public IGumballMachine
-{
-public:
-	MOCK_METHOD(void, ReleaseBall, (), (override));
-	MOCK_METHOD(unsigned, GetBallCount, (), (const, override));
-
-	MOCK_METHOD(bool, AddQuarter, (), (override));
-	MOCK_METHOD(bool, ConsumeQuarter, (), (override));
-	MOCK_METHOD(void, ReleaseAllQuarters, (), (override));
-	MOCK_METHOD(unsigned, GetQuarterCount, (), (const, override));
-
-	MOCK_METHOD(void, SetSoldOutState, (), (override));
-	MOCK_METHOD(void, SetNoQuarterState, (), (override));
-	MOCK_METHOD(void, SetSoldState, (), (override));
-	MOCK_METHOD(void, SetHasQuarterState, (), (override));
-};
 
 #pragma region GumballMachineWithState
 
