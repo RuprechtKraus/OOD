@@ -20,7 +20,7 @@ private:
 	void ReleaseBall() override;
 	unsigned GetBallCount() const override;
 
-	bool AddQuarter() override;
+	[[nodiscard]] bool AddQuarter() override;
 	bool ConsumeQuarter() override;
 	void ReleaseAllQuarters() override;
 	unsigned GetQuarterCount() const override;

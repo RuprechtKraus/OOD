@@ -21,7 +21,7 @@ public:
 	std::shared_ptr<const IShapeGroup> GetShapeGroup() const override;
 
 protected:
-	virtual void DrawImpl(ICanvas& canvas) const = 0;
+	virtual void DrawImpl(ICanvas& canvas) const = 0; // TODO: AdjustSHape перенести сюда и сделать виртуальным, но пустым
 
 	FrameRect m_frame;
 	std::shared_ptr<ILineStyle> m_lineStyle = std::make_shared<LineStyle>();

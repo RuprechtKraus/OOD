@@ -166,7 +166,7 @@ std::optional<FrameRect> ShapeGroup::EvaluateFrame() const
 	for (size_t i = 0; i < m_shapes->GetShapeCount(); i++)
 	{
 		auto shape = m_shapes->GetShapeAt(i);
-		if (!shape->GetFrame().has_value())
+		if (!shape->GetFrame().has_value()) // TODO: Внутри группы может быть пустая группа. Выбрасывать исключение не вариант. Пропускать так же не вариант
 		{
 			throw std::runtime_error("Cannot evaluate group frame");
 		}

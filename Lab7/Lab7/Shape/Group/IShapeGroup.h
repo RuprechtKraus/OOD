@@ -6,7 +6,7 @@
 
 class IShapeGroup : public IShape
 	, public IShapeCollection
-	, public std::enable_shared_from_this<IShapeGroup>
+	, public std::enable_shared_from_this<IShapeGroup> //TODO: Наследоваться в конкретном классе
 {
 public:
 	virtual ~IShapeGroup() = default;
