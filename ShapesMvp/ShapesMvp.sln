@@ -5,6 +5,10 @@ VisualStudioVersion = 17.4.33122.133
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShapesMvp.App", "ShapesMvp.App\ShapesMvp.App.csproj", "{8E84095D-E64E-4883-8A60-FFD8834C94C5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShapesMvp.Domain", "ShapesMvp.Domain\ShapesMvp.Domain.csproj", "{44730507-4E4A-4AEF-889B-9091360B73A7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShapesMvp.Common", "ShapesMvp.Common\ShapesMvp.Common.csproj", "{DF4AEB6C-1F60-44C9-8CC2-1A652FDC052F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{8E84095D-E64E-4883-8A60-FFD8834C94C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8E84095D-E64E-4883-8A60-FFD8834C94C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8E84095D-E64E-4883-8A60-FFD8834C94C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44730507-4E4A-4AEF-889B-9091360B73A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44730507-4E4A-4AEF-889B-9091360B73A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44730507-4E4A-4AEF-889B-9091360B73A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44730507-4E4A-4AEF-889B-9091360B73A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF4AEB6C-1F60-44C9-8CC2-1A652FDC052F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF4AEB6C-1F60-44C9-8CC2-1A652FDC052F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF4AEB6C-1F60-44C9-8CC2-1A652FDC052F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF4AEB6C-1F60-44C9-8CC2-1A652FDC052F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

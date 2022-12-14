@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,18 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
-using ShapesMvp.App.Views;
 
-namespace ShapesMvp.App
+namespace ShapesMvp.App.Views
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for CanvasView.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class CanvasView : Window
     {
-        public MainWindow()
+        public CanvasView()
         {
             InitializeComponent();
         }
