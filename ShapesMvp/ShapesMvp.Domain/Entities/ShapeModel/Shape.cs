@@ -30,6 +30,8 @@ namespace ShapesMvp.Domain.Entities.ShapeModel
         public readonly ShapeType ShapeType;
         public readonly string Uid;
 
+        public string Color { get; set; } = "Black";
+
         private FrameRect _frameRect;
         public FrameRect FrameRect
         {

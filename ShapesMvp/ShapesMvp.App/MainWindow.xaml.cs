@@ -2,6 +2,7 @@ using System;
 using System.Windows;
 using System.Windows.Shapes;
 using ShapesMvp.App.Events.Canvas;
+using ShapesMvp.App.Factories;
 using ShapesMvp.App.Presenters;
 using ShapesMvp.Domain.Enums;
 using ShapesMvp.Domain.Events.CanvasModel;
@@ -24,7 +25,10 @@ namespace ShapesMvp.App
         public MainWindow()
         {
             InitializeComponent();
-            CanvasPresenter presenter = new( this, new Domain.Entities.CanvasModel.Canvas() );
+            CanvasPresenter presenter = new( 
+                new ShapeModelFactory(), 
+                this, 
+                new Domain.Entities.CanvasModel.Canvas() );
         }
 
         public void AddShape( Shape shape )

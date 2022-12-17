@@ -1,12 +1,13 @@
 using System.Windows;
 using System.Windows.Media;
 using ShapesMvp.App.Events.Canvas;
+using ShapesMvp.App.Factories;
 using ShapesMvp.Common;
-using ShapesMvp.Domain.Entities.CanvasModel;
-using ShapesMvp.Domain.Entities.ShapeModel;
-using ShapesMvp.Domain.Enums;
 using ShapesMvp.Domain.Events.CanvasModel;
 using SystemCanvas = System.Windows.Controls.Canvas;
+using DomainCanvas = ShapesMvp.Domain.Entities.CanvasModel.Canvas;
+using SystemShapes = System.Windows.Shapes;
+using DomainShapes = ShapesMvp.Domain.Entities.ShapeModel;
 
 namespace ShapesMvp.App.Presenters
 {
@@ -14,11 +15,17 @@ namespace ShapesMvp.App.Presenters
     {
         private const double InitialShapeWidth = 50;
         private const double InitialShapeHeight = 50;
+        private const string InitialShapeColor = "Crimson";
+        private readonly IShapeModelFactory _shapeModelFactory;
         private readonly ICanvasView _canvasView;
-        private readonly Canvas _canvasModel;
+        private readonly DomainCanvas _canvasModel;
 
-        public CanvasPresenter( ICanvasView canvasView, Canvas canvas )
+        public CanvasPresenter( 
+            IShapeModelFactory shapeModelFactory, 
+            ICanvasView canvasView,
+            DomainCanvas canvas )
         {
+            _shapeModelFactory = shapeModelFactory;
             _canvasView = canvasView;
             _canvasModel = canvas;
 
@@ -29,69 +36,17 @@ namespace ShapesMvp.App.Presenters
         private void View_ShapeAdded( object? sender, CanvasViewShapeAddedEventArgs e )
         {
             FrameRect frameRect = GetInitialShapeFrameRect( e.Canvas );
-
-            switch ( e.ShapeType )
-            {
-                case ShapeType.Ellipse:
-                    _canvasModel.AddShape( new Ellipse( frameRect ) );
-                    break;
-                case ShapeType.Rectangle:
-                    _canvasModel.AddShape( new Rectangle( frameRect ) );
-                    break;
-                case ShapeType.Triangle:
-                    _canvasModel.AddShape( new Triangle( frameRect ) );
-                    break;
-                default:
-                    break;
-            }
+            var shape = _shapeModelFactory.CreateShape( e.ShapeType, frameRect );
+            shape.Color = "Crimson";
+            _canvasModel.AddShape( shape );
         }
 
         private void Model_ShapeAdded( object? sender, CanvasModelShapeAddedEventArgs e )
         {
-            switch ( e.Shape.ShapeType )
-            {
-                case ShapeType.Ellipse:
-                    System.Windows.Shapes.Ellipse ellipse = new()
-                    {
-                        Fill = Brushes.Crimson,
-                        Uid = e.Shape.Uid,
-                        Height = e.Shape.FrameRect.Height,
-                        Width = e.Shape.FrameRect.Width,
-                    };
-                    SystemCanvas.SetLeft( ellipse, e.Shape.FrameRect.X );
-                    SystemCanvas.SetTop( ellipse, e.Shape.FrameRect.Y );
-                    _canvasView.AddShape( ellipse );
-                    break;
-                case ShapeType.Rectangle:
-                    System.Windows.Shapes.Rectangle rectangle = new()
-                    {
-                        Fill = Brushes.Crimson,
-                        Uid = e.Shape.Uid,
-                        Height = e.Shape.FrameRect.Height,
-                        Width = e.Shape.FrameRect.Width,
-                    };
-                    SystemCanvas.SetLeft( rectangle, e.Shape.FrameRect.X );
-                    SystemCanvas.SetTop( rectangle, e.Shape.FrameRect.Y );
-                    _canvasView.AddShape( rectangle );
-                    break;
-                case ShapeType.Triangle:
-                    System.Windows.Shapes.Polygon triangle = new()
-                    {
-                        Fill = Brushes.Crimson,
-                        Uid = e.Shape.Uid,
-                        Height = e.Shape.FrameRect.Height,
-                        Width = e.Shape.FrameRect.Width,
-                    };
-                    triangle.Points.Add( new Point( 0, triangle.Height ) );
-                    triangle.Points.Add( new Point( triangle.Width / 2, 0 ) );
-                    triangle.Points.Add( new Point( triangle.Width, triangle.Height ) );
-                    SystemCanvas.SetLeft( triangle, e.Shape.FrameRect.X );
-                    SystemCanvas.SetTop( triangle, e.Shape.FrameRect.Y );
-                    _canvasView.AddShape( triangle );
-                    break;
-                default:
-                    break;
-            }
+            var shape = ShapeConverter.ConvertToView( e.Shape );
+            SystemCanvas.SetLeft( shape, e.Shape.FrameRect.X );
+            SystemCanvas.SetTop( shape, e.Shape.FrameRect.Y );
+            _canvasView.AddShape( shape );
         }
 
         private static FrameRect GetInitialShapeFrameRect( SystemCanvas canvas )
