@@ -83,10 +83,18 @@ namespace ShapesMvp.App.Adorners
 
         private void DragDeltaResizeThumb( object sender, DragDeltaEventArgs e )
         {
+            double x = Canvas.GetLeft( _adornedElement );
+            double y = Canvas.GetTop( _adornedElement );
             double dX = e.HorizontalChange;
             double dY = e.VerticalChange;
-            _adornedElement.Width = Math.Max( _adornedElement.Width + dX, AdornedElementMinWidth );
-            _adornedElement.Height = Math.Max( _adornedElement.Height + dY, AdornedElementMinHeight );
+            double newWidth = Math.Max( _adornedElement.Width + dX, AdornedElementMinWidth );
+            double newHeight = Math.Max( _adornedElement.Height + dY, AdornedElementMinHeight );
+
+            newWidth = x + newWidth >= _canvas.ActualWidth ? _canvas.ActualWidth - x : newWidth;
+            newHeight = y + newHeight >= _canvas.ActualHeight ? _canvas.ActualHeight - y : newHeight;
+
+            _adornedElement.Width = newWidth;
+            _adornedElement.Height = newHeight;
         }
 
         private void DragDeltaMoveThumb( object sender, DragDeltaEventArgs e )

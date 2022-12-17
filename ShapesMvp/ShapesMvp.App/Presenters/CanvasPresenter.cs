@@ -61,15 +61,13 @@ namespace ShapesMvp.App.Presenters
         {
             if ( _selectedShapeUid != null )
             {
-                SystemShapes.Shape? selectedShape = _canvasView.GetShape( _selectedShapeUid );
-                selectedShape?.DisableSelectionAdorner();
+                _canvasView.GetShape( _selectedShapeUid )?.DisableSelectionAdorner();
             }
 
             if ( e.SelectedShape != null )
             {
                 _selectedShapeUid = e.SelectedShape.Uid;
-                SystemShapes.Shape? selectedShape = _canvasView.GetShape( _selectedShapeUid );
-                selectedShape?.EnableSelectionAdorner();
+                _canvasView.GetShape( _selectedShapeUid )?.EnableSelectionAdorner();
             }
             else
             {
