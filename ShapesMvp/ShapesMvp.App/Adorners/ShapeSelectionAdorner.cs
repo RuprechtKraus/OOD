@@ -9,7 +9,7 @@ using System.Windows.Shapes;
 
 namespace ShapesMvp.App.Adorners
 {
-    public class SelectedShapeAdorner : Adorner
+    public class ShapeSelectionAdorner : Adorner
     {
         private const double AdornedElementMinWidth = 50;
         private const double AdornedElementMinHeight = 50;
@@ -21,7 +21,7 @@ namespace ShapesMvp.App.Adorners
         private readonly VisualCollection _visualChildren;
         private readonly FrameworkElement _adornedElement;
 
-        public SelectedShapeAdorner( UIElement adornedElement )
+        public ShapeSelectionAdorner( UIElement adornedElement )
            : base( adornedElement )
         {
             _visualChildren = new VisualCollection( this );

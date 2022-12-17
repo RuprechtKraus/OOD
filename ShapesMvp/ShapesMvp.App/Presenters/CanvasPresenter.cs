@@ -11,6 +11,7 @@ using DomainShapes = ShapesMvp.Domain.Entities.ShapeModel;
 using System.Windows.Documents;
 using ShapesMvp.App.Adorners;
 using System.Linq;
+using ShapesMvp.App.Extensions;
 
 namespace ShapesMvp.App.Presenters
 {
@@ -61,20 +62,14 @@ namespace ShapesMvp.App.Presenters
             if ( _selectedShapeUid != null )
             {
                 SystemShapes.Shape? selectedShape = _canvasView.GetShape( _selectedShapeUid );
-                var adornerLayer = AdornerLayer.GetAdornerLayer( selectedShape );
-                var adorners = adornerLayer.GetAdorners( selectedShape );
-                adornerLayer.Remove( adorners.First( x => x is SelectedShapeAdorner ) );
+                selectedShape?.DisableSelectionAdorner();
             }
 
             if ( e.SelectedShape != null )
             {
                 _selectedShapeUid = e.SelectedShape.Uid;
                 SystemShapes.Shape? selectedShape = _canvasView.GetShape( _selectedShapeUid );
-                if ( selectedShape != null )
-                {
-                    AdornerLayer.GetAdornerLayer( selectedShape )
-                        .Add( new SelectedShapeAdorner( selectedShape ) );
-                }
+                selectedShape?.EnableSelectionAdorner();
             }
             else
             {
