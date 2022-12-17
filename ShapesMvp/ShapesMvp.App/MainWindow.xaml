@@ -7,7 +7,23 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="480" Width="640"
         ResizeMode="NoResize">
+    <Window.Resources>
+        <Style x:Key="MenuButton">
+            <Setter Property="Control.MinWidth" Value="90"/>
+            <Setter Property="Control.MinHeight" Value="20"/>
+            <Setter Property="Control.HorizontalAlignment" Value="Left"/>
+            <Setter Property="Control.VerticalAlignment" Value="Top"/>
+        </Style>
+    </Window.Resources>
     <Grid>
-
+        <DockPanel>
+            <WrapPanel DockPanel.Dock="Top" Height="40">
+                <Button Margin="10,10,0,0" Style="{StaticResource MenuButton}" Content="Add Ellipse" Click="AddEllipseButton_Click"/>
+                <Button Margin="10,10,0,0" Style="{StaticResource MenuButton}" Content="Add Rectangle" Click="AddRectangleButton_Click"/>
+                <Button Margin="10,10,0,0" Style="{StaticResource MenuButton}" Content="Add Triangle" Click="AddTriangleButton_Click"/>
+            </WrapPanel>
+            <Separator DockPanel.Dock="Top"/>
+            <Canvas x:Name="MainCanvas" DockPanel.Dock="Top" Background="AliceBlue"/>
+        </DockPanel>
     </Grid>
 </Window>
