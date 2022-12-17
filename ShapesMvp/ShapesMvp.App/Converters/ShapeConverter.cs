@@ -7,8 +7,10 @@ using System.Windows;
 
 namespace ShapesMvp.App.Factories
 {
-    public class ShapeConverter
+    public static class ShapeConverter
     {
+        private static readonly Brush DefaultFillColor = Brushes.Black;
+
         public static SystemShapes.Shape ConvertToView( DomainShapes.Shape shape )
         {
             SystemShapes.Shape _shape = shape.ShapeType switch
@@ -25,7 +27,7 @@ namespace ShapesMvp.App.Factories
         {
             return new SystemShapes.Ellipse()
             {
-                Fill = (Brush) new BrushConverter().ConvertFromString( shape.Color ),
+                Fill = StringToBrushOrDefault( shape.Color ),
                 Uid = shape.Uid,
                 Height = shape.FrameRect.Height,
                 Width = shape.FrameRect.Width,
@@ -36,7 +38,7 @@ namespace ShapesMvp.App.Factories
         {
             return new SystemShapes.Rectangle()
             {
-                Fill = (Brush) new BrushConverter().ConvertFromString( shape.Color ),
+                Fill = StringToBrushOrDefault( shape.Color ),
                 Uid = shape.Uid,
                 Height = shape.FrameRect.Height,
                 Width = shape.FrameRect.Width,
@@ -47,7 +49,7 @@ namespace ShapesMvp.App.Factories
         {
             SystemShapes.Polygon triangle = new()
             {
-                Fill = (Brush) new BrushConverter().ConvertFromString( shape.Color ),
+                Fill = StringToBrushOrDefault( shape.Color ),
                 Uid = shape.Uid,
                 Height = shape.FrameRect.Height,
                 Width = shape.FrameRect.Width,
@@ -57,6 +59,21 @@ namespace ShapesMvp.App.Factories
             triangle.Points.Add( new Point( triangle.Width, triangle.Height ) );
 
             return triangle;
+        }
+
+        private static Brush StringToBrushOrDefault( string color )
+        {
+            Brush? brush = null;
+
+            try
+            {
+                brush = new BrushConverter().ConvertFromString( color ) as Brush;
+            }
+            catch
+            {
+            }
+
+            return brush ?? DefaultFillColor;
         }
     }
 }
