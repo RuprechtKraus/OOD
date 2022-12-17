@@ -53,6 +53,7 @@ namespace ShapesMvp.App.Factories
                 Uid = shape.Uid,
                 Height = shape.FrameRect.Height,
                 Width = shape.FrameRect.Width,
+                Stretch = Stretch.Fill
             };
             triangle.Points.Add( new Point( 0, triangle.Height ) );
             triangle.Points.Add( new Point( triangle.Width / 2, 0 ) );

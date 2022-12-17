@@ -23,7 +23,7 @@
                 <Button Margin="10,10,0,0" Style="{StaticResource MenuButton}" Content="Add Triangle" Click="AddTriangleButton_Click"/>
             </WrapPanel>
             <Separator DockPanel.Dock="Top"/>
-            <Canvas x:Name="MainCanvas" DockPanel.Dock="Top" Background="AliceBlue"/>
+            <Canvas x:Name="MainCanvas" DockPanel.Dock="Top" Background="AliceBlue" MouseDown="Canvas_MouseDown"/>
         </DockPanel>
     </Grid>
 </Window>
