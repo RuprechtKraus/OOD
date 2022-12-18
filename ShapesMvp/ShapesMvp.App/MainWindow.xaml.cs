@@ -5,10 +5,11 @@ using ShapesMvp.App.Events.Canvas;
 using ShapesMvp.App.Factories;
 using ShapesMvp.App.Presenters;
 using ShapesMvp.Domain.Enums;
-using System.Linq;
+using SystemCanvas = System.Windows.Controls.Canvas;
 using DomainCanvas = ShapesMvp.Domain.Entities.CanvasModel.Canvas;
 using System.Windows.Input;
 using System.Windows.Controls;
+using ShapesMvp.Domain.Entities.CanvasModel;
 
 namespace ShapesMvp.App
 {
@@ -28,6 +29,8 @@ namespace ShapesMvp.App
     {
         public event EventHandler<CanvasViewShapeAddedEventArgs>? ShapeAdded;
         public event EventHandler<CanvasViewEventArgs>? CanvasMouseDown;
+
+        private Point? _dragStart = null;
 
         public MainWindow()
         {
@@ -80,7 +83,7 @@ namespace ShapesMvp.App
                 {
                     CanvasMouseDown( this, new CanvasViewEventArgs( shape ) );
                 }
-                else if ( source is Canvas )
+                else if ( source is SystemCanvas )
                 {
                     CanvasMouseDown( this, new CanvasViewEventArgs( null ) );
                 }

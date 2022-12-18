@@ -106,9 +106,9 @@ namespace ShapesMvp.App.Adorners
 
             newX = newX <= 0 ? 0 : newX;
             newY = newY <= 0 ? 0 : newY;
-            newX = newX + _adornedElement.Width >= _canvas.ActualWidth ? 
+            newX = newX + _adornedElement.Width >= _canvas.ActualWidth ?
                 _canvas.ActualWidth - _adornedElement.Width : newX;
-            newY = newY + _adornedElement.Height >= _canvas.ActualHeight ? 
+            newY = newY + _adornedElement.Height >= _canvas.ActualHeight ?
                 _canvas.ActualHeight - _adornedElement.Height : newY;
 
             Canvas.SetLeft( _adornedElement, newX );

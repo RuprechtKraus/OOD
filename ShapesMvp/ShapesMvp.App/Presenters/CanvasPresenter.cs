@@ -1,5 +1,4 @@
 using System.Windows;
-using System.Windows.Media;
 using ShapesMvp.App.Events.Canvas;
 using ShapesMvp.App.Factories;
 using ShapesMvp.Common;
@@ -12,6 +11,8 @@ using System.Windows.Documents;
 using ShapesMvp.App.Adorners;
 using System.Linq;
 using ShapesMvp.App.Extensions;
+using System.Windows.Input;
+using ShapesMvp.App.Dragging;
 
 namespace ShapesMvp.App.Presenters
 {
@@ -24,6 +25,7 @@ namespace ShapesMvp.App.Presenters
         private readonly IShapeModelFactory _shapeModelFactory;
         private readonly ICanvasView _canvasView;
         private readonly DomainCanvas _canvasModel;
+        private readonly ShapeDraggingManager _draggingManager;
 
         private string? _selectedShapeUid = null;
 
@@ -35,6 +37,7 @@ namespace ShapesMvp.App.Presenters
             _shapeModelFactory = shapeModelFactory;
             _canvasView = canvasView;
             _canvasModel = canvas;
+            _draggingManager = new ShapeDraggingManager();
 
             _canvasView.ShapeAdded += View_ShapeAdded;
             _canvasView.CanvasMouseDown += View_MouseDown;
@@ -54,6 +57,7 @@ namespace ShapesMvp.App.Presenters
             SystemShapes.Shape shape = ShapeConverter.ConvertToView( e.Shape );
             SystemCanvas.SetLeft( shape, e.Shape.FrameRect.X );
             SystemCanvas.SetTop( shape, e.Shape.FrameRect.Y );
+            _draggingManager.EnableDrag( shape );
             _canvasView.AddShape( shape );
         }
 
