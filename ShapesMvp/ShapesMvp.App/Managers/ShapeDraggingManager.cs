@@ -33,11 +33,14 @@ namespace ShapesMvp.App.Dragging
 
         private void OnMouseUp( object sender, MouseButtonEventArgs e )
         {
-            _shape!.Cursor = Cursors.Arrow;
-            _dragStart = null;
-            _canvas = null;
-            _shape.ReleaseMouseCapture();
-            _shape = null;
+            if ( _shape != null )
+            {
+                _shape.Cursor = Cursors.Arrow;
+                _dragStart = null;
+                _canvas = null;
+                _shape.ReleaseMouseCapture();
+                _shape = null;
+            }
         }
 
         private void OnMouseMove( object sender, MouseEventArgs e )

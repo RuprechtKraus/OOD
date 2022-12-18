@@ -64,6 +64,7 @@ namespace ShapesMvp.App.Adorners
                 Opacity = 0
             };
             _resizeThumb.DragDelta += DragDeltaResizeThumb;
+            _resizeThumb.DragCompleted += DragCompleted;
             _resizeThumb.Cursor = Cursors.SizeNWSE;
             _visualChildren.Add( _resizeThumb );
         }
@@ -77,6 +78,7 @@ namespace ShapesMvp.App.Adorners
                 Opacity = 0
             };
             _moveThumb.DragDelta += DragDeltaMoveThumb;
+            _moveThumb.DragCompleted += DragCompleted;
             _moveThumb.Cursor = Cursors.SizeAll;
             _visualChildren.Add( _moveThumb );
         }
@@ -93,6 +95,8 @@ namespace ShapesMvp.App.Adorners
             newWidth = x + newWidth >= _canvas.ActualWidth ? _canvas.ActualWidth - x : newWidth;
             newHeight = y + newHeight >= _canvas.ActualHeight ? _canvas.ActualHeight - y : newHeight;
 
+            _moveThumb!.Width = newWidth;
+            _moveThumb.Height = newHeight;
             _adornedElement.Width = newWidth;
             _adornedElement.Height = newHeight;
         }
@@ -113,6 +117,15 @@ namespace ShapesMvp.App.Adorners
 
             Canvas.SetLeft( _adornedElement, newX );
             Canvas.SetTop( _adornedElement, newY );
+        }
+
+        private void DragCompleted( object sender, DragCompletedEventArgs e )
+        {
+            var args = new MouseButtonEventArgs( Mouse.PrimaryDevice, 0, MouseButton.Left )
+            {
+                RoutedEvent = MouseUpEvent
+            };
+            _adornedElement.RaiseEvent( args );
         }
 
         protected override Size ArrangeOverride( Size finalSize )

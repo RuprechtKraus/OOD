@@ -32,5 +32,10 @@ namespace ShapesMvp.Domain.Entities.CanvasModel
         {
             return _shapes.ElementAt( index );
         }
+
+        public Shape? GetShapeByUid( string uid )
+        {
+            return _shapes.Find( x => x.Uid == uid );
+        }
     }
 }

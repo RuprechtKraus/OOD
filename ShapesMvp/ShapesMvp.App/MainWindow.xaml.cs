@@ -16,10 +16,13 @@ namespace ShapesMvp.App
     public interface ICanvasView
     {
         void AddShape( Shape shape );
-        Shape? GetShape( string uid );
+        void RemoveShape( Shape shape );
+        Shape? GetShapeByUid( string uid );
 
         event EventHandler<CanvasViewShapeAddedEventArgs> ShapeAdded;
         event EventHandler<CanvasViewEventArgs> CanvasMouseDown;
+        event EventHandler<CanvasViewEventArgs> CanvasMouseUp;
+        event EventHandler<CanvasViewEventArgs> CanvasKeyPressed;
     }
 
     /// <summary>
@@ -29,8 +32,8 @@ namespace ShapesMvp.App
     {
         public event EventHandler<CanvasViewShapeAddedEventArgs>? ShapeAdded;
         public event EventHandler<CanvasViewEventArgs>? CanvasMouseDown;
-
-        private Point? _dragStart = null;
+        public event EventHandler<CanvasViewEventArgs>? CanvasMouseUp;
+        public event EventHandler<CanvasViewEventArgs>? CanvasKeyPressed;
 
         public MainWindow()
         {
@@ -44,9 +47,15 @@ namespace ShapesMvp.App
         public void AddShape( Shape shape )
         {
             MainCanvas.Children.Add( shape );
+            shape.Focusable = true;
         }
 
-        public Shape? GetShape( string uid )
+        public void RemoveShape( Shape shape )
+        {
+            MainCanvas.Children.Remove( shape );
+        }
+
+        public Shape? GetShapeByUid( string uid )
         {
             foreach ( UIElement item in MainCanvas.Children )
             {
@@ -82,11 +91,38 @@ namespace ShapesMvp.App
                 if ( source is Shape shape )
                 {
                     CanvasMouseDown( this, new CanvasViewEventArgs( shape ) );
+                    Keyboard.Focus( shape );
                 }
                 else if ( source is SystemCanvas )
                 {
                     CanvasMouseDown( this, new CanvasViewEventArgs( null ) );
+                    Keyboard.ClearFocus();
                 }
+            }
+        }
+
+        private void Canvas_MouseUp( object sender, MouseButtonEventArgs e )
+        {
+            if ( CanvasMouseUp != null )
+            {
+                object source = e.OriginalSource;
+
+                if ( source is Shape shape )
+                {
+                    CanvasMouseUp( this, new CanvasViewEventArgs( shape ) );
+                }
+            }
+        }
+
+        private void Canvas_KeyDown( object sender, KeyEventArgs e )
+        {
+            if ( CanvasKeyPressed != null )
+            {
+                var args = new CanvasViewEventArgs( e.OriginalSource is Shape ? e.OriginalSource as Shape : null )
+                {
+                    KeyPressed = e.Key
+                };
+                CanvasKeyPressed( this, args );
             }
         }
     }

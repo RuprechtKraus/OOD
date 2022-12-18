@@ -31,6 +31,7 @@ namespace ShapesMvp.App.Factories
                 Uid = shape.Uid,
                 Height = shape.FrameRect.Height,
                 Width = shape.FrameRect.Width,
+                Focusable = true
             };
         }
 
@@ -42,6 +43,7 @@ namespace ShapesMvp.App.Factories
                 Uid = shape.Uid,
                 Height = shape.FrameRect.Height,
                 Width = shape.FrameRect.Width,
+                Focusable = true
             };
         }
 
@@ -53,6 +55,7 @@ namespace ShapesMvp.App.Factories
                 Uid = shape.Uid,
                 Height = shape.FrameRect.Height,
                 Width = shape.FrameRect.Width,
+                Focusable = true,
                 Stretch = Stretch.Fill
             };
             triangle.Points.Add( new Point( 0, triangle.Height ) );

@@ -41,7 +41,25 @@ namespace ShapesMvp.App.Presenters
 
             _canvasView.ShapeAdded += View_ShapeAdded;
             _canvasView.CanvasMouseDown += View_MouseDown;
+            _canvasView.CanvasMouseUp += View_MouseUp;
+            _canvasView.CanvasKeyPressed += View_KeyPressed;
             _canvasModel.ShapeAdded += Model_ShapeAdded;
+            _canvasModel.ShapeRemoved += Model_ShapeRemoved;
+        }
+
+        private void View_KeyPressed( object? sender, CanvasViewEventArgs e )
+        {
+            switch ( e.KeyPressed )
+            {
+                case Key.Delete:
+                    if ( e.SelectedShape != null )
+                    {
+                        RemoveShape( e.SelectedShape );
+                    }
+                    break;
+                default:
+                    break;
+            }
         }
 
         private void View_ShapeAdded( object? sender, CanvasViewShapeAddedEventArgs e )
@@ -52,8 +70,44 @@ namespace ShapesMvp.App.Presenters
             _canvasModel.AddShape( shape );
         }
 
+        private void View_MouseDown( object? sender, CanvasViewEventArgs e )
+        {
+            if ( _selectedShapeUid != null )
+            {
+                _canvasView.GetShapeByUid( _selectedShapeUid )?.DisableSelectionAdorner();
+            }
+
+            if ( e.SelectedShape != null )
+            {
+                _selectedShapeUid = e.SelectedShape.Uid;
+                _canvasView.GetShapeByUid( _selectedShapeUid )?.EnableSelectionAdorner();
+            }
+            else
+            {
+                _selectedShapeUid = null;
+            }
+        }
+
+        private void View_MouseUp( object? sender, CanvasViewEventArgs e )
+        {
+            if ( e.SelectedShape != null )
+            {
+                DomainShapes.Shape? shape = _canvasModel.GetShapeByUid( e.SelectedShape.Uid );
+                if ( shape != null )
+                {
+                    SystemShapes.Shape selectedShape = e.SelectedShape;
+                    shape.FrameRect = new FrameRect(
+                        SystemCanvas.GetLeft( selectedShape ),
+                        SystemCanvas.GetTop( selectedShape ),
+                        selectedShape.ActualWidth,
+                        selectedShape.ActualHeight );
+                }
+            }
+        }
+
         private void Model_ShapeAdded( object? sender, CanvasModelShapeAddedEventArgs e )
         {
+            e.Shape.ShapeChanged += Shape_ShapeChanged;
             SystemShapes.Shape shape = ShapeConverter.ConvertToView( e.Shape );
             SystemCanvas.SetLeft( shape, e.Shape.FrameRect.X );
             SystemCanvas.SetTop( shape, e.Shape.FrameRect.Y );
@@ -61,21 +115,34 @@ namespace ShapesMvp.App.Presenters
             _canvasView.AddShape( shape );
         }
 
-        private void View_MouseDown( object? sender, CanvasViewEventArgs e )
+        private void Model_ShapeRemoved( object? sender, CanvasModelShapeRemovedEventArgs e )
         {
-            if ( _selectedShapeUid != null )
+            SystemShapes.Shape? shape = _canvasView.GetShapeByUid( e.Uid );
+            if ( shape != null )
             {
-                _canvasView.GetShape( _selectedShapeUid )?.DisableSelectionAdorner();
+                _canvasView.RemoveShape( shape );
             }
+        }
 
-            if ( e.SelectedShape != null )
+        private void Shape_ShapeChanged( object? sender, Domain.Events.ShapeModel.ShapeModelChangedEventArgs e )
+        {
+            SystemShapes.Shape? shape = _canvasView.GetShapeByUid( e.Shape.Uid );
+            if ( shape != null )
             {
-                _selectedShapeUid = e.SelectedShape.Uid;
-                _canvasView.GetShape( _selectedShapeUid )?.EnableSelectionAdorner();
+                FrameRect frameRect = e.Shape.FrameRect;
+                SystemCanvas.SetLeft( shape, frameRect.X );
+                SystemCanvas.SetTop( shape, frameRect.Y );
+                shape.Width = frameRect.Width;
+                shape.Height = frameRect.Height;
             }
-            else
+        }
+
+        private void RemoveShape( SystemShapes.Shape shape )
+        {
+            DomainShapes.Shape? _shape = _canvasModel.GetShapeByUid( shape.Uid );
+            if ( _shape != null )
             {
-                _selectedShapeUid = null;
+                _canvasModel.RemoveShape( _shape );
             }
         }
 
