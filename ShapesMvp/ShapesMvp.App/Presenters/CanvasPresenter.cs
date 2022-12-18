@@ -43,6 +43,8 @@ namespace ShapesMvp.App.Presenters
             _canvasView.CanvasMouseDown += View_MouseDown;
             _canvasView.CanvasMouseUp += View_MouseUp;
             _canvasView.CanvasKeyPressed += View_KeyPressed;
+            _canvasView.DeleteButtonPressed += View_DeleteButtonPressed;
+
             _canvasModel.ShapeAdded += Model_ShapeAdded;
             _canvasModel.ShapeRemoved += Model_ShapeRemoved;
         }
@@ -52,14 +54,16 @@ namespace ShapesMvp.App.Presenters
             switch ( e.KeyPressed )
             {
                 case Key.Delete:
-                    if ( e.SelectedShape != null )
-                    {
-                        RemoveShape( e.SelectedShape );
-                    }
+                    RemoveShapeByUid( _selectedShapeUid! );
                     break;
                 default:
                     break;
             }
+        }
+
+        private void View_DeleteButtonPressed( object? sender, System.EventArgs e )
+        {
+            RemoveShapeByUid( _selectedShapeUid! );
         }
 
         private void View_ShapeAdded( object? sender, CanvasViewShapeAddedEventArgs e )
@@ -137,12 +141,15 @@ namespace ShapesMvp.App.Presenters
             }
         }
 
-        private void RemoveShape( SystemShapes.Shape shape )
+        private void RemoveShapeByUid( string uid )
         {
-            DomainShapes.Shape? _shape = _canvasModel.GetShapeByUid( shape.Uid );
-            if ( _shape != null )
+            if ( uid != null )
             {
-                _canvasModel.RemoveShape( _shape );
+                DomainShapes.Shape? shape = _canvasModel.GetShapeByUid( uid );
+                if ( shape != null )
+                {
+                    _canvasModel.RemoveShape( shape );
+                }
             }
         }
 

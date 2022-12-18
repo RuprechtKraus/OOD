@@ -21,6 +21,7 @@
                 <Button Margin="10,10,0,0" Style="{StaticResource MenuButton}" Content="Add Ellipse" Click="AddEllipseButton_Click"/>
                 <Button Margin="10,10,0,0" Style="{StaticResource MenuButton}" Content="Add Rectangle" Click="AddRectangleButton_Click"/>
                 <Button Margin="10,10,0,0" Style="{StaticResource MenuButton}" Content="Add Triangle" Click="AddTriangleButton_Click"/>
+                <Button Margin="10,10,0,0" Style="{StaticResource MenuButton}" Content="Delete Shape" Click="DeleteButton_Click"/>
             </WrapPanel>
             <Separator DockPanel.Dock="Top"/>
             <Canvas x:Name="MainCanvas" DockPanel.Dock="Top" Background="AliceBlue" 

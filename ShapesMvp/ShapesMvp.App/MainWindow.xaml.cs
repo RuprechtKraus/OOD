@@ -23,6 +23,7 @@ namespace ShapesMvp.App
         event EventHandler<CanvasViewEventArgs> CanvasMouseDown;
         event EventHandler<CanvasViewEventArgs> CanvasMouseUp;
         event EventHandler<CanvasViewEventArgs> CanvasKeyPressed;
+        event EventHandler DeleteButtonPressed;
     }
 
     /// <summary>
@@ -34,6 +35,7 @@ namespace ShapesMvp.App
         public event EventHandler<CanvasViewEventArgs>? CanvasMouseDown;
         public event EventHandler<CanvasViewEventArgs>? CanvasMouseUp;
         public event EventHandler<CanvasViewEventArgs>? CanvasKeyPressed;
+        public event EventHandler? DeleteButtonPressed;
 
         public MainWindow()
         {
@@ -124,6 +126,11 @@ namespace ShapesMvp.App
                 };
                 CanvasKeyPressed( this, args );
             }
+        }
+
+        private void DeleteButton_Click( object sender, RoutedEventArgs e )
+        {
+            DeleteButtonPressed?.Invoke( this, new EventArgs() );
         }
     }
 }
