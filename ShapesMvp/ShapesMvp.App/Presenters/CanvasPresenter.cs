@@ -7,9 +7,6 @@ using SystemCanvas = System.Windows.Controls.Canvas;
 using DomainCanvas = ShapesMvp.Domain.Entities.CanvasModel.Canvas;
 using SystemShapes = System.Windows.Shapes;
 using DomainShapes = ShapesMvp.Domain.Entities.ShapeModel;
-using System.Windows.Documents;
-using ShapesMvp.App.Adorners;
-using System.Linq;
 using ShapesMvp.App.Extensions;
 using System.Windows.Input;
 using ShapesMvp.App.Dragging;
@@ -47,6 +44,16 @@ namespace ShapesMvp.App.Presenters
 
             _canvasModel.ShapeAdded += Model_ShapeAdded;
             _canvasModel.ShapeRemoved += Model_ShapeRemoved;
+
+            LoadCanvas();
+        }
+
+        private void LoadCanvas()
+        {
+            foreach ( DomainShapes.Shape shape in _canvasModel.Shapes )
+            {
+                ConvertShapeToViewAndDisplay( shape );
+            }
         }
 
         private void View_KeyPressed( object? sender, CanvasViewEventArgs e )
@@ -111,12 +118,17 @@ namespace ShapesMvp.App.Presenters
 
         private void Model_ShapeAdded( object? sender, CanvasModelShapeAddedEventArgs e )
         {
-            e.Shape.ShapeChanged += Shape_ShapeChanged;
-            SystemShapes.Shape shape = ShapeConverter.ConvertToView( e.Shape );
-            SystemCanvas.SetLeft( shape, e.Shape.FrameRect.X );
-            SystemCanvas.SetTop( shape, e.Shape.FrameRect.Y );
-            _draggingManager.EnableDrag( shape );
-            _canvasView.AddShape( shape );
+            ConvertShapeToViewAndDisplay( e.Shape );
+        }
+
+        private void ConvertShapeToViewAndDisplay( DomainShapes.Shape shape )
+        {
+            shape.ShapeChanged += Shape_ShapeChanged;
+            SystemShapes.Shape shapeView = ShapeConverter.ConvertToView( shape );
+            SystemCanvas.SetLeft( shapeView, shape.FrameRect.X );
+            SystemCanvas.SetTop( shapeView, shape.FrameRect.Y );
+            _draggingManager.EnableDrag( shapeView );
+            _canvasView.AddShape( shapeView );
         }
 
         private void Model_ShapeRemoved( object? sender, CanvasModelShapeRemovedEventArgs e )
