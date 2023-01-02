@@ -9,7 +9,7 @@ using SystemShapes = System.Windows.Shapes;
 using DomainShapes = ShapesMvp.Domain.Entities.ShapeModel;
 using ShapesMvp.App.Extensions;
 using System.Windows.Input;
-using ShapesMvp.App.Dragging;
+using System.Collections.Generic;
 
 namespace ShapesMvp.App.Presenters
 {
@@ -22,37 +22,36 @@ namespace ShapesMvp.App.Presenters
         private readonly IShapeModelFactory _shapeModelFactory;
         private readonly ICanvasView _canvasView;
         private readonly DomainCanvas _canvasModel;
-        private readonly ShapeDraggingManager _draggingManager;
 
         private string? _selectedShapeUid = null;
+        private readonly List<ShapeView> _shapeViews;
 
         public CanvasPresenter(
             IShapeModelFactory shapeModelFactory,
             ICanvasView canvasView,
-            DomainCanvas canvas )
+            DomainCanvas canvasModel )
         {
             _shapeModelFactory = shapeModelFactory;
             _canvasView = canvasView;
-            _canvasModel = canvas;
-            _draggingManager = new ShapeDraggingManager();
+            _canvasModel = canvasModel;
+            _shapeViews = new List<ShapeView>();
 
             _canvasView.ShapeAdded += View_ShapeAdded;
             _canvasView.CanvasMouseDown += View_MouseDown;
-            _canvasView.CanvasMouseUp += View_MouseUp;
             _canvasView.CanvasKeyPressed += View_KeyPressed;
             _canvasView.DeleteButtonPressed += View_DeleteButtonPressed;
 
             _canvasModel.ShapeAdded += Model_ShapeAdded;
             _canvasModel.ShapeRemoved += Model_ShapeRemoved;
 
-            LoadCanvas();
+            LoadShapes();
         }
 
-        private void LoadCanvas()
+        private void LoadShapes()
         {
             foreach ( DomainShapes.Shape shape in _canvasModel.Shapes )
             {
-                ConvertShapeToViewAndDisplay( shape );
+                _shapeViews.Add( new ShapeView( shape, _canvasView ) );
             }
         }
 
@@ -86,49 +85,41 @@ namespace ShapesMvp.App.Presenters
             if ( _selectedShapeUid != null )
             {
                 _canvasView.GetShapeByUid( _selectedShapeUid )?.DisableSelectionAdorner();
-            }
-
-            if ( e.SelectedShape != null )
-            {
-                _selectedShapeUid = e.SelectedShape.Uid;
-                _canvasView.GetShapeByUid( _selectedShapeUid )?.EnableSelectionAdorner();
-            }
-            else
-            {
                 _selectedShapeUid = null;
-            }
-        }
-
-        private void View_MouseUp( object? sender, CanvasViewEventArgs e )
-        {
-            if ( e.SelectedShape != null )
-            {
-                DomainShapes.Shape? shape = _canvasModel.GetShapeByUid( e.SelectedShape.Uid );
-                if ( shape != null )
-                {
-                    SystemShapes.Shape selectedShape = e.SelectedShape;
-                    shape.FrameRect = new FrameRect(
-                        SystemCanvas.GetLeft( selectedShape ),
-                        SystemCanvas.GetTop( selectedShape ),
-                        selectedShape.ActualWidth,
-                        selectedShape.ActualHeight );
-                }
             }
         }
 
         private void Model_ShapeAdded( object? sender, CanvasModelShapeAddedEventArgs e )
         {
-            ConvertShapeToViewAndDisplay( e.Shape );
+            var shapeView = new ShapeView( e.Shape, _canvasView );
+            shapeView.ShapeMouseDown += ShapeView_MouseDown;
+            shapeView.ShapeMouseUp += ShapeView_MouseUp;
+            _shapeViews.Add( shapeView );
         }
 
-        private void ConvertShapeToViewAndDisplay( DomainShapes.Shape shape )
+        private void ShapeView_MouseDown( object? sender, ShapeViewEventArgs e )
         {
-            shape.ShapeChanged += Shape_ShapeChanged;
-            SystemShapes.Shape shapeView = ShapeConverter.ConvertToView( shape );
-            SystemCanvas.SetLeft( shapeView, shape.FrameRect.X );
-            SystemCanvas.SetTop( shapeView, shape.FrameRect.Y );
-            _draggingManager.EnableDrag( shapeView );
-            _canvasView.AddShape( shapeView );
+            if ( _selectedShapeUid != null )
+            {
+                _canvasView.GetShapeByUid( _selectedShapeUid )?.DisableSelectionAdorner();
+            }
+
+            _selectedShapeUid = e.Shape.Uid;
+            _canvasView.GetShapeByUid( _selectedShapeUid )?.EnableSelectionAdorner();
+        }
+
+        private void ShapeView_MouseUp( object? sender, ShapeViewEventArgs e )
+        {
+            DomainShapes.Shape? shape = _canvasModel.GetShapeByUid( e.Shape.Uid );
+            if ( shape != null )
+            {
+                SystemShapes.Shape shapeView = e.Shape;
+                shape.FrameRect = new FrameRect(
+                    SystemCanvas.GetLeft( shapeView ),
+                    SystemCanvas.GetTop( shapeView ),
+                    shapeView.ActualWidth,
+                    shapeView.ActualHeight );
+            }
         }
 
         private void Model_ShapeRemoved( object? sender, CanvasModelShapeRemovedEventArgs e )
@@ -140,19 +131,6 @@ namespace ShapesMvp.App.Presenters
             }
         }
 
-        private void Shape_ShapeChanged( object? sender, Domain.Events.ShapeModel.ShapeModelChangedEventArgs e )
-        {
-            SystemShapes.Shape? shape = _canvasView.GetShapeByUid( e.Shape.Uid );
-            if ( shape != null )
-            {
-                FrameRect frameRect = e.Shape.FrameRect;
-                SystemCanvas.SetLeft( shape, frameRect.X );
-                SystemCanvas.SetTop( shape, frameRect.Y );
-                shape.Width = frameRect.Width;
-                shape.Height = frameRect.Height;
-            }
-        }
-
         private void RemoveShapeByUid( string uid )
         {
             if ( uid != null )
@@ -161,6 +139,12 @@ namespace ShapesMvp.App.Presenters
                 if ( shape != null )
                 {
                     _canvasModel.RemoveShape( shape );
+                }
+
+                ShapeView? shapeView = _shapeViews.Find( x => x.Uid == uid );
+                if ( shapeView != null )
+                {
+                    _shapeViews.Remove( shapeView );
                 }
             }
         }

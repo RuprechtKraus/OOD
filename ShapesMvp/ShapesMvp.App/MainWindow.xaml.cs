@@ -21,7 +21,6 @@ namespace ShapesMvp.App
 
         event EventHandler<CanvasViewShapeAddedEventArgs> ShapeAdded;
         event EventHandler<CanvasViewEventArgs> CanvasMouseDown;
-        event EventHandler<CanvasViewEventArgs> CanvasMouseUp;
         event EventHandler<CanvasViewEventArgs> CanvasKeyPressed;
         event EventHandler DeleteButtonPressed;
     }
@@ -31,15 +30,17 @@ namespace ShapesMvp.App
     /// </summary>
     public partial class MainWindow : Window, ICanvasView
     {
+        public readonly SystemCanvas Canvas;
+
         public event EventHandler<CanvasViewShapeAddedEventArgs>? ShapeAdded;
         public event EventHandler<CanvasViewEventArgs>? CanvasMouseDown;
-        public event EventHandler<CanvasViewEventArgs>? CanvasMouseUp;
         public event EventHandler<CanvasViewEventArgs>? CanvasKeyPressed;
         public event EventHandler? DeleteButtonPressed;
 
         public MainWindow()
         {
             InitializeComponent();
+            Canvas = MainCanvas;
             CanvasPresenter presenter = new(
                 new ShapeModelFactory(),
                 this,
@@ -90,28 +91,10 @@ namespace ShapesMvp.App
             {
                 object source = e.OriginalSource;
 
-                if ( source is Shape shape )
-                {
-                    CanvasMouseDown( this, new CanvasViewEventArgs( shape ) );
-                    Keyboard.Focus( shape );
-                }
-                else if ( source is SystemCanvas )
+                if ( source is SystemCanvas )
                 {
                     CanvasMouseDown( this, new CanvasViewEventArgs( null ) );
                     Keyboard.ClearFocus();
-                }
-            }
-        }
-
-        private void Canvas_MouseUp( object sender, MouseButtonEventArgs e )
-        {
-            if ( CanvasMouseUp != null )
-            {
-                object source = e.OriginalSource;
-
-                if ( source is Shape shape )
-                {
-                    CanvasMouseUp( this, new CanvasViewEventArgs( shape ) );
                 }
             }
         }
