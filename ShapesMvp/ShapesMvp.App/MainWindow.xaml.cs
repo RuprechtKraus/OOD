@@ -49,8 +49,10 @@ namespace ShapesMvp.App
 
         public void AddShape( Shape shape )
         {
-            MainCanvas.Children.Add( shape );
             shape.Focusable = true;
+            MainCanvas.Children.Add( shape );
+            var resizeThumb = new ResizeThumb( shape );
+            MainCanvas.Children.Add( resizeThumb );
         }
 
         public void RemoveShape( Shape shape )
@@ -91,10 +93,10 @@ namespace ShapesMvp.App
             {
                 object source = e.OriginalSource;
 
-                if ( source is SystemCanvas )
+                if ( source is SystemCanvas canvas )
                 {
                     CanvasMouseDown( this, new CanvasViewEventArgs( null ) );
-                    Keyboard.ClearFocus();
+                    canvas.Focus();
                 }
             }
         }

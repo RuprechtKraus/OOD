@@ -26,7 +26,8 @@
             <Separator DockPanel.Dock="Top"/>
             <Canvas x:Name="MainCanvas" DockPanel.Dock="Top" Background="AliceBlue" 
                     MouseDown="Canvas_MouseDown"
-                    KeyDown="Canvas_KeyDown"/>
+                    KeyDown="Canvas_KeyDown"
+                    Focusable="True"/>
         </DockPanel>
     </Grid>
 </Window>

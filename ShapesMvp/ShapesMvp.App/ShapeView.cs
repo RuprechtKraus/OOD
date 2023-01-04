@@ -13,11 +13,6 @@ using System;
 
 namespace ShapesMvp.App
 {
-    public interface IShapeView
-    {
-
-    }
-
     public class ShapeViewEventArgs : EventArgs
     {
         public SystemShapes.Shape Shape { get; }
@@ -28,7 +23,7 @@ namespace ShapesMvp.App
         }
     }
 
-    public class ShapeView : IShapeView
+    public class ShapeView
     {
         private readonly ICanvasView _canvas;
         private readonly DomainShapes.Shape _model;
@@ -78,7 +73,7 @@ namespace ShapesMvp.App
             if ( ShapeMouseDown != null && e.OriginalSource is SystemShapes.Shape shape )
             {
                 ShapeMouseDown( this, new ShapeViewEventArgs( shape ) );
-                Keyboard.Focus( shape );
+                shape.Focus();
             }
         }
 
