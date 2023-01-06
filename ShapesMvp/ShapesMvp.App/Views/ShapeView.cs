@@ -60,6 +60,7 @@ namespace ShapesMvp.App.Views
                 _frameRect.Y = value.Y;
                 _frameRect.Width = value.Width;
                 _frameRect.Height = value.Height;
+                UpdateLayout();
             }
         }
 
@@ -72,7 +73,6 @@ namespace ShapesMvp.App.Views
             _draggingManager = draggingManager;
 
             Uid = shape.Uid;
-            FrameRect = shape.FrameRect;
 
             _widget = ShapeViewBuilder.BuildView( shape );
             _widget.Focusable = true;
@@ -80,17 +80,23 @@ namespace ShapesMvp.App.Views
             _widget.MouseUp += ShapeView_MouseUp;
             _widget.Unloaded += Widget_Unloaded;
             _draggingManager.EnableDrag( _widget );
+            FrameRect = shape.FrameRect;
 
             _resizeThumb = new ResizeThumb( _widget );
             _resizeThumb.IsEnabled = false;
 
-            InitWidgetLayout();
             Display();
-
         }
 
         private void ShapeView_MouseUp( object sender, MouseButtonEventArgs e )
         {
+            _frameRect = new FrameRect(
+                SystemCanvas.GetLeft( _widget ),
+                SystemCanvas.GetTop( _widget ),
+                _widget.ActualWidth,
+                _widget.ActualHeight
+                );
+
             if ( ShapeMouseUp != null && e.OriginalSource is SystemShapes.Shape shape )
             {
                 ShapeMouseUp( this, new ShapeViewEventArgs( shape ) );
@@ -131,7 +137,7 @@ namespace ShapesMvp.App.Views
             }
         }
 
-        private void InitWidgetLayout()
+        private void UpdateLayout()
         {
             SystemCanvas.SetLeft( _widget, FrameRect.X );
             SystemCanvas.SetTop( _widget, FrameRect.Y );

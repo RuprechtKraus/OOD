@@ -9,6 +9,7 @@ using SystemShapes = System.Windows.Shapes;
 using DomainShapes = ShapesMvp.Domain.Entities.ShapeModel;
 using System.Windows.Input;
 using ShapesMvp.App.Managers;
+using ShapesMvp.App.Views;
 
 namespace ShapesMvp.App.Presenters
 {
@@ -22,6 +23,8 @@ namespace ShapesMvp.App.Presenters
         private readonly ShapeSelectionManager _selectionManager;
         private readonly ICanvasView _canvasView;
         private readonly DomainCanvas _canvasModel;
+
+        public DomainCanvas GetDomainCanvas() => _canvasModel;
 
         public CanvasPresenter(
             IShapeModelFactory shapeModelFactory,
