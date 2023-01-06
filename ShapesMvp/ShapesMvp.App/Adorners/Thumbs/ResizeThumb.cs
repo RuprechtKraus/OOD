@@ -6,7 +6,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
 
-namespace ShapesMvp.App
+namespace ShapesMvp.App.Adorners.Thumbs
 {
     public class ResizeThumb : Thumb
     {
@@ -16,12 +16,11 @@ namespace ShapesMvp.App
         private const int ThumbHeight = 10;
 
         private readonly Shape _shape;
-        private readonly Canvas? _canvas;
+        private Canvas? _canvas;
 
         public ResizeThumb( Shape shape )
         {
             _shape = shape;
-            _canvas = VisualTreeHelper.GetParent( _shape ) as Canvas;
 
             Width = ThumbWidth;
             Height = ThumbHeight;
@@ -31,11 +30,19 @@ namespace ShapesMvp.App
             Canvas.SetLeft( this, Canvas.GetLeft( _shape ) + _shape.Width - ThumbWidth / 2 );
             Canvas.SetTop( this, Canvas.GetTop( _shape ) + _shape.Height - ThumbHeight / 2 );
 
+            DragStarted += ResizeThumb_DragStarted;
             DragDelta += ResizeThumb_DragDelta;
             DragCompleted += ResizeThumb_DragCompleted;
-            _shape.GotFocus += Shape_GotFocus;
-            _shape.LostFocus += Shape_LostFocus;
             _shape.LayoutUpdated += Shape_LayoutUpdated;
+        }
+
+        public void Enable() => IsEnabled = true;
+
+        public void Disable() => IsEnabled = false;
+
+        private void ResizeThumb_DragStarted( object sender, DragStartedEventArgs e )
+        {
+            _canvas = VisualTreeHelper.GetParent( _shape ) as Canvas;
         }
 
         private void ResizeThumb_DragDelta( object sender, DragDeltaEventArgs e )
@@ -59,21 +66,12 @@ namespace ShapesMvp.App
 
         private void ResizeThumb_DragCompleted( object sender, DragCompletedEventArgs e )
         {
+            _canvas = null;
             var args = new MouseButtonEventArgs( Mouse.PrimaryDevice, 0, MouseButton.Left )
             {
                 RoutedEvent = MouseUpEvent
             };
             _shape.RaiseEvent( args );
-        }
-
-        private void Shape_GotFocus( object sender, RoutedEventArgs e )
-        {
-            IsEnabled = true;
-        }
-
-        private void Shape_LostFocus( object sender, RoutedEventArgs e )
-        {
-            IsEnabled = false;
         }
 
         private void Shape_LayoutUpdated( object? sender, EventArgs e )

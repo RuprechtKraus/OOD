@@ -7,16 +7,21 @@ using ShapesMvp.App.Presenters;
 using ShapesMvp.Domain.Enums;
 using SystemCanvas = System.Windows.Controls.Canvas;
 using DomainCanvas = ShapesMvp.Domain.Entities.CanvasModel.Canvas;
+using DomainShapes = ShapesMvp.Domain.Entities.ShapeModel;
 using System.Windows.Input;
 using System.Windows.Controls;
 using ShapesMvp.Domain.Entities.CanvasModel;
+using System.Collections.Generic;
+using ShapesMvp.App.Managers;
+using ShapesMvp.App.Dragging;
+using ShapesMvp.App.Views;
 
 namespace ShapesMvp.App
 {
     public interface ICanvasView
     {
-        void AddShape( Shape shape );
-        void RemoveShape( Shape shape );
+        void AddShape( DomainShapes.Shape shape );
+        void RemoveShapeByUid( string uid );
         Shape? GetShapeByUid( string uid );
 
         event EventHandler<CanvasViewShapeAddedEventArgs> ShapeAdded;
@@ -30,7 +35,8 @@ namespace ShapesMvp.App
     /// </summary>
     public partial class MainWindow : Window, ICanvasView
     {
-        public readonly SystemCanvas Canvas;
+        private readonly ShapeSelectionManager _selectionManager = new();
+        private readonly ShapeDraggingManager _draggingManager = new();
 
         public event EventHandler<CanvasViewShapeAddedEventArgs>? ShapeAdded;
         public event EventHandler<CanvasViewEventArgs>? CanvasMouseDown;
@@ -40,24 +46,32 @@ namespace ShapesMvp.App
         public MainWindow()
         {
             InitializeComponent();
-            Canvas = MainCanvas;
-            CanvasPresenter presenter = new(
+            _ = new CanvasPresenter(
                 new ShapeModelFactory(),
+                _selectionManager,
                 this,
                 new DomainCanvas() );
         }
 
-        public void AddShape( Shape shape )
+        public void AddShape( DomainShapes.Shape shape )
         {
-            shape.Focusable = true;
-            MainCanvas.Children.Add( shape );
-            var resizeThumb = new ResizeThumb( shape );
-            MainCanvas.Children.Add( resizeThumb );
+            var shapeView = new ShapeView(
+                shape,
+                MainCanvas,
+                _draggingManager );
+            _ = new ShapePresenter(
+                shapeView,
+                shape,
+                _selectionManager );
         }
 
-        public void RemoveShape( Shape shape )
+        public void RemoveShapeByUid( string uid )
         {
-            MainCanvas.Children.Remove( shape );
+            Shape? shape = GetShapeByUid( uid );
+            if ( shape != null )
+            {
+                MainCanvas.Children.Remove( shape );
+            }
         }
 
         public Shape? GetShapeByUid( string uid )
