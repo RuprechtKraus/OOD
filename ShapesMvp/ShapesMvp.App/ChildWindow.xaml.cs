@@ -1,24 +1,24 @@
 using System;
 using System.Windows;
+using System.Windows.Input;
 using System.Windows.Shapes;
+using ShapesMvp.App.Dragging;
 using ShapesMvp.App.Events.Canvas;
-using ShapesMvp.App.Factories;
-using ShapesMvp.App.Presenters;
+using ShapesMvp.App.Managers;
+using ShapesMvp.App.Views;
 using ShapesMvp.Domain.Enums;
 using SystemCanvas = System.Windows.Controls.Canvas;
 using DomainCanvas = ShapesMvp.Domain.Entities.CanvasModel.Canvas;
 using DomainShapes = ShapesMvp.Domain.Entities.ShapeModel;
-using System.Windows.Input;
-using ShapesMvp.App.Managers;
-using ShapesMvp.App.Dragging;
-using ShapesMvp.App.Views;
+using ShapesMvp.App.Presenters;
+using ShapesMvp.App.Factories;
 
 namespace ShapesMvp.App
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for ChildWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window, ICanvasView
+    public partial class ChildWindow : Window, ICanvasView
     {
         private readonly ShapeSelectionManager _selectionManager = new();
         private readonly ShapeDraggingManager _draggingManager = new();
@@ -30,14 +30,14 @@ namespace ShapesMvp.App
         public event EventHandler? DeleteButtonPressed;
         public event EventHandler? ViewDestroyed;
 
-        public MainWindow()
+        public ChildWindow( DomainCanvas canvas )
         {
             InitializeComponent();
             _canvasPresenter = new CanvasPresenter(
                 new ShapeModelFactory(),
                 _selectionManager,
                 this,
-                new DomainCanvas() );
+                canvas );
         }
 
         public void AddShape( DomainShapes.Shape shape )
@@ -122,13 +122,6 @@ namespace ShapesMvp.App
         private void Window_Closed( object sender, EventArgs e )
         {
             ViewDestroyed?.Invoke( this, EventArgs.Empty );
-        }
-
-        private void AddWindow_Click( object sender, RoutedEventArgs e )
-        {
-            var window = new ChildWindow( _canvasPresenter.GetDomainCanvas() );
-            window.Owner = this;
-            window.Show();
         }
     }
 }
