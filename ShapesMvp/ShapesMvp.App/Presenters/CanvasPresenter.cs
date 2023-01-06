@@ -38,6 +38,7 @@ namespace ShapesMvp.App.Presenters
             _canvasView.CanvasMouseDown += CanvasView_MouseDown;
             _canvasView.CanvasKeyPressed += CanvasView_KeyPressed;
             _canvasView.DeleteButtonPressed += CanvasView_DeleteButtonPressed;
+            _canvasView.ViewDestroyed += CanvasView_ViewDestroyed;
 
             _canvasModel.ShapeAdded += CanvasModel_ShapeAdded;
             _canvasModel.ShapeRemoved += CanvasModel_ShapeRemoved;
@@ -81,6 +82,12 @@ namespace ShapesMvp.App.Presenters
         private void CanvasView_MouseDown( object? sender, CanvasViewEventArgs e )
         {
             _selectionManager.SelectedShapeUid = null;
+        }
+
+        private void CanvasView_ViewDestroyed( object? sender, System.EventArgs e )
+        {
+            _canvasModel.ShapeAdded -= CanvasModel_ShapeAdded;
+            _canvasModel.ShapeRemoved -= CanvasModel_ShapeRemoved;
         }
 
         private void CanvasModel_ShapeAdded( object? sender, CanvasModelShapeAddedEventArgs e )

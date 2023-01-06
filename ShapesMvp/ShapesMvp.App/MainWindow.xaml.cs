@@ -9,9 +9,6 @@ using SystemCanvas = System.Windows.Controls.Canvas;
 using DomainCanvas = ShapesMvp.Domain.Entities.CanvasModel.Canvas;
 using DomainShapes = ShapesMvp.Domain.Entities.ShapeModel;
 using System.Windows.Input;
-using System.Windows.Controls;
-using ShapesMvp.Domain.Entities.CanvasModel;
-using System.Collections.Generic;
 using ShapesMvp.App.Managers;
 using ShapesMvp.App.Dragging;
 using ShapesMvp.App.Views;
@@ -28,6 +25,7 @@ namespace ShapesMvp.App
         event EventHandler<CanvasViewEventArgs> CanvasMouseDown;
         event EventHandler<CanvasViewEventArgs> CanvasKeyPressed;
         event EventHandler DeleteButtonPressed;
+        event EventHandler ViewDestroyed;
     }
 
     /// <summary>
@@ -42,6 +40,7 @@ namespace ShapesMvp.App
         public event EventHandler<CanvasViewEventArgs>? CanvasMouseDown;
         public event EventHandler<CanvasViewEventArgs>? CanvasKeyPressed;
         public event EventHandler? DeleteButtonPressed;
+        public event EventHandler? ViewDestroyed;
 
         public MainWindow()
         {
@@ -129,7 +128,12 @@ namespace ShapesMvp.App
 
         private void DeleteButton_Click( object sender, RoutedEventArgs e )
         {
-            DeleteButtonPressed?.Invoke( this, new EventArgs() );
+            DeleteButtonPressed?.Invoke( this, EventArgs.Empty );
+        }
+
+        private void Window_Closed( object sender, EventArgs e )
+        {
+            ViewDestroyed?.Invoke( this, EventArgs.Empty );
         }
     }
 }

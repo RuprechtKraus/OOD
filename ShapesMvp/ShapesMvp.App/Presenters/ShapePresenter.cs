@@ -22,6 +22,7 @@ namespace ShapesMvp.App.Presenters
 
             _view.ShapeMouseUp += View_ShapeMouseUp;
             _view.ShapeMouseDown += View_ShapeMouseDown;
+            _view.ViewDestroyed += View_ViewDestroyed;
             _model.ShapeChanged += Model_ShapeChanged;
 
             _selectionManager.SelectionChanged += SelectionManager_SelectionChanged;
@@ -54,6 +55,11 @@ namespace ShapesMvp.App.Presenters
         private void View_ShapeMouseUp( object? sender, ShapeViewEventArgs e )
         {
             _model.FrameRect = _view.FrameRect;
+        }
+
+        private void View_ViewDestroyed( object? sender, System.EventArgs e )
+        {
+            _model.ShapeChanged -= Model_ShapeChanged;
         }
     }
 }

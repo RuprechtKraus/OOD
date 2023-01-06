@@ -32,6 +32,7 @@ namespace ShapesMvp.App.Views
 
         event EventHandler<ShapeViewEventArgs>? ShapeMouseDown;
         event EventHandler<ShapeViewEventArgs>? ShapeMouseUp;
+        event EventHandler? ViewDestroyed;
     }
 
     public class ShapeView : IShapeView
@@ -45,6 +46,7 @@ namespace ShapesMvp.App.Views
 
         public event EventHandler<ShapeViewEventArgs>? ShapeMouseDown;
         public event EventHandler<ShapeViewEventArgs>? ShapeMouseUp;
+        public event EventHandler? ViewDestroyed;
 
         public string Uid { get; }
 
@@ -76,6 +78,7 @@ namespace ShapesMvp.App.Views
             _widget.Focusable = true;
             _widget.MouseDown += ShapeView_MouseDown;
             _widget.MouseUp += ShapeView_MouseUp;
+            _widget.Unloaded += Widget_Unloaded;
             _draggingManager.EnableDrag( _widget );
 
             _resizeThumb = new ResizeThumb( _widget );
@@ -83,6 +86,28 @@ namespace ShapesMvp.App.Views
 
             InitWidgetLayout();
             Display();
+
+        }
+
+        private void ShapeView_MouseUp( object sender, MouseButtonEventArgs e )
+        {
+            if ( ShapeMouseUp != null && e.OriginalSource is SystemShapes.Shape shape )
+            {
+                ShapeMouseUp( this, new ShapeViewEventArgs( shape ) );
+            }
+        }
+
+        private void ShapeView_MouseDown( object sender, MouseButtonEventArgs e )
+        {
+            if ( ShapeMouseDown != null && e.OriginalSource is SystemShapes.Shape shape )
+            {
+                ShapeMouseDown( this, new ShapeViewEventArgs( shape ) );
+            }
+        }
+
+        private void Widget_Unloaded( object sender, RoutedEventArgs e )
+        {
+            ViewDestroyed?.Invoke( this, EventArgs.Empty );
         }
 
         public void SetFocus()
@@ -103,22 +128,6 @@ namespace ShapesMvp.App.Views
                 _isFocused = false;
                 _widget.DisableSelectionAdorner();
                 _resizeThumb.Disable();
-            }
-        }
-
-        private void ShapeView_MouseUp( object sender, MouseButtonEventArgs e )
-        {
-            if ( ShapeMouseUp != null && e.OriginalSource is SystemShapes.Shape shape )
-            {
-                ShapeMouseUp( this, new ShapeViewEventArgs( shape ) );
-            }
-        }
-
-        private void ShapeView_MouseDown( object sender, MouseButtonEventArgs e )
-        {
-            if ( ShapeMouseDown != null && e.OriginalSource is SystemShapes.Shape shape )
-            {
-                ShapeMouseDown( this, new ShapeViewEventArgs( shape ) );
             }
         }
 

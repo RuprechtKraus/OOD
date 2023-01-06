@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:ShapesMvp.App"
         mc:Ignorable="d"
         Title="MainWindow" Height="480" Width="640"
-        ResizeMode="NoResize">
+        ResizeMode="NoResize" 
+        Closed="Window_Closed">
     <Window.Resources>
         <Style x:Key="MenuButton">
             <Setter Property="Control.MinWidth" Value="90"/>
