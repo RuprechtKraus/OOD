@@ -1,3 +1,4 @@
+using System.Xml.Serialization;
 using ShapesMvp.Domain.Entities.ShapeModel;
 using ShapesMvp.Domain.Events.CanvasModel;
 
@@ -35,7 +36,7 @@ namespace ShapesMvp.Domain.Entities.CanvasModel
 
         public Shape? GetShapeByUid( string uid )
         {
-            return _shapes.Find( x => x.Uid == uid );
+            return _shapes.FirstOrDefault( x => x.Uid == uid );
         }
     }
 }

@@ -18,22 +18,25 @@ namespace ShapesMvp.App
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window, ICanvasView
+    public partial class MainWindow : Window, IMainCanvasView
     {
         private readonly ShapeSelectionManager _selectionManager = new();
         private readonly ShapeDraggingManager _draggingManager = new();
-        private readonly CanvasPresenter _canvasPresenter;
+        private readonly BaseCanvasPresenter _canvasPresenter;
 
         public event EventHandler<CanvasViewShapeAddedEventArgs>? ShapeAdded;
         public event EventHandler<CanvasViewEventArgs>? CanvasMouseDown;
         public event EventHandler<CanvasViewEventArgs>? CanvasKeyPressed;
+        public event EventHandler? OpenFileButtonPressed;
+        public event EventHandler? SaveFileButtonPressed;
+        public event EventHandler? SaveFileAsButtonPressed;
         public event EventHandler? DeleteButtonPressed;
         public event EventHandler? ViewDestroyed;
 
         public MainWindow()
         {
             InitializeComponent();
-            _canvasPresenter = new CanvasPresenter(
+            _canvasPresenter = new MainCanvasPresenter(
                 new ShapeModelFactory(),
                 _selectionManager,
                 this,
@@ -71,6 +74,18 @@ namespace ShapesMvp.App
                 }
             }
             return null;
+        }
+
+        public void ShowOpenFileDialog()
+        {
+        }
+
+        public void ShowSaveFileDialog()
+        {
+        }
+
+        public void ShowSaveFileAsDialog()
+        { 
         }
 
         private void AddEllipseButton_Click( object sender, RoutedEventArgs e )
@@ -126,9 +141,23 @@ namespace ShapesMvp.App
 
         private void AddWindow_Click( object sender, RoutedEventArgs e )
         {
-            var window = new ChildWindow( _canvasPresenter.GetDomainCanvas() );
+            var window = new ChildWindow( _canvasPresenter.CanvasModel );
             window.Owner = this;
             window.Show();
+        }
+
+        private void OpenFile_Click( object sender, RoutedEventArgs e )
+        {
+        }
+
+        private void SaveFile_Click( object sender, RoutedEventArgs e )
+        {
+            SaveFileButtonPressed?.Invoke( this, EventArgs.Empty );
+        }
+
+        private void SaveFileAs_Click( object sender, RoutedEventArgs e )
+        {
+
         }
     }
 }

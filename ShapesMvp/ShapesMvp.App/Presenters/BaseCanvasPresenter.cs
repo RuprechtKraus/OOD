@@ -13,7 +13,7 @@ using ShapesMvp.App.Views;
 
 namespace ShapesMvp.App.Presenters
 {
-    public class CanvasPresenter
+    public abstract class BaseCanvasPresenter
     {
         private const double InitialShapeWidth = 50;
         private const double InitialShapeHeight = 50;
@@ -21,15 +21,15 @@ namespace ShapesMvp.App.Presenters
 
         private readonly IShapeModelFactory _shapeModelFactory;
         private readonly ShapeSelectionManager _selectionManager;
-        private readonly ICanvasView _canvasView;
+        private readonly IBaseCanvasView _canvasView;
         private readonly DomainCanvas _canvasModel;
 
-        public DomainCanvas GetDomainCanvas() => _canvasModel;
+        public DomainCanvas CanvasModel => _canvasModel;
 
-        public CanvasPresenter(
+        public BaseCanvasPresenter(
             IShapeModelFactory shapeModelFactory,
             ShapeSelectionManager selectionManager,
-            ICanvasView canvasView,
+            IBaseCanvasView canvasView,
             DomainCanvas canvasModel )
         {
             _shapeModelFactory = shapeModelFactory;

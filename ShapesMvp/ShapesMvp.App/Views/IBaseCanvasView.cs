@@ -5,7 +5,7 @@ using ShapesMvp.App.Events.Canvas;
 
 namespace ShapesMvp.App.Views
 {
-    public interface ICanvasView
+    public interface IBaseCanvasView
     {
         void AddShape( DomainShapes.Shape shape );
         void RemoveShapeByUid( string uid );

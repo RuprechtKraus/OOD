@@ -18,11 +18,11 @@ namespace ShapesMvp.App
     /// <summary>
     /// Interaction logic for ChildWindow.xaml
     /// </summary>
-    public partial class ChildWindow : Window, ICanvasView
+    public partial class ChildWindow : Window, IBaseCanvasView
     {
         private readonly ShapeSelectionManager _selectionManager = new();
         private readonly ShapeDraggingManager _draggingManager = new();
-        private readonly CanvasPresenter _canvasPresenter;
+        private readonly BaseCanvasPresenter _canvasPresenter;
 
         public event EventHandler<CanvasViewShapeAddedEventArgs>? ShapeAdded;
         public event EventHandler<CanvasViewEventArgs>? CanvasMouseDown;
@@ -33,7 +33,7 @@ namespace ShapesMvp.App
         public ChildWindow( DomainCanvas canvas )
         {
             InitializeComponent();
-            _canvasPresenter = new CanvasPresenter(
+            _canvasPresenter = new ChildCanvasPresenter(
                 new ShapeModelFactory(),
                 _selectionManager,
                 this,

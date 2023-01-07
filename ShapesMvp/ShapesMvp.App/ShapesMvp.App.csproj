@@ -11,4 +11,8 @@
     <ProjectReference Include="..\ShapesMvp.Domain\ShapesMvp.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Adapters\" />
+  </ItemGroup>
+
 </Project>

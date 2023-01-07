@@ -18,6 +18,16 @@
     </Window.Resources>
     <Grid>
         <DockPanel>
+            <Menu VerticalAlignment="Top" DockPanel.Dock="Top">
+                <MenuItem Header="File">
+                    <MenuItem Header="Open" Click="OpenFile_Click"></MenuItem>
+                    <MenuItem Header="Save" Click="SaveFile_Click"></MenuItem>
+                    <MenuItem Header="Save As">
+                        <MenuItem Header="Json"></MenuItem>
+                        <MenuItem Header="Xml"></MenuItem>
+                    </MenuItem>
+                </MenuItem>
+            </Menu>
             <WrapPanel DockPanel.Dock="Top" Height="40">
                 <Button Margin="10,10,0,0" Style="{StaticResource MenuButton}" Content="Add Ellipse" Click="AddEllipseButton_Click"/>
                 <Button Margin="10,10,0,0" Style="{StaticResource MenuButton}" Content="Add Rectangle" Click="AddRectangleButton_Click"/>
