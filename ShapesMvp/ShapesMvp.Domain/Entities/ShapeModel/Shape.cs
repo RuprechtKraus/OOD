@@ -1,4 +1,3 @@
-using System.Xml.Serialization;
 using ShapesMvp.Common;
 using ShapesMvp.Domain.Enums;
 using ShapesMvp.Domain.Events.ShapeModel;

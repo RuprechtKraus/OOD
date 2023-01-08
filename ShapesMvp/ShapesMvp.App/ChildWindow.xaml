@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ShapesMvp.App"
         mc:Ignorable="d"
         Title="ChildWindow" Height="480" Width="640"
-        ResizeMode="NoResize"
+        ResizeMode="NoResize" FocusVisualStyle="{x:Null}"
         Closed="Window_Closed">
     <Window.Resources>
         <Style x:Key="MenuButton">

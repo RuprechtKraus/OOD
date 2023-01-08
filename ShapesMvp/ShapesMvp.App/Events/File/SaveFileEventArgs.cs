@@ -3,11 +3,11 @@ using ShapesMvp.App.Managers;
 
 namespace ShapesMvp.App.Events.File
 {
-    public class SaveFileEventArgs : EventArgs
+    public class FileEventArgs : EventArgs
     {
         public readonly string FilePath;
 
-        public SaveFileEventArgs( string filePath )
+        public FileEventArgs( string filePath )
         {
             FilePath = filePath;
         }

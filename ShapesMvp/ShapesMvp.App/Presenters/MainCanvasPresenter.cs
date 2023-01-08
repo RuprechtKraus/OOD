@@ -1,10 +1,8 @@
 using System;
-using System.IO;
 using ShapesMvp.App.Events.File;
 using ShapesMvp.App.Factories;
 using ShapesMvp.App.Helpers.Files;
 using ShapesMvp.App.Managers;
-using ShapesMvp.App.Managers.Serialization;
 using ShapesMvp.App.Views;
 using DomainCanvas = ShapesMvp.Domain.Entities.CanvasModel.Canvas;
 
@@ -25,9 +23,15 @@ namespace ShapesMvp.App.Presenters
             _canvasView = canvasView;
             _shapeFileManager = new ShapeFileManager();
 
+            _canvasView.OpenFileButtonPressed += CanvasView_OpenFileButtonPressed;
             _canvasView.SaveFileButtonPressed += CanvasView_SaveFileButtonPressed;
             _canvasView.FileOpened += CanvasView_FileOpened;
             _canvasView.FileSaved += CanvasView_FileSaved;
+        }
+
+        private void CanvasView_OpenFileButtonPressed( object? sender, EventArgs e )
+        {
+            _canvasView.ShowOpenFileDialog();
         }
 
         private void CanvasView_SaveFileButtonPressed( object? sender, EventArgs e )
@@ -44,12 +48,12 @@ namespace ShapesMvp.App.Presenters
             }
         }
 
-        private void CanvasView_FileOpened( object? sender, System.EventArgs e )
+        private void CanvasView_FileOpened( object? sender, FileEventArgs e )
         {
-
+            _shapeFileManager.Open( e.FilePath );
         }
 
-        private void CanvasView_FileSaved( object? sender, SaveFileEventArgs e )
+        private void CanvasView_FileSaved( object? sender, FileEventArgs e )
         {
             _shapeFileManager.Save( CanvasModel, e.FilePath );
         }

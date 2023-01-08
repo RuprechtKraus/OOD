@@ -1,3 +1,4 @@
+using System.Text.Json.Serialization;
 using System.Xml.Serialization;
 using ShapesMvp.Domain.Entities.ShapeModel;
 using ShapesMvp.Domain.Events.CanvasModel;

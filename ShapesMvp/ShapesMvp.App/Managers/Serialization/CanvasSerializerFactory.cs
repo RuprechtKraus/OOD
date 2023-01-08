@@ -11,7 +11,7 @@ namespace ShapesMvp.App.Managers.Serialization
         {
             return fileFormat switch
             {
-                FileFormat.Json => new JsonSerializerAdapter<Canvas>(),
+                FileFormat.Json => new JsonCanvasSerializer(),
                 FileFormat.Xml => new XmlCanvasSerializer(),
                 _ => null
             };
@@ -21,7 +21,7 @@ namespace ShapesMvp.App.Managers.Serialization
         {
             return fileFormat switch
             {
-                FileFormatString.Json => new JsonSerializerAdapter<Canvas>(),
+                FileFormatString.Json => new JsonCanvasSerializer(),
                 FileFormatString.Xml => new XmlCanvasSerializer(),
                 _ => null
             };

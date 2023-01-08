@@ -7,9 +7,11 @@ namespace ShapesMvp.App.Views
     public interface IMainCanvasView : IBaseCanvasView
     {
         void ShowSaveFileDialog( FileFormat defaultFileFormat );
+        void ShowOpenFileDialog();
 
         event EventHandler SaveFileButtonPressed;
-        event EventHandler FileOpened;
-        event EventHandler<SaveFileEventArgs> FileSaved;
+        event EventHandler OpenFileButtonPressed;
+        event EventHandler<FileEventArgs> FileOpened;
+        event EventHandler<FileEventArgs> FileSaved;
     }
 }

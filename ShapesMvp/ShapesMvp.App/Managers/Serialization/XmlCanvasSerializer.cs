@@ -1,8 +1,9 @@
+using System;
 using System.IO;
 using System.Linq;
 using System.Windows.Documents;
 using System.Xml.Serialization;
-using ShapesMvp.App.Managers.Serialization.XmlSerializables;
+using ShapesMvp.App.Managers.Serialization.SerializationDtos;
 using ShapesMvp.Domain.Entities.CanvasModel;
 using ShapesMvp.Domain.Entities.ShapeModel;
 
@@ -12,9 +13,9 @@ namespace ShapesMvp.App.Managers.Serialization
     {
         public string Serialize( Canvas target )
         {
-            var xmlCanvas = new XmlSerializableCanvas
+            var xmlCanvas = new CanvasSerializationDto
             {
-                Shapes = target.Shapes.Select( x => new XmlSerializableShape()
+                Shapes = target.Shapes.Select( x => new ShapeSerializationDto()
                 {
                     Color = x.Color,
                     FrameRect = x.FrameRect,
@@ -27,6 +28,11 @@ namespace ShapesMvp.App.Managers.Serialization
 
             serializer.Serialize( sf, xmlCanvas );
             return sf.ToString();
+        }
+
+        public Canvas Deserialize( string taget )
+        {
+            throw new NotImplementedException();
         }
     }
 }

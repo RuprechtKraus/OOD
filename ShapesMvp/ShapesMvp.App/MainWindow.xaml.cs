@@ -31,9 +31,10 @@ namespace ShapesMvp.App
         public event EventHandler<CanvasViewShapeAddedEventArgs>? ShapeAdded;
         public event EventHandler<CanvasViewEventArgs>? CanvasMouseDown;
         public event EventHandler<CanvasViewEventArgs>? CanvasKeyPressed;
+        public event EventHandler? OpenFileButtonPressed;
         public event EventHandler? SaveFileButtonPressed;
-        public event EventHandler? FileOpened;
-        public event EventHandler<SaveFileEventArgs>? FileSaved;
+        public event EventHandler<FileEventArgs>? FileOpened;
+        public event EventHandler<FileEventArgs>? FileSaved;
         public event EventHandler? DeleteButtonPressed;
         public event EventHandler? ViewDestroyed;
 
@@ -82,18 +83,33 @@ namespace ShapesMvp.App
 
         public void ShowSaveFileDialog( FileFormat defaultFileFormat )
         {
-            switch ( defaultFileFormat )
+            var dialog = new SaveFileDialog();
+            dialog.Filter = "Json files (*.json)|*.json|Xml files (*.xml)|*.xml";
+
+            dialog.FilterIndex = defaultFileFormat switch
             {
-                case FileFormat.Json:
-                    ShowSaveFileDialog( 1 );
-                    break;
-                case FileFormat.Xml:
-                    ShowSaveFileDialog( 2 );
-                    break;
-                default:
-                    throw new InvalidEnumArgumentException( $"Unknown file format: {defaultFileFormat}" );
+                FileFormat.Json => 1,
+                FileFormat.Xml => 2,
+                _ => throw new InvalidEnumArgumentException( $"Unknown file format: {defaultFileFormat}" ),
+            };
+
+            if ( dialog.ShowDialog() ?? false )
+            {
+                FileSaved?.Invoke( this, new FileEventArgs( dialog.FileName ) );
             }
         }
+
+        public void ShowOpenFileDialog()
+        {
+            var dialog = new OpenFileDialog();
+
+            if ( dialog.ShowDialog() ?? false )
+            {
+                FileOpened?.Invoke( this, new FileEventArgs( dialog.FileName ) );
+            }
+        }
+
+        #region Event Handlers
 
         private void AddEllipseButton_Click( object sender, RoutedEventArgs e )
         {
@@ -155,7 +171,7 @@ namespace ShapesMvp.App
 
         private void OpenFile_Click( object sender, RoutedEventArgs e )
         {
-
+            OpenFileButtonPressed?.Invoke( this, EventArgs.Empty );
         }
 
         private void SaveFile_Click( object sender, RoutedEventArgs e )
@@ -163,22 +179,12 @@ namespace ShapesMvp.App
             SaveFileButtonPressed?.Invoke( this, EventArgs.Empty );
         }
 
-        private void SaveAsJson_Click( object sender, RoutedEventArgs e ) => ShowSaveFileDialog( 1 );
+        private void SaveAsJson_Click( object sender, RoutedEventArgs e ) 
+            => ShowSaveFileDialog( FileFormat.Json );
 
-        private void SaveAsXml_Click( object sender, RoutedEventArgs e ) => ShowSaveFileDialog( 2 );
+        private void SaveAsXml_Click( object sender, RoutedEventArgs e ) 
+            => ShowSaveFileDialog( FileFormat.Xml );
 
-        private void ShowSaveFileDialog( int filterIndex = 1 )
-        {
-            var dialog = new SaveFileDialog
-            {
-                Filter = "Json files (*.json)|*.json|Xml files (*.xml)|*.xml",
-                FilterIndex = filterIndex
-            };
-
-            if ( dialog.ShowDialog() ?? false )
-            {
-                FileSaved?.Invoke( this, new SaveFileEventArgs( dialog.FileName ) );
-            }
-        }
+        #endregion Event Handlers
     }
 }
