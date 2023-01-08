@@ -1,15 +1,14 @@
 using System.IO;
 using System.Text.Json;
-using ShapesMvp.Domain.Entities.CanvasModel;
 
 namespace ShapesMvp.App.Managers.Serialization
 {
-    public class JsonSerializerAdapter : ICanvasSerializer
+    public class JsonSerializerAdapter<T> : ISerializer<T>
+        where T : class
     {
-        public void Serialize( Canvas canvas, string path )
+        public string Serialize( T target )
         {
-            using var fs = new FileStream( path, FileMode.OpenOrCreate );
-            JsonSerializer.Serialize( fs, canvas, new JsonSerializerOptions()
+            return JsonSerializer.Serialize( target, new JsonSerializerOptions()
             {
                 IncludeFields = true
             } );

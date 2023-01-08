@@ -8,13 +8,13 @@ using ShapesMvp.Domain.Entities.ShapeModel;
 
 namespace ShapesMvp.App.Managers.Serialization
 {
-    public class XmlSerializerAdapter : ICanvasSerializer
+    public class XmlCanvasSerializer : ISerializer<Canvas>
     {
-        public void Serialize( Canvas canvas, string path )
+        public string Serialize( Canvas target )
         {
             var xmlCanvas = new XmlSerializableCanvas
             {
-                Shapes = canvas.Shapes.Select( x => new XmlSerializableShape()
+                Shapes = target.Shapes.Select( x => new XmlSerializableShape()
                 {
                     Color = x.Color,
                     FrameRect = x.FrameRect,
@@ -22,10 +22,11 @@ namespace ShapesMvp.App.Managers.Serialization
                     Uid = x.Uid,
                 } ).ToList()
             };
+            var serializer = new XmlSerializer( xmlCanvas.GetType() );
+            using var sf = new StringWriter();
 
-            var serializer = new XmlSerializer( typeof( XmlSerializableCanvas ) );
-            using var fs = new FileStream( path, FileMode.OpenOrCreate );
-            serializer.Serialize( fs, xmlCanvas );
+            serializer.Serialize( sf, xmlCanvas );
+            return sf.ToString();
         }
     }
 }

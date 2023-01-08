@@ -12,6 +12,10 @@ using System.Windows.Input;
 using ShapesMvp.App.Managers;
 using ShapesMvp.App.Dragging;
 using ShapesMvp.App.Views;
+using ShapesMvp.App.Events.File;
+using Microsoft.Win32;
+using ShapesMvp.App.Helpers.Files;
+using System.ComponentModel;
 
 namespace ShapesMvp.App
 {
@@ -27,9 +31,9 @@ namespace ShapesMvp.App
         public event EventHandler<CanvasViewShapeAddedEventArgs>? ShapeAdded;
         public event EventHandler<CanvasViewEventArgs>? CanvasMouseDown;
         public event EventHandler<CanvasViewEventArgs>? CanvasKeyPressed;
-        public event EventHandler? OpenFileButtonPressed;
         public event EventHandler? SaveFileButtonPressed;
-        public event EventHandler? SaveFileAsButtonPressed;
+        public event EventHandler? FileOpened;
+        public event EventHandler<SaveFileEventArgs>? FileSaved;
         public event EventHandler? DeleteButtonPressed;
         public event EventHandler? ViewDestroyed;
 
@@ -76,16 +80,19 @@ namespace ShapesMvp.App
             return null;
         }
 
-        public void ShowOpenFileDialog()
+        public void ShowSaveFileDialog( FileFormat defaultFileFormat )
         {
-        }
-
-        public void ShowSaveFileDialog()
-        {
-        }
-
-        public void ShowSaveFileAsDialog()
-        { 
+            switch ( defaultFileFormat )
+            {
+                case FileFormat.Json:
+                    ShowSaveFileDialog( 1 );
+                    break;
+                case FileFormat.Xml:
+                    ShowSaveFileDialog( 2 );
+                    break;
+                default:
+                    throw new InvalidEnumArgumentException( $"Unknown file format: {defaultFileFormat}" );
+            }
         }
 
         private void AddEllipseButton_Click( object sender, RoutedEventArgs e )
@@ -148,6 +155,7 @@ namespace ShapesMvp.App
 
         private void OpenFile_Click( object sender, RoutedEventArgs e )
         {
+
         }
 
         private void SaveFile_Click( object sender, RoutedEventArgs e )
@@ -155,9 +163,22 @@ namespace ShapesMvp.App
             SaveFileButtonPressed?.Invoke( this, EventArgs.Empty );
         }
 
-        private void SaveFileAs_Click( object sender, RoutedEventArgs e )
-        {
+        private void SaveAsJson_Click( object sender, RoutedEventArgs e ) => ShowSaveFileDialog( 1 );
 
+        private void SaveAsXml_Click( object sender, RoutedEventArgs e ) => ShowSaveFileDialog( 2 );
+
+        private void ShowSaveFileDialog( int filterIndex = 1 )
+        {
+            var dialog = new SaveFileDialog
+            {
+                Filter = "Json files (*.json)|*.json|Xml files (*.xml)|*.xml",
+                FilterIndex = filterIndex
+            };
+
+            if ( dialog.ShowDialog() ?? false )
+            {
+                FileSaved?.Invoke( this, new SaveFileEventArgs( dialog.FileName ) );
+            }
         }
     }
 }

@@ -1,7 +1,6 @@
 using System;
 using System.IO;
-using System.Text.Json;
-using System.Xml.Serialization;
+using ShapesMvp.App.Helpers.Files;
 using ShapesMvp.App.Managers.Serialization;
 using ShapesMvp.Domain.Entities.CanvasModel;
 
@@ -9,15 +8,11 @@ namespace ShapesMvp.App.Managers
 {
     public class ShapeFileManager
     {
-        private string? _lastSaveLocation;
-        public string? LastSaveLocation => _lastSaveLocation;
+        private string? _lastFileName;
+        public string? LastFileName => _lastFileName;
 
-        private readonly ICanvasSerializer _serializer;
-
-        public ShapeFileManager( ICanvasSerializer serializer )
-        {
-            _serializer = serializer;
-        }
+        private FileFormat? _lastFileFormat;
+        public FileFormat? LastFileFormat => _lastFileFormat;
 
         public void Open( string path )
         {
@@ -25,8 +20,29 @@ namespace ShapesMvp.App.Managers
 
         public void Save( Canvas canvas, string path )
         {
-            _serializer.Serialize( canvas, path );
-            _lastSaveLocation = path;
+            FileFormat fileFormat = GetFileFormatFromFileName( path );
+            ISerializer<Canvas>? serializer = CanvasSerializerFactory.GetSerializer( fileFormat );
+            if ( serializer == null )
+            {
+                throw new ArgumentException( "Unsupported file format", nameof( path ) );
+            }
+
+            File.WriteAllText( path, serializer!.Serialize( canvas ) );
+
+            _lastFileName = path;
+            _lastFileFormat = fileFormat;
+        }
+
+        private static FileFormat GetFileFormatFromFileName( string fileName )
+        {
+            string? extension = Path.GetExtension( fileName );
+
+            return extension.ToLower() switch
+            {
+                FileFormatString.Json => FileFormat.Json,
+                FileFormatString.Xml => FileFormat.Xml,
+                _ => throw new ArgumentException( "Unsupported file format", nameof( fileName ) )
+            };
         }
     }
 }

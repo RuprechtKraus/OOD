@@ -1,15 +1,15 @@
 using System;
+using ShapesMvp.App.Events.File;
+using ShapesMvp.App.Helpers.Files;
 
 namespace ShapesMvp.App.Views
 {
     public interface IMainCanvasView : IBaseCanvasView
     {
-        void ShowOpenFileDialog();
-        void ShowSaveFileDialog();
-        void ShowSaveFileAsDialog();
+        void ShowSaveFileDialog( FileFormat defaultFileFormat );
 
-        event EventHandler OpenFileButtonPressed;
         event EventHandler SaveFileButtonPressed;
-        event EventHandler SaveFileAsButtonPressed;
+        event EventHandler FileOpened;
+        event EventHandler<SaveFileEventArgs> FileSaved;
     }
 }

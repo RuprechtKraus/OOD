@@ -23,8 +23,8 @@
                     <MenuItem Header="Open" Click="OpenFile_Click"></MenuItem>
                     <MenuItem Header="Save" Click="SaveFile_Click"></MenuItem>
                     <MenuItem Header="Save As">
-                        <MenuItem Header="Json"></MenuItem>
-                        <MenuItem Header="Xml"></MenuItem>
+                        <MenuItem Header="Json" Click="SaveAsJson_Click"></MenuItem>
+                        <MenuItem Header="Xml" Click="SaveAsXml_Click"></MenuItem>
                     </MenuItem>
                 </MenuItem>
             </Menu>
